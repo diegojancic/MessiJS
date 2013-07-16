@@ -19,8 +19,8 @@ that have been already issued for the official Messi repo.
 
 ### Pull Requests – Examine and apply all appropriate 
 * [x] https://github.com/marcosesperon/Messi/pull/26 – Added Box Name _NOTE: There are better ways to do this. E.g. hide()_
-* [ ] https://github.com/marcosesperon/Messi/pull/27 – Bad Integration with jQuery patch-1
-* [ ] https://github.com/marcosesperon/Messi/pull/28 – Bad Integration with jQuery patch-2
+* [x] https://github.com/marcosesperon/Messi/pull/27 – Bad Integration with jQuery patch-1
+* [x] https://github.com/marcosesperon/Messi/pull/28 – Bad Integration with jQuery patch-2
 * [ ] https://github.com/marcosesperon/Messi/pull/29 – Fixed: width buttons on Firefox
 * [ ] https://github.com/marcosesperon/Messi/pull/30 – Fix to enable the callbacks
 * [ ] https://github.com/marcosesperon/Messi/pull/31 – Remove extra comma
