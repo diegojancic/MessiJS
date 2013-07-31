@@ -25,7 +25,7 @@ that have been already issued for the official Messi repo.
 * [x] https://github.com/marcosesperon/Messi/pull/29 – Fixed: width buttons on Firefox
 * [x] https://github.com/marcosesperon/Messi/pull/30 – Fix to enable the callbacks
 * [x] https://github.com/marcosesperon/Messi/pull/31 – Remove extra comma
-* [ ] https://github.com/marcosesperon/Messi/pull/32 – updated messi.js to correct when messi appears off page
+* [x] https://github.com/marcosesperon/Messi/pull/32 – updated messi.js to correct when messi appears off page
 * [ ] https://github.com/marcosesperon/Messi/pull/33 – add click to close feature
 
 * [x] https://github.com/marcosesperon/Messi/pull/35 - Update messi.css (for Firefox 23.0.1) _IGNORED: This fix was causing the buttons to appear incorrectly in Firefox 27.0.1_

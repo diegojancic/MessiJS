@@ -119,6 +119,7 @@
       height: 'auto',                          // content height
       title: null,                             // message title
       titleClass: null,                        // title style: info, warning, success, error
+      minMargin : 15,                          // set how much minimal space there should be (in pixels) when the nudge function moves the popup back into the window
       modal: false,                            // shows message in modal (loads background)
       modalOpacity: .2,                        // modal background opacity
       padding: '10px',                         // content padding
@@ -153,7 +154,11 @@
       this.messi.appendTo(document.body);
 
       // Get the center of the screen if the center option is on
-      if(this.options.center) this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+      if(this.options.center){
+        this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+      }else{
+        this.nudge();
+      }
 
       this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left, 'z-index': this.options.zIndex + jQuery('.messi').length}).show().animate({opacity: 1}, 300);
 
@@ -206,6 +211,41 @@
       if (this.visible) this.hide();
       jQuery(window).unbind('resize', function () { this.resize(); });
       this.messi.remove();
+    },
+
+    nudge: function() {
+      // this.options.viewport.top, this.options.viewport.left
+      var win = $(window);
+      var x= (this.options.viewport.left).replace("px", "");
+      var y= (this.options.viewport.top).replace("px", "");
+
+      if (this.isNumber(x) && this.isNumber(y) ){
+        x = parseInt(x, 10);
+        y = parseInt(y, 10);
+
+        // When the popup is too far on the right, change the viewport  to the left
+        var xtreme = $(document).scrollLeft() + win.width() - this.messi.width() - this.options.minMargin;
+        if(x > xtreme) {
+          x -= this.messi.width() + 2 * this.options.minMargin;
+        }
+        x = this.max(x, 0);
+
+        // When the popup is too far down, move popup up
+        if((y + this.messi.height()) > (win.height() +  $(document).scrollTop())) {
+          y -= this.messi.height() + this.options.minMargin;
+        }
+        this.options.viewport.left = x.toString()+"px";
+        this.options.viewport.top = y.toString()+"px";
+      }
+    },
+
+    max: function(a,b) {
+      if (a > b) return a;
+      else return b;
+    },
+
+    isNumber: function(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
   };
