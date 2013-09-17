@@ -150,8 +150,13 @@
 
       if(this.visible) return;
 
-      if(this.options.modal && this.modal != null) this.modal.show();
-      this.messi.appendTo(document.body);
+      if (this.messi.parent().length == 0) {
+        // or unload in case of first call
+        this.modal && this.modal.appendTo(document.body);
+        this.messi.appendTo(document.body);
+      }
+
+      this.modal && this.modal.show();
 
       // Get the center of the screen if the center option is on
       if(this.options.center){
@@ -170,6 +175,7 @@
     },
 
     hide: function(after) {
+
       if (!this.visible) return;
       var _this = this;
 
@@ -180,8 +186,9 @@
       }
 
       this.messi.animate({opacity: 0}, 300, function() {
-        if(_this.options.modal && _this.modal != null) _this.modal.remove();
-        _this.messi.css({display: 'none'}).remove();
+        _this.modal && _this.modal.css({display: 'none'});
+        _this.messi.css({display: 'none'});
+
         // Reactivate the scroll
         //document.documentElement.style.overflow = "visible";
         _this.visible = false;
@@ -210,6 +217,7 @@
     unload: function() {
       if (this.visible) this.hide();
       jQuery(window).unbind('resize', function () { this.resize(); });
+      this.modal && this.modal.remove();
       this.messi.remove();
     },
 
