@@ -30,7 +30,7 @@ that have been already issued for the official Messi repo.
 
 * [x] https://github.com/marcosesperon/Messi/pull/35 - Update messi.css (for Firefox 23.0.1) _IGNORED: This fix was causing the buttons to appear incorrectly in Firefox 27.0.1_
 * [x] https://github.com/marcosesperon/Messi/pull/36 - fix unload and modal
-* [ ] https://github.com/marcosesperon/Messi/pull/38 - Controlling the resizing and scrolling the screen to adjust the message in the user's field of view.
+* [x] https://github.com/marcosesperon/Messi/pull/38 - Controlling the resizing and scrolling the screen to adjust the message in the user's field of view.
 
 
 ### Open Issues – Read and move any appropriate issues to the new repo

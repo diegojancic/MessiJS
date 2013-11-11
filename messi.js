@@ -95,7 +95,7 @@
     if(_this.options.show) _this.show();
 
     // Control the resizing of the display
-    jQuery(window).bind('resize', function(){ _this.resize(); });
+    jQuery(window).bind('resize scroll', function(){ _this.resize(); });
 
     // Configure the automatic closing
     if(_this.options.autoclose != null) {
@@ -216,7 +216,7 @@
 
     unload: function() {
       if (this.visible) this.hide();
-      jQuery(window).unbind('resize', function () { this.resize(); });
+    jQuery(window).unbind('resize scroll', function () { this.resize(); });
       this.modal && this.modal.remove();
       this.messi.remove();
     },
