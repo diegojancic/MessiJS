@@ -100,7 +100,9 @@
     // Configure the automatic closing
     if(_this.options.autoclose != null) {
       setTimeout(function(_this) {
-        _this.hide();
+        var value = jQuery.data(this, 'value');
+        var after = (_this.options.callback != null) ? function () { _this.options.callback(value); } : null;
+        _this.hide(after);
       }, _this.options.autoclose, this);
     };
 
