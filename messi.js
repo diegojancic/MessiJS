@@ -20,7 +20,7 @@ function Messi(data, options) {
   _this.setContent(data);
 
   // Adjust the title
-  if(_this.options.title == null) {
+  if(_this.options.title === null) {
 
     jQuery('.messi-titlebox', _this.messi).remove();
 
@@ -38,16 +38,16 @@ function Messi(data, options) {
 
         jQuery('.messi-titlebox', this.messi).prepend(close);
 
-      };
+      }
 
-    };
+    }
 
-    if(_this.options.titleClass != null) jQuery('.messi-titlebox', this.messi).addClass(_this.options.titleClass);
+    if(_this.options.titleClass !== null) jQuery('.messi-titlebox', this.messi).addClass(_this.options.titleClass);
 
-  };
+  }
 
   // Adjust the width
-  if(_this.options.width != null) jQuery('.messi-box', _this.messi).css('width', _this.options.width);
+  if(_this.options.width !== null) jQuery('.messi-box', _this.messi).css('width', _this.options.width);
 
   // Prepare the buttons
   if(_this.options.buttons.length > 0) {
@@ -58,22 +58,22 @@ function Messi(data, options) {
       var btn = jQuery('<div class="btnbox"><button data-value="'+ _this.options.buttons[i].val +'" class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button></div>');
       btn.on('click', 'button', function() {
         var value = jQuery(this).data('value');
-        var after = (_this.options.callback != null) ? function() { return _this.options.callback.call(this, value); } : null;
+        var after = (_this.options.callback !== null) ? function() { return _this.options.callback.call(this, value); } : null;
         _this.hide(after);
       });
 
       jQuery('.messi-actions', this.messi).append(btn);
 
-    };
+    }
 
   } else {
 
     jQuery('.messi-footbox', this.messi).remove();
 
-  };
+  }
 
   // Prepare the close button automatically
-  if(_this.options.buttons.length === 0 && _this.options.title == null && !_this.options.autoclose) {
+  if(_this.options.buttons.length === 0 && _this.options.title === null && !_this.options.autoclose) {
 
     if(_this.options.closeButton) {
       var close = jQuery('<span class="messi-closebtn"></span>');
@@ -83,9 +83,9 @@ function Messi(data, options) {
 
       jQuery('.messi-content', this.messi).prepend(close);
 
-    };
+    }
 
-  };
+  }
 
   // Activate the modal screen
   _this.modal = (_this.options.modal) ? jQuery('<div class="messi-modal"></div>').css({opacity: _this.options.modalOpacity, width: jQuery(document).width(), height: jQuery(document).height(), 'z-index': _this.options.zIndex + jQuery('.messi').length}).appendTo(document.body) : null;
@@ -97,15 +97,15 @@ function Messi(data, options) {
   jQuery(window).bind('resize', function(){ _this.resize(); });
 
   // Configure the automatic closing
-  if(_this.options.autoclose != null) {
+  if(_this.options.autoclose !== null) {
     setTimeout(function(_this) {
       _this.hide();
     }, _this.options.autoclose, this);
-  };
+  }
 
   return _this;
 
-};
+}
 
 Messi.prototype = {
 
@@ -119,7 +119,7 @@ Messi.prototype = {
     title: null,                             // message title
     titleClass: null,                        // title style: info, warning, success, error
     modal: false,                            // shows message in modal (loads background)
-    modalOpacity: .2,                        // modal background opacity
+    modalOpacity: 0.2,                       // modal background opacity
     padding: '10px',                         // content padding
     show: true,                              // show message after load
     unload: true,                            // unload message after hide
@@ -148,7 +148,7 @@ Messi.prototype = {
 
     if(this.visible) return;
 
-    if(this.options.modal && this.modal != null) this.modal.show();
+    if(this.options.modal && this.modal !== null) this.modal.show();
     this.messi.appendTo(document.body);
 
     // Get the center of the screen if the center option is on
@@ -168,13 +168,13 @@ Messi.prototype = {
     var _this = this;
 
     if (typeof after === 'function') {
-      if (after.call(this) == false) {
+      if (after.call(this) === false) {
         return this;
       }
     }
 
     this.messi.animate({opacity: 0}, 300, function() {
-      if(_this.options.modal && _this.modal != null) _this.modal.remove();
+      if(_this.options.modal && _this.modal !== null) _this.modal.remove();
       _this.messi.css({display: 'none'}).remove();
       // Reactivate the scroll
       //document.documentElement.style.overflow = "visible";
@@ -189,11 +189,11 @@ Messi.prototype = {
   resize: function() {
     if(this.options.modal) {
       jQuery('.messi-modal').css({width: jQuery(document).width(), height: jQuery(document).height()});
-    };
+    }
     if(this.options.center) {
       this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
       this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left});
-    };
+    }
   },
 
   toggle: function() {
