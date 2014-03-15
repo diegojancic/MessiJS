@@ -22,7 +22,7 @@ that have been already issued for the official Messi repo.
 * [x] https://github.com/marcosesperon/Messi/pull/27 – Bad Integration with jQuery patch-1
 * [x] https://github.com/marcosesperon/Messi/pull/28 – Bad Integration with jQuery patch-2
 * [ ] https://github.com/marcosesperon/Messi/pull/29 – Fixed: width buttons on Firefox
-* [ ] https://github.com/marcosesperon/Messi/pull/30 – Fix to enable the callbacks
+* [x] https://github.com/marcosesperon/Messi/pull/30 – Fix to enable the callbacks
 * [x] https://github.com/marcosesperon/Messi/pull/31 – Remove extra comma
 * [ ] https://github.com/marcosesperon/Messi/pull/32 – updated messi.js to correct when messi appears off page
 * [ ] https://github.com/marcosesperon/Messi/pull/33 – add click to close feature
