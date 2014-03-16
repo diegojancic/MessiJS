@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var mocha = require('gulp-mocha');
+var exec = require('gulp-exec');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
@@ -23,11 +23,12 @@ gulp.task('lint', function() {
 });
 
 gulp.task('test', function() {
-    gulp.src('test/*.js')
-        .pipe(mocha({reporter: 'nyan'}))
-        .on('error', function(err) {
-            console.log(err.toString());
-        });
+  var options = {
+      //silent: true,
+      //customTemplatingThing: "test"
+    };
+  gulp.src('test/*.js')
+    .pipe(exec('node_modules/.bin/mocha-phantomjs /test/index.html'));
 });
 
 gulp.task('compress', ['clean'], function() {

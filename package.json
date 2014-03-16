@@ -43,6 +43,8 @@
     "gulp-mocha": "^0.4.1",
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.2.1",
-    "gulp-watch": "^0.5.2"
+    "gulp-watch": "^0.5.2",
+    "gulp-exec": "^1.0.4",
+    "mocha-phantomjs": "^3.3.2"
   }
 }
