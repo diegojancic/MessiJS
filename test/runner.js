@@ -66,8 +66,25 @@ describe('Create a titled Messi window', function() {
 });
 
 describe('Create a modal Messi window', function() {
-    it('should be truthy', function() {
-        expect(true).to.be.ok;
+    var dialog = null;
+
+    beforeEach(function() {
+        dialog = new Messi(
+            'This is a message with Messi in modal view. Now you can\'t interact with other elements in the page until close this.',
+            {title: 'Modal Window', modal: true}
+        );
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('should have a title', function() {
+        expect($('.messi-title:visible').text()).to.equal('Modal Window');
+    });
+
+    it('should open a modal background', function() {
+        expect($('.messi-modal').get(0)).to.defined
     });
 });
 
