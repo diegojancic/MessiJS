@@ -26,11 +26,13 @@ describe('Creating a simple Messi window', function() {
         dialog.unload();
     });
 
-    // FIXME The check is happening before the dialog fades
-    it('should close when we click the button', function() {
+    it('should close when we click the button', function(done) {
         var dialog = new Messi('my message');
         $('.messi-closebtn').click();
-        expect($('.messi:visible').get(0)).to.be.undefined;
+        setTimeout(function() {
+            expect($('.messi:visible', dialog).get(0)).to.be.undefined;
+            done();
+        }, 600);
     });
 
 });
@@ -53,11 +55,13 @@ describe('Create a titled Messi window', function() {
         expect($('.messi-closebtn').css('opacity')).to.equal('1')
     });
 
-    // FIXME The check is happening before the dialog fades
-    it('should close when we click the button', function() {
+    it('should close when we click the button', function(done) {
         var dialog = new Messi('my message');
         $('.messi-closebtn').click();
-        expect($('.messi:visible').get(0)).to.be.undefined;
+        setTimeout(function() {
+            expect($('.messi:visible', dialog).get(0)).to.be.undefined;
+            done();
+        }, 600);
     });
 });
 
