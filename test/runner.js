@@ -88,8 +88,88 @@ describe('Create a modal Messi window', function() {
     });
 });
 
-describe('Create an abosolutely positioned Messi window', function() {
-    it('should be truthy', function() {
-        expect(true).to.be.ok;
+describe('Create an absolutely positioned Messi window', function() {
+    var dialog = null;
+
+    beforeEach(function() {
+        dialog = new Messi(
+            'This is a message with Messi in absolute position.',
+            {center: false, viewport: {top: '76px', left: '10px'}}
+        );
     });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('should be positioned absolutely', function() {
+        var position = $('.messi').position();
+        expect(position.top).to.equal(76);
+        expect(position.left).to.equal(10);
+    });
+});
+
+describe('Create a Messi window with a custom button', function() {
+    var dialog = null;
+
+    beforeEach(function() {
+        dialog = new Messi(
+            'This is a message with Messi with custom buttons.',
+            {title: 'Buttons', buttons: [{id: 0, label: 'Close', val: 'X'}]}
+        );
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('should not have an inline close button', function() {
+        var dialog = new Messi('my message');
+        expect($('.messi-closebtn').get(0)).to.not.be.defined
+    });
+
+    it('should have a custom "Close" action button', function() {
+        expect($('.messi-actions button').text()).to.equal('Close');
+    });
+});
+
+describe('Message with custom buttons (yes/no/cancel) and style classes', function() {
+    it('should have a yes button');
+    it('should have a no button');
+    it('should have a cancel button');
+    it('should have style classes');
+});
+
+describe('Window with success title', function() {
+    it('titleClass should be "success"');
+});
+
+describe('Window with info title', function() {
+    it('titleClass should be "info"');
+});
+
+describe('Window with error title (animated)', function() {
+    it('titleClass should be "error"');
+    it('title should be animated');
+});
+
+describe('Window with warning title (animated)', function() {
+    it('titleClass should be "warning"');
+    it('title should be animated');
+});
+
+describe('Create a Messi.alert()', function() {
+    it('should show a Messi alert');
+});
+
+describe('Create a Messi.ask() to launch a fast yes/no message', function() {
+    it('should show a Messi ask');
+});
+
+describe('Use Messi.load() to show an ajax response', function() {
+    it('TBD');
+});
+
+describe('Use Messi.img() to show an image', function() {
+    it('should show an image');
 });
