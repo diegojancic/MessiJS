@@ -27,7 +27,7 @@ describe('Creating a simple Messi window', function() {
     });
 
     // FIXME The check is happening before the dialog fades
-    it.skip('should close when we click the button', function() {
+    it('should close when we click the button', function() {
         var dialog = new Messi('my message');
         $('.messi-closebtn').click();
         expect($('.messi:visible').get(0)).to.be.undefined;
@@ -54,7 +54,7 @@ describe('Create a titled Messi window', function() {
     });
 
     // FIXME The check is happening before the dialog fades
-    it.skip('should close when we click the button', function() {
+    it('should close when we click the button', function() {
         var dialog = new Messi('my message');
         $('.messi-closebtn').click();
         expect($('.messi:visible').get(0)).to.be.undefined;
