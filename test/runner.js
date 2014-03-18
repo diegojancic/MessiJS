@@ -284,14 +284,31 @@ describe('Create a Messi.ask() to launch a fast yes/no message', function() {
     beforeEach(function() {
         dialog = Messi.ask(
             'This is a question with Messi. Do you like it?',
-            function(val) { console.log('Your selection: ' + val); });
+            function(value) { }
+        );
     });
 
     afterEach(function() {
         dialog.unload();
     });
 
-    it('TBD: should show a Messi ask');
+    it('should have a callback');
+
+    it('should have a yes button', function() {
+        expect($('button[value="Yes"]').get(0)).to.be.defined;
+    });
+
+    it('should have a no button', function() {
+        expect($('button[value="No"]').get(0)).to.be.defined;
+    });
+
+    it('should have content', function() {
+        expect($('.messi-content').text()).to.equal('This is a question with Messi. Do you like it?');
+    });
+
+    it('but should not have a titlebar by default', function() {
+        expect($('.messi-titlebox').get(0)).to.be.undefined
+    });
 });
 
 describe('Use Messi.load() to show an ajax response', function() {
