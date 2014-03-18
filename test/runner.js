@@ -1,13 +1,8 @@
-//function untilMessiIsClosed() {
-    //if ($('.messi:visible').get(0)) {
-        //setTimeout(untilMessiIsClosed, 50);
-    //}
-//}
-
-//beforeEach(function(done) {
-    //untilMessiIsClosed();
-    //done();
-//});
+beforeEach(function(done) {
+    setTimeout(function() {
+        done();
+    }, 25);
+});
 
 describe('Creating a simple Messi window', function() {
 
@@ -120,7 +115,7 @@ describe('Create an absolutely positioned Messi window', function() {
 });
 
 // FIXME This appears to be picking up a previous test's window.
-describe.skip('Create a Messi window with a custom button', function() {
+describe('Create a Messi window with a custom button', function() {
     var dialog = null;
 
     beforeEach(function(done) {
@@ -136,13 +131,10 @@ describe.skip('Create a Messi window with a custom button', function() {
     });
 
     it('should show my message', function() {
-        var dialog = new Messi('my message');
         expect($('.messi-content').text()).to.be.equal('This is a message with Messi with custom buttons.');
-        dialog.unload();
     });
 
     it('should not have an inline close button', function() {
-        var dialog = new Messi('my message');
         expect($('.messi-closebtn').get(0)).to.be.undefined;
     });
 
@@ -151,7 +143,7 @@ describe.skip('Create a Messi window with a custom button', function() {
     });
 });
 
-describe('Message with custom buttons (yes/no) and a callback function', function() {
+describe('Message with custom buttons (yes/no/cancel)', function() {
     var dialog = null;
 
     beforeEach(function() {
@@ -160,40 +152,7 @@ describe('Message with custom buttons (yes/no) and a callback function', functio
             {
                 title: 'Buttons', buttons: [
                     {id: 0, label: 'Yes', val: 'Y'},
-                    {id: 1, label: 'No', val: 'N'}
-                ],
-                callback: function(val) { alert('Your selection: ' + val); }
-            }
-        );
-    });
-
-    afterEach(function() {
-        dialog.unload();
-    });
-
-    it('should have a yes button', function() {
-        expect($('button[value="Yes"]').get(0)).to.be.defined;
-    });
-
-    it('should have a no button', function() {
-        expect($('button[value="No"]').get(0)).to.be.defined;
-    });
-
-    it('should have a cancel button');
-    it('should have style classes');
-});
-
-describe('Message with custom buttons (yes/no/cancel) and style classes', function() {
-    var dialog = null;
-
-    beforeEach(function() {
-        dialog = new Messi(
-            'This is a message with Messi with custom buttons.',
-            {
-                title: 'Buttons',
-                buttons: [
-                    {id: 0, label: 'Yes', val: 'Y', class: 'btn-success'},
-                    {id: 1, label: 'No', val: 'N', class: 'btn-danger'},
+                    {id: 1, label: 'No', val: 'N'},
                     {id: 2, label: 'Cancel', val: 'C'}
                 ]
             }
@@ -215,40 +174,131 @@ describe('Message with custom buttons (yes/no/cancel) and style classes', functi
     it('should have a cancel button', function() {
         expect($('button[value="Cancel"]').get(0)).to.be.defined;
     });
+});
 
-    it('should have style classes');
+describe('Message with custom buttons (yes/no) and style classes', function() {
+    var dialog = null;
+
+    beforeEach(function() {
+        dialog = new Messi(
+            'This is a message with Messi with custom buttons.',
+            {
+                title: 'Buttons',
+                buttons: [
+                    {id: 0, label: 'Yes', val: 'Y', class: 'btn-success'},
+                    {id: 1, label: 'No', val: 'N', class: 'btn-danger'}
+                ]
+            }
+        );
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('should have a yes button with class', function() {
+        expect($('button.btn-success[value="Yes"]').get(0)).to.be.defined;
+    });
+
+    it('should have a no button with class', function() {
+        expect($('button.btn-danger[value="No"]').get(0)).to.be.defined;
+    });
 });
 
 describe('Window with success title', function() {
-    it('titleClass should be "success"');
-});
+    var dialog = null;
 
-describe('Window with info title', function() {
-    it('titleClass should be "info"');
+    beforeEach(function() {
+        dialog = new Messi(
+            'This is a message with Messi.',
+            {
+                title: 'Title',
+                titleClass: 'success',
+                buttons: [{id: 0, label: 'Close', val: 'X'}]
+            }
+        );
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('should have a titleClass of "success"', function() {
+        expect($('.messi-titlebox.success').attr('class')).to.match(/success/);
+    });
 });
 
 describe('Window with error title (animated)', function() {
-    it('titleClass should be "error"');
-    it('title should be animated');
-});
+    var dialog = null;
 
-describe('Window with warning title (animated)', function() {
-    it('titleClass should be "warning"');
-    it('title should be animated');
+    beforeEach(function() {
+        dialog = new Messi(
+            'This is a message with Messi.',
+            {
+                title: 'Title',
+                titleClass: 'anim error',
+                buttons: [{id: 0, label: 'Close', val: 'X'}]
+            }
+        );
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('titleClass should be "error"', function() {
+        expect($('.messi-titlebox.error').text()).to.be.equal('Title');
+    });
+
+    it('titleClass should be animated', function() {
+        expect($('.messi-titlebox.anim').text()).to.be.equal('Title');
+    });
 });
 
 describe('Create a Messi.alert()', function() {
-    it('should show a Messi alert');
+    var dialog = null;
+
+    beforeEach(function() {
+        dialog = Messi.alert('This is an alert with Messi.');
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('should show a Messi alert', function() {
+        expect($('.messi-content').text()).to.be.equal('This is an alert with Messi.');
+    });
+
+    it('should show a Messi alert', function() {
+        expect($('.messi button').text()).to.equal('OK');
+    });
+
+    it('should not have a titlebar', function() {
+        expect($('.messi-titlebox').get(0)).to.be.undefined
+    });
 });
 
 describe('Create a Messi.ask() to launch a fast yes/no message', function() {
-    it('should show a Messi ask');
+    var dialog = null;
+
+    beforeEach(function() {
+        dialog = Messi.ask(
+            'This is a question with Messi. Do you like it?',
+            function(val) { console.log('Your selection: ' + val); });
+    });
+
+    afterEach(function() {
+        dialog.unload();
+    });
+
+    it('TBD: should show a Messi ask');
 });
 
 describe('Use Messi.load() to show an ajax response', function() {
-    it('TBD');
+    it('TBD: show an Ajax response');
 });
 
 describe('Use Messi.img() to show an image', function() {
-    it('should show an image');
+    it('TBD: show an image');
 });
