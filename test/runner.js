@@ -114,7 +114,6 @@ describe('Create an absolutely positioned Messi window', function() {
     });
 });
 
-// FIXME This appears to be picking up a previous test's window.
 describe('Create a Messi window with a custom button', function() {
     var dialog = null;
 
@@ -270,11 +269,11 @@ describe('Create a Messi.alert()', function() {
         expect($('.messi-content').text()).to.be.equal('This is an alert with Messi.');
     });
 
-    it('should show a Messi alert', function() {
+    it('should have an OK button', function() {
         expect($('.messi button').text()).to.equal('OK');
     });
 
-    it('should not have a titlebar', function() {
+    it('should not have a titlebar by default', function() {
         expect($('.messi-titlebox').get(0)).to.be.undefined
     });
 });
