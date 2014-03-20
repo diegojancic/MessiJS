@@ -11,12 +11,7 @@
     "type": "git",
     "url": "git://github.com/kgust/Messi.git"
   },
-  "keywords": [
-    "messi",
-    "jQuery",
-    "message",
-    "plugin"
-  ],
+  "keywords": [ "messi", "jQuery", "message", "plugin" ],
   "contributors": [
     {
       "name": "Marcos Esperón"
