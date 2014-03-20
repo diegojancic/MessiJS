@@ -13,102 +13,118 @@
 (function(window, $) {
   function Messi(data, options) {
 
+    var close;
     var _this = this;
-    _this.options = jQuery.extend({}, Messi.prototype.options, options || {});
+    _this.options = $.extend({}, Messi.prototype.options, options || {});
 
     // Prepare the item
-    _this.messi = jQuery(_this.template);
+    _this.messi = $(_this.template);
     _this.setContent(data);
 
     // Adjust the title
-    if(_this.options.title == null) {
+    if(_this.options.title === null) {
 
-      jQuery('.messi-titlebox', _this.messi).remove();
+      $('.messi-titlebox', _this.messi).remove();
 
     } else {
 
-      jQuery('.messi-title', _this.messi).append(_this.options.title);
+      $('.messi-title', _this.messi).append(_this.options.title);
 
       if(_this.options.buttons.length === 0 && !_this.options.autoclose) {
 
         if(_this.options.closeButton) {
-          var close = jQuery('<span class="messi-closebtn"></span>');
+          close = $('<span class="messi-closebtn"></span>');
           close.bind('click', function() {
             _this.hide();
           });
 
-          jQuery('.messi-titlebox', this.messi).prepend(close);
+          $('.messi-titlebox', this.messi).prepend(close);
 
-        };
+        }
 
-      };
+      }
 
-      if(_this.options.titleClass != null) jQuery('.messi-titlebox', this.messi).addClass(_this.options.titleClass);
+      if(_this.options.titleClass !== null) {
+        $('.messi-titlebox', this.messi).addClass(_this.options.titleClass);
+      }
 
-    };
+    }
 
     // Adjust the width
-    if(_this.options.width != null) jQuery('.messi-box', _this.messi).css('width', _this.options.width);
+    if(_this.options.width !== null) {
+      $('.messi-box', _this.messi).css('width', _this.options.width);
+    }
 
     // Prepare the buttons
     if(_this.options.buttons.length > 0) {
 
+      var btnCallback = function() { _this.options.callback.call(this.value); };
+
       for (var i = 0; i < _this.options.buttons.length; i++) {
 
         var cls = (_this.options.buttons[i]["class"]) ? _this.options.buttons[i]["class"] : '';
-        var btn = jQuery('<div class="btnbox"><button data-value="'+ _this.options.buttons[i].val +'" class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button></div>');
-        btn.on('click', 'button', function() {
-          var value = jQuery(this).data('value');
-          var after = (_this.options.callback != null) ? function() { return _this.options.callback.call(this, value); } : null;
+        var btn = '<button data-value="'+ _this.options.buttons[i].val +'" class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button>';
+        btn = $('<div class="btnbox">' + btn + '</div>', {
+        });
+
+        $('.messi-actions', this.messi).append(btn);
+
+
+        $(document).delegate('.messi-actions button', 'click', function() {
+          var after = null;
+          var value = $(this).data('value');
+
+          if (typeof _this.options.callback === "function") {
+            after = btnCallback;
+          }
           _this.hide(after);
         });
 
-        jQuery('.messi-actions', this.messi).append(btn);
 
-      };
+      }
 
     } else {
 
-      jQuery('.messi-footbox', this.messi).remove();
+      $('.messi-footbox', this.messi).remove();
 
-    };
+    }
 
     // Prepare the close button automatically
-    if(_this.options.buttons.length === 0 && _this.options.title == null && !_this.options.autoclose) {
+    if(_this.options.buttons.length === 0 && _this.options.title === null && !_this.options.autoclose) {
 
       if(_this.options.closeButton) {
-        var close = jQuery('<span class="messi-closebtn"></span>');
+        close = $('<span class="messi-closebtn"></span>');
         close.bind('click', function() {
           _this.hide();
         });
 
-        jQuery('.messi-content', this.messi).prepend(close);
+        $('.messi-content', this.messi).prepend(close);
 
-      };
+      }
 
-    };
+    }
 
     // Activate the modal screen
-    _this.modal = (_this.options.modal) ? jQuery('<div class="messi-modal"></div>').css({opacity: _this.options.modalOpacity, width: jQuery(document).width(), height: jQuery(document).height(), 'z-index': _this.options.zIndex + jQuery('.messi').length}).appendTo(document.body) : null;
+    _this.modal = (_this.options.modal) ? $('<div class="messi-modal"></div>').css({opacity: _this.options.modalOpacity, width: $(document).width(), height: $(document).height(), 'z-index': _this.options.zIndex + $('.messi').length}).appendTo(document.body) : null;
 
     // Show the message
     if(_this.options.show) _this.show();
 
     // Control the resizing of the display
-    jQuery(window).bind('resize scroll', function(){ _this.resize(); });
+    $(window).bind('resize scroll', function(){ _this.resize(); });
 
     // Configure the automatic closing
-    if(_this.options.autoclose != null) {
+    if(_this.options.autoclose !== null) {
       setTimeout(function(_this) {
-        var value = jQuery.data(this, 'value');
-        var after = (_this.options.callback != null) ? function () { _this.options.callback(value); } : null;
+        var value = $.data(this, 'value');
+        var after = (_this.options.callback !== null) ? function () { _this.options.callback(value); } : null;
         _this.hide(after);
       }, _this.options.autoclose, this);
-    };
+    }
 
     return _this;
 
-  };
+  }
 
   Messi.prototype = {
 
@@ -123,7 +139,7 @@
       titleClass: null,                        // title style: info, warning, success, error
       minMargin : 15,                          // set how much minimal space there should be (in pixels) when the nudge function moves the popup back into the window
       modal: false,                            // shows message in modal (loads background)
-      modalOpacity: .2,                        // modal background opacity
+      modalOpacity: 0.2,                        // modal background opacity
       padding: '10px',                         // content padding
       show: true,                              // show message after load
       unload: true,                            // unload message after hide
@@ -136,14 +152,14 @@
     visible: false,
 
     setContent: function(data) {
-      jQuery('.messi-content', this.messi).css({padding: this.options.padding, height: this.options.height}).empty().append(data);
+      $('.messi-content', this.messi).css({padding: this.options.padding, height: this.options.height}).empty().append(data);
     },
 
     viewport: function() {
 
       return {
-        top: ((jQuery(window).height() - this.messi.height()) / 2) +  jQuery(window).scrollTop() + "px",
-        left: ((jQuery(window).width() - this.messi.width()) / 2) + jQuery(window).scrollLeft() + "px"
+        top: (($(window).height() - this.messi.height()) / 2) +  $(window).scrollTop() + "px",
+        left: (($(window).width() - this.messi.width()) / 2) + $(window).scrollLeft() + "px"
       };
 
     },
@@ -152,22 +168,22 @@
 
       if(this.visible) return;
 
-      if (this.messi.parent().length == 0) {
+      if (this.messi.parent().length === 0) {
         // or unload in case of first call
-        this.modal && this.modal.appendTo(document.body);
+        if (this.modal) { this.modal.appendTo(document.body); }
         this.messi.appendTo(document.body);
       }
 
-      this.modal && this.modal.show();
+      if (this.modal) { this.modal.show(); }
 
       // Get the center of the screen if the center option is on
       if(this.options.center){
-        this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+        this.options.viewport = this.viewport($('.messi-box', this.messi));
       }else{
         this.nudge();
       }
 
-      this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left, 'z-index': this.options.zIndex + jQuery('.messi').length}).show().animate({opacity: 1}, 300);
+      this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left, 'z-index': this.options.zIndex + $('.messi').length}).show().animate({opacity: 1}, 300);
 
       // Cancel the scroll
       //document.documentElement.style.overflow = "hidden";
@@ -182,13 +198,13 @@
       var _this = this;
 
       if (typeof after === 'function') {
-        if (after.call(this) == false) {
+        if (after.call(this) === false) {
           return this;
         }
       }
 
       this.messi.animate({opacity: 0}, 300, function() {
-        _this.modal && _this.modal.css({display: 'none'});
+        if (_this.modal) { _this.modal.css({display: 'none'}); }
         _this.messi.css({display: 'none'});
 
         // Reactivate the scroll
@@ -203,12 +219,12 @@
 
     resize: function() {
       if(this.options.modal) {
-        jQuery('.messi-modal').css({width: jQuery(document).width(), height: jQuery(document).height()});
-      };
+        $('.messi-modal').css({width: $(document).width(), height: $(document).height()});
+      }
       if(this.options.center) {
-        this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+        this.options.viewport = this.viewport($('.messi-box', this.messi));
         this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left});
-      };
+      }
     },
 
     toggle: function() {
@@ -218,8 +234,8 @@
 
     unload: function() {
       if (this.visible) this.hide();
-    jQuery(window).unbind('resize scroll', function () { this.resize(); });
-      this.modal && this.modal.remove();
+    $(window).unbind('resize scroll', function () { this.resize(); });
+      if (this.modal) { this.modal.remove(); }
       this.messi.remove();
     },
 
@@ -261,13 +277,13 @@
   };
 
   // Special Call
-  jQuery.extend(Messi, {
+  $.extend(Messi, {
 
     alert: function(data, callback, options) {
 
       var buttons = [{id: 'ok', label: 'OK', val: 'OK'}];
 
-      options = jQuery.extend({closeButton: false, buttons: buttons, callback:function() {}}, options || {}, {show: true, unload: true, callback: callback});
+      options = $.extend({closeButton: false, buttons: buttons, callback:function() {}}, options || {}, {show: true, unload: true, callback: callback});
 
       return new Messi(data, options);
 
@@ -280,7 +296,7 @@
         {id: 'no', label: 'No', val: 'N', "class": 'btn-danger'},
       ];
 
-      options = jQuery.extend({closeButton: false, modal: true, buttons: buttons, callback:function() {}}, options || {}, {show: true, unload: true, callback: callback});
+      options = $.extend({closeButton: false, modal: true, buttons: buttons, callback:function() {}}, options || {}, {show: true, unload: true, callback: callback});
 
       return new Messi(data, options);
 
@@ -290,14 +306,14 @@
 
       var img = new Image();
 
-      jQuery(img).load(function() {
+      $(img).load(function() {
 
-        var vp = {width: jQuery(window).width() - 50, height: jQuery(window).height() - 50};
+        var vp = {width: $(window).width() - 50, height: $(window).height() - 50};
         var ratio = (this.width > vp.width || this.height > vp.height) ? Math.min(vp.width / this.width, vp.height / this.height) : 1;
 
-        jQuery(img).css({width: this.width * ratio, height: this.height * ratio});
+        $(img).css({width: this.width * ratio, height: this.height * ratio});
 
-        options = jQuery.extend(options || {}, {show: true, unload: true, closeButton: true, width: this.width * ratio, height: this.height * ratio, padding: 0});
+        options = $.extend(options || {}, {show: true, unload: true, closeButton: true, width: this.width * ratio, height: this.height * ratio, padding: 0});
         new Messi(img, options);
 
       }).error(function() {
@@ -311,7 +327,7 @@
 
     load: function(url, options) {
 
-      options = jQuery.extend(options || {}, {show: true, unload: true, params: {}});
+      options = $.extend(options || {}, {show: true, unload: true, params: {}});
 
       var request = {
         url: url,
@@ -323,12 +339,12 @@
           if (typeof window.console === 'object') console.log(request.responseText);
         },
         success: function(html) {
-          //html = jQuery(html);
+          //html = $(html);
           new Messi(html, options);
         }
       };
 
-      jQuery.ajax(request);
+      $.ajax(request);
 
     }
 
@@ -337,7 +353,7 @@
   // Preserve backward compatibility
   window.Messi = Messi;
 
-  // Put in jQuery namespace
+  // Put Messi into the jQuery namespace
   $.Messi = Messi;
 
 })(window, jQuery);
