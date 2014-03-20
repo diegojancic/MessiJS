@@ -1,6 +1,6 @@
 {
   "name": "Messi",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-beta",
   "description": "A simple message plugin for jQuery",
   "main": "messi.js",
   "private": true,

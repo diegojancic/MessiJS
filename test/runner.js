@@ -1,3 +1,5 @@
+/* jshint expr:true  */
+
 beforeEach(function(done) {
     setTimeout(function() {
         done();
@@ -26,8 +28,8 @@ describe('Creating a simple Messi window', function() {
 
     it('should have a hidden close button', function() {
         var dialog = new Messi('my message');
-        expect($('.messi-closebtn').get(0)).to.be.defined
-        expect($('.messi-closebtn').css('opacity')).to.equal('0')
+        expect($('.messi-closebtn').get(0)).to.be.defined;
+        expect($('.messi-closebtn').css('opacity')).to.equal('0');
         dialog.unload();
     });
 
@@ -56,8 +58,8 @@ describe('Create a titled Messi window', function() {
     });
 
     it('should have a visible close button', function() {
-        expect($('.messi-closebtn').get(0)).to.defined
-        expect($('.messi-closebtn').css('opacity')).to.equal('1')
+        expect($('.messi-closebtn').get(0)).to.defined;
+        expect($('.messi-closebtn').css('opacity')).to.equal('1');
     });
 
     it('should close when we click the button', function(done) {
@@ -89,7 +91,7 @@ describe('Create a modal Messi window', function() {
     });
 
     it('should open a modal background', function() {
-        expect($('.messi-modal').get(0)).to.defined
+        expect($('.messi-modal').get(0)).to.defined;
     });
 });
 
@@ -274,7 +276,7 @@ describe('Create a Messi.alert()', function() {
     });
 
     it('should not have a titlebar by default', function() {
-        expect($('.messi-titlebox').get(0)).to.be.undefined
+        expect($('.messi-titlebox').get(0)).to.be.undefined;
     });
 });
 
@@ -307,7 +309,7 @@ describe('Create a Messi.ask() to launch a fast yes/no message', function() {
     });
 
     it('but should not have a titlebar by default', function() {
-        expect($('.messi-titlebox').get(0)).to.be.undefined
+        expect($('.messi-titlebox').get(0)).to.be.undefined;
     });
 });
 
