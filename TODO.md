@@ -17,6 +17,17 @@ that have been already issued for the official Messi repo.
   global scope. See PR27 & PR28. 
   [x] Add css minification.
 
+### Preparing for Beta
+* [ ] Complete the basic tests
+* [ ] Complete the PR tests
+* [ ] Examine Open Issues: Currently there are 38 Open Issues
+* [ ] Complete the Issue tests
+* [ ] Update package.json
+
+### Preparing for 2.0.0 Final
+* [ ] Write the documentation
+* [ ] Add a LICENSE file
+* [ ] Update package.json
 
 ### Pull Requests – Examine and apply all appropriate 
 * [x] https://github.com/marcosesperon/Messi/pull/26 – Added Box Name _NOTE: There are better ways to do this. E.g. hide()_
@@ -32,6 +43,3 @@ that have been already issued for the official Messi repo.
 * [x] https://github.com/marcosesperon/Messi/pull/36 - fix unload and modal
 * [x] https://github.com/marcosesperon/Messi/pull/38 - Controlling the resizing and scrolling the screen to adjust the message in the user's field of view.
 
-
-### Open Issues – Read and move any appropriate issues to the new repo
-* [ ] Examine Open Issues: Currently there are 38 Open Issues

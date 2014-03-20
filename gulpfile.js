@@ -28,7 +28,7 @@ gulp.task('test', function() {
       //customTemplatingThing: "test"
     };
   gulp.src('test/*.js')
-    .pipe(exec('node_modules/.bin/mocha-phantomjs /test/index.html'));
+    .pipe(exec('node_modules/.bin/mocha-phantomjs --view 640x480 /test/index.html'));
 });
 
 gulp.task('compress', ['clean'], function() {
