@@ -5,18 +5,14 @@
   "main": "messi.js",
   "private": true,
   "scripts": {
-    "test": "gulp"
+    "test": "istanbul test --report html -x 'vendor/**' _mocha",
+    "test-travis": "istanbul cover -x 'vendor/**' _mocha -- -R spec;A=$?;cat coverage/lcov.info | coveralls;exit $A"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/kgust/Messi.git"
   },
-  "keywords": [
-    "messi",
-    "jQuery",
-    "message",
-    "plugin"
-  ],
+  "keywords": [ "messi", "jQuery", "message", "plugin" ],
   "contributors": [
     {
       "name": "Marcos Esperón"
@@ -45,6 +41,7 @@
     "gulp-uglify": "^0.2.1",
     "gulp-watch": "^0.5.2",
     "gulp-exec": "^1.0.4",
-    "mocha-phantomjs": "^3.3.2"
+    "mocha-phantomjs": "^3.3.2",
+    "istanbul": "*"
   }
 }
