@@ -1,6 +1,8 @@
 An unofficial fork of the [Messi](https://github.com/marcosesperon/Messi) dialog.
 
 See [TODO.md](https://github.com/kgust/Messi/blob/master/TODO.md)
+
+[![Build Status](https://travis-ci.org/MessiJS/Messi.png?branch=master)](https://travis-ci.org/MessiJS/Messi)
 *****
 
 # Messi
