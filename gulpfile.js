@@ -5,7 +5,7 @@ var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-minify-css');
 var clean = require('gulp-clean');
 var rename = require('gulp-rename');
-var sources = ['messi.js', 'test/*.js'];
+var sources = ['messi.js', 'test/all.js'];
 
 gulp.task('clean', function() {
     gulp.src([
@@ -27,7 +27,7 @@ gulp.task('test', function() {
       //silent: true,
       //customTemplatingThing: "test"
     };
-  gulp.src('test/*.js')
+  gulp.src('test/all.js')
     .pipe(exec('node_modules/.bin/mocha-phantomjs --view 640x480 /test/index.html'));
 });
 
