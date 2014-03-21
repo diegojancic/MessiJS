@@ -8,7 +8,7 @@ document = jsdom.jsdom('<html><head><script></script></head><body></body></html>
 window = jsdom.jsdom().parentWindow;
 global.jQuery = global.$ = require('jquery');
 
-require('/Users/kgustavson/Sites/MessiJS/messi.js');
+require('./messi.js');
 
 navigator = window.navigator = {};
 DEBUG = false;
