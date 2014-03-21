@@ -1,10 +1,15 @@
 /*jshint -W020 */
 /*jshint -W117 */
 // globals
-jsdom = require('jsdom').jsdom;
-document = jsdom('<html><head><script></script></head><body></body></html>');
-window = document.createWindow();
-jQuery = $ = require("jquery");//.create(window);
+jsdom = require('jsdom');
+document = jsdom.jsdom('<html><head><script></script></head><body></body></html>');
+
+//window = document.createWindow();
+window = jsdom.jsdom().parentWindow;
+global.jQuery = global.$ = require('jquery');
+
+require('/Users/kgustavson/Sites/MessiJS/messi.js');
+
 navigator = window.navigator = {};
 DEBUG = false;
 navigator.userAgent = 'NodeJs JsDom';
@@ -26,29 +31,15 @@ var glob = require('glob').sync,
     _ = require('lodash');
 
 
-//
 // mocha
 var Mocha = require('mocha');
-
 var mocha = new Mocha();
 
 mocha.reporter('spec').ui('bdd');
 
 
 // gather test files
-var filePatterns = _([
-    'runner.js'
-    //'test/runner-test.js',
-    //'test/lib/angular/angular.js',
-    //'test/lib/angular/angular-*.js',
-    //'public/js/app.js',
-    //'public/js/controllers/*.js',
-    //'public/js/filters/*.js',
-    //'public/js/services/*.js',
-    //'test/unit/ctrls/*Spec.js',
-    //'test/unit/filters/*Spec.js',
-    //'test/unit/services/*Spec.js'
-]);
+var filePatterns = _([ 'messi.js', 'test/all.js' ]);
 
 var testFiles = filePatterns.map(function(pattern){
     return glob(pattern);
