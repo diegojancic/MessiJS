@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
 Copyright (c) 2012-2013 Marcos Esperón: http://marcosesperon.es
+
 Copyright (c) 2014 Kevin Gustavson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
