@@ -1,7 +1,7 @@
 {
   "name": "Messi",
   "version": "2.0.0-beta",
-  "description": "A simple message plugin for jQuery",
+  "description": "A easy to use message plugin for jQuery",
   "main": "messi.js",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kgust/Messi.git"
+    "url": "git://github.com/MessiJS/MessiJS.git"
   },
   "keywords": [
     "messi",
@@ -49,6 +49,7 @@
     "glob": "^3.2.9",
     "lodash": "^2.4.1",
     "jsdom": "^0.10.3",
-    "sinon": "^1.9.0"
+    "sinon": "^1.9.0",
+    "gulp-jscodesniffer": "0.0.1"
   }
 }

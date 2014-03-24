@@ -2,13 +2,14 @@
 /*jshint -W117 */
 // globals
 jsdom = require('jsdom');
-document = jsdom.jsdom('<html><head><script></script></head><body></body></html>');
+//document = jsdom.jsdom('<html><head><script></script></head><body></body></html>');
+document = jsdom.jsdom('index.html');
 
 //window = document.createWindow();
 window = jsdom.jsdom().parentWindow;
 global.jQuery = global.$ = require('jquery');
 
-require('./messi.js');
+//require('./messi.js');
 
 navigator = window.navigator = {};
 DEBUG = false;
