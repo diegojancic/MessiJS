@@ -1,5 +1,6 @@
 # MessiJS
 [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS)
+[![Coverage Status](https://coveralls.io/repos/MessiJS/Messi/badge.png?branch=master)](https://coveralls.io/r/MessiJS/Messi?branch=master)
 
 An easy to configure message plugin for jQuery.
 
