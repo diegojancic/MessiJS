@@ -1,17 +1,22 @@
 {
   "name": "Messi",
   "version": "2.0.0-beta",
-  "description": "A simple message plugin for jQuery",
+  "description": "A easy to use message plugin for jQuery",
   "main": "messi.js",
   "private": true,
   "scripts": {
-    "test": "gulp"
+    "test": "gulp travis-test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kgust/Messi.git"
+    "url": "git://github.com/MessiJS/MessiJS.git"
   },
-  "keywords": [ "messi", "jQuery", "message", "plugin" ],
+  "keywords": [
+    "messi",
+    "jQuery",
+    "message",
+    "plugin"
+  ],
   "contributors": [
     {
       "name": "Marcos Esperón"
@@ -30,7 +35,7 @@
   "devDependencies": {
     "mocha": "^1.17.1",
     "chai": "^1.9.0",
-    "jquery": "^2.1.0",
+    "jquery": "^1.7.1",
     "gulp": "^3.5.5",
     "gulp-clean": "^0.2.4",
     "gulp-jshint": "^1.5.0",
@@ -40,6 +45,17 @@
     "gulp-uglify": "^0.2.1",
     "gulp-watch": "^0.5.2",
     "gulp-exec": "^1.0.4",
-    "mocha-phantomjs": "^3.3.2"
+    "mocha-phantomjs": "^3.3.2",
+    "glob": "^3.2.9",
+    "lodash": "^2.4.1",
+    "jsdom": "^0.10.3",
+    "sinon": "^1.9.0",
+    "gulp-jscodesniffer": "0.0.1",
+    "karma": "^0.12.1",
+    "karma-mocha": "^0.1.3",
+    "karma-phantomjs-launcher": "^0.1.2",
+    "karma-coverage": "^0.2.1",
+    "gulp-util": "^2.2.14",
+    "gulp-coveralls": "^0.1.2"
   }
 }
