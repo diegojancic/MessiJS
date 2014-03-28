@@ -88,8 +88,7 @@ describe('Creating a simple Messi window', function() {
         }, 600);
     });
 
-    // FIXME - this is failing. likely timeout issues.
-    it.skip('should close automatically when autoclose is enabled', function() {
+    it('should close automatically when autoclose is enabled', function(done) {
         var dialog = new $.Messi('my message', {autoclose: 1000});
         expect($('.messi:visible', dialog).get(0)).to.be.defined;
 
@@ -182,7 +181,7 @@ describe('Create an absolutely positioned Messi window', function() {
         dialog.unload();
     });
 
-    // FIXME this is failing on PhantomJS - viewport
+    // TODO this was failing on PhantomJS - viewport
     it('should be positioned absolutely', function() {
         var position = $('.messi').position();
         expect(position.top).to.equal(8);
@@ -205,9 +204,8 @@ describe('Create a Messi window with a custom buttons', function() {
         dialog.unload();
     });
 
-    // FIXME failing due to a conflict with other tests
-    it.skip('should show my message', function() {
-        expect($('.messi-content', dialog).text()).to.be.equal('This is a message with Messi with custom buttons.');
+    it('should show my message', function() {
+        expect($('.messi-content').text()).to.be.equal('This is a message with Messi with custom buttons.');
     });
 
     it('should not have an inline close button', function() {
@@ -395,8 +393,15 @@ describe('Use Messi.load() to show an ajax response', function() {
 
 describe('Using Messi.img()', function() {
     it('will show an image', function() {
-        dialog = Messi.ask('https://avatars2.githubusercontent.com/u/70142?s=140');
+        dialog = Messi.img('https://avatars2.githubusercontent.com/u/70142?s=140');
         expect(jQuery('.messi', dialog).get(0)).to.be.defined;
+        expect(jQuery('.messi img', dialog).get(0)).to.be.defined;
+    });
+
+    it('will error loading a non-existant image', function() {
+        dialog = Messi.img('https://avatars2.githubusercontent.com/u/70142?s=140');
+        expect(jQuery('.messi', dialog).get(0)).to.be.defined;
+        expect(jQuery('.messi img', dialog).get(0)).to.be.undefined;
     });
 });
 
