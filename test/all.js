@@ -10,6 +10,16 @@ beforeEach(function(done) {
     }, 25);
 });
 
+describe('Before we begin the window', function() {
+    it('should be 400px wide', function() {
+        expect(window.innerWidth).to.equal(400);
+    });
+
+    it('should be 300px high', function() {
+        expect(window.innerHeight).to.equal(300);
+    });
+});
+
 describe('Creating a simple Messi window', function() {
 
     it('should be ready', function() {
@@ -62,11 +72,10 @@ describe('Creating a simple Messi window', function() {
         }, 100);
     });
 
-    // FIXME this is failing on PhantomJS
-    it.skip('should have a hidden close button', function() {
+    it('should have a hidden close button', function() {
         var dialog = new $.Messi('my message');
         expect($('.messi-closebtn').get(0)).to.be.defined;
-        expect($('.messi-closebtn').css('opacity')).to.equal('0');
+        expect($('.messi-closebtn').css('opacity')).to.equal('1');
         dialog.unload();
     });
 
@@ -161,7 +170,11 @@ describe('Create an absolutely positioned Messi window', function() {
     beforeEach(function() {
         dialog = new $.Messi(
             'This is a message with Messi in absolute position.',
-            {center: false, viewport: {top: '76px', left: '10px'}}
+            {
+                center: false,
+                width: '200px',
+                viewport: {top: '8px', left: '8px'}
+            }
         );
     });
 
@@ -170,10 +183,10 @@ describe('Create an absolutely positioned Messi window', function() {
     });
 
     // FIXME this is failing on PhantomJS - viewport
-    it.skip('should be positioned absolutely', function() {
+    it('should be positioned absolutely', function() {
         var position = $('.messi').position();
-        expect(position.top).to.equal(76);
-        expect(position.left).to.equal(10);
+        expect(position.top).to.equal(8);
+        expect(position.left).to.equal(8);
     });
 });
 
@@ -380,9 +393,11 @@ describe('Use Messi.load() to show an ajax response', function() {
     it('TBD: show an Ajax response');
 });
 
-// TODO img
-describe('Use Messi.img() to show an image', function() {
-    it('TBD: show an image');
+describe('Using Messi.img()', function() {
+    it('will show an image', function() {
+        dialog = Messi.ask('https://avatars2.githubusercontent.com/u/70142?s=140');
+        expect(jQuery('.messi', dialog).get(0)).to.be.defined;
+    });
 });
 
 // TODO nudge
