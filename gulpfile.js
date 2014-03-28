@@ -44,7 +44,17 @@ gulp.task('oldtest', function() {
 gulp.task('test', function() {
     karma.start(
         {
-            browsers: ['PhantomJS'],
+            browsers: ['PhantomWithConfig'],
+            customLaunchers: {
+                PhantomWithConfig: {
+                    base: 'PhantomJS',
+                    options: {
+                        page: {
+                            viewportSize: { width: 640, height: 480 }
+                        }
+                    }
+                }
+            },
             files: [
                 'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
                 'http://chaijs.com/chai.js',
