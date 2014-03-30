@@ -17,16 +17,18 @@ that have been already issued for the original Messi repo.
 * :white_check_mark: Add css minification.
 
 ### Preparing for 2.0 Beta
-* [ ] Complete the basic tests
-* [ ] Complete the PR tests
+* [ ] 90% Code Coverage
 * [ ] Examine Open Issues: Currently there are 38 Open Issues
 * [ ] Complete the Issue tests
 * :white_check_mark: Update package.json
+* [ ] Add Code Style checks for JSHint.
 
 ### Preparing for 2.0 Final
 * [ ] Write the documentation
 * [ ] Add a LICENSE file
 * [ ] Update package.json
+* [ ] Write CONTRIBUTING.md
+* [ ] 95% Code Coverage or better
 
 ### Pull Requests – Examine and apply all appropriate 
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/26 – Added Box Name _NOTE: There are better ways to do this. E.g. hide()_
