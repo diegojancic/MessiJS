@@ -1,14 +1,17 @@
-An unofficial fork of the [Messi](https://github.com/marcosesperon/Messi) dialog.
+# MessiJS
+[![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS)
+[![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
 
-See [TODO.md](https://github.com/kgust/Messi/blob/master/TODO.md)
+An easy to configure message plugin for jQuery.
 
-[![Build Status](https://travis-ci.org/MessiJS/Messi.png?branch=master)](https://travis-ci.org/MessiJS/Messi)
-*****
+This is a continuation of the [Messi](https://github.com/marcosesperon/Messi) dialog.
+When the original contributor stopped responding to Issues and Pull Requests, I created this official fork of the Messi plugin.
+See [TODO.md](https://github.com/kgust/Messi/blob/master/TODO.md) for our goals and progress.
 
-# Messi
-A simple message plugin for jQuery.
+All earlier edits are Copyright 2012-2013, Marcos Esperón: http://marcosesperon.es
 
-Copyright 2012, Marcos Esperón: http://marcosesperon.es
+See our [Contributors List](https://github.com/MessiJS/MessiJS/graphs/contributors)
+to see who's contributed code to this project recently.
 
 ## About
 Messi is a jQuery plugin to show clean, elegant messages in a simple way. With Messi you will avoid to use default JavaScript alert notifications or new windows to provide extended information to the user.
