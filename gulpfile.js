@@ -18,8 +18,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('lint', function() {
-    gulp
-        .src(sources)
+    gulp.src(sources)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
