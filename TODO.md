@@ -4,7 +4,7 @@ TO DO:
 Goals
 -----
 
-Take Messi and move it to the next level.
+Take Messi and move it to the next level.  Also full support for IE9+.
 
 If you are interested in helping, send me Pull Requests and I'll
 review them.  Where appropriate, I'll try to add the Pull Requests
