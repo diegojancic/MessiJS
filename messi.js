@@ -139,7 +139,7 @@
 
         // Configure the automatic closing
         if (_this.options.autoclose !== null) {
-            setTimeout(function (_this) {
+            setTimeout(function () {
                 var value = jQuery.data(this, 'value');
                 var after = (_this.options.callback !== null) ? function () {
                         _this.options.callback(value);
