@@ -298,9 +298,7 @@
             }
 
             jQuery(window)
-                .unbind('resize scroll', function () {
-                    this.resize();
-                });
+                .unbind('resize scroll');
 
             if (this.modal) {
                 this.modal.remove();
