@@ -139,7 +139,7 @@
 
         // Configure the automatic closing
         if (_this.options.autoclose !== null) {
-            setTimeout(function (_this) {
+            setTimeout(function () {
                 var value = jQuery.data(this, 'value');
                 var after = (_this.options.callback !== null) ? function () {
                         _this.options.callback(value);
@@ -298,9 +298,7 @@
             }
 
             jQuery(window)
-                .unbind('resize scroll', function () {
-                    this.resize();
-                });
+                .unbind('resize scroll');
 
             if (this.modal) {
                 this.modal.remove();
