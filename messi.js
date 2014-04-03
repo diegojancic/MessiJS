@@ -409,14 +409,14 @@
                         height: this.height * ratio
                     });
 
-                options = jQuery.extend(options || {}, {
+                options = jQuery.extend({
                     show:         true,
                     unload:       true,
                     closeButton:  true,
                     width:        this.width * ratio,
                     height:       this.height * ratio,
                     padding:      0
-                });
+                }, options || {});
 
                 new Messi(img, options);
 
@@ -435,11 +435,11 @@
 
         load: function (url, options) {
 
-            options = jQuery.extend(options || {}, {
+            options = jQuery.extend({
                 show: true,
                 unload: true,
                 params: {}
-            });
+            }, options || {});
 
             var request = {
                 url: url,
