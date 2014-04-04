@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
+var concat = require('gulp-concat');
 var coveralls = require('gulp-coveralls');
 var exec = require('gulp-exec');
 var jshint = require('gulp-jshint');
@@ -22,23 +23,6 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('oldertest', function() {
-  gulp
-    .src('test/all.js')
-    .pipe(exec('node_modules/.bin/mocha-phantomjs --view 640x480 /test/index.html'));
-});
-
-gulp.task('oldtest', function() {
-    // Be sure to return the stream
-    return gulp
-        .src([ 'messi.js', 'test/all.js' ])
-        .pipe(karma({ configFile: 'karma.conf.js' }))
-        .on('error', function(err) {
-            // Make sure failed tests cause gulp to exit non-zero
-            throw err;
-        });
-});
-
 gulp.task('test', function() {
     karma.start(
         {
@@ -57,11 +41,11 @@ gulp.task('test', function() {
                 'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
                 'http://chaijs.com/chai.js',
                 'http://code.jquery.com/jquery.min.js',
-                'messi.js',
+                'messi-full.js',
                 'test/**/*.js'
             ],
             frameworks: ['mocha'],
-            preprocessors: {'messi.js': ['coverage']},
+            preprocessors: {'messi-full.js': ['coverage']},
             reporters: ['progress', 'coverage'],
             coverageReporter: {
               type : 'lcov',
@@ -80,15 +64,24 @@ gulp.task('coveralls', function() {
     .pipe(coveralls());
 });
 
-gulp.task('compress', ['clean'], function() {
-    gulp
-        .src('messi.js')
+gulp.task('combine', ['clean'], function() {
+    gulp.src(['messi.js', 'extensions/*.js'])
+        .pipe(concat('messi-full.js'))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('compress', ['combine'], function() {
+    gulp.src('messi.js')
         .pipe(rename('messi.min.js'))
         .pipe(uglify({outSourceMap: true}))
         .pipe(gulp.dest('./'));
 
-    gulp
-        .src('messi.css')
+    gulp.src('messi-full.js')
+        .pipe(rename('messi-full.min.js'))
+        .pipe(uglify({outSourceMap: true}))
+        .pipe(gulp.dest('./'));
+
+    gulp.src('messi.css')
         .pipe(rename('messi.min.css'))
         .pipe(minifyCSS())
         .pipe(gulp.dest('./'));
