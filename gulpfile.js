@@ -23,7 +23,7 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', function() {
+gulp.task('test', ['combine'], function() {
     karma.start(
         {
             browsers: ['PhantomWithConfig'],
@@ -57,11 +57,6 @@ gulp.task('test', function() {
             gutil.log('Karma has exited with ' + exitCode);
             process.exit(exitCode);
         });
-});
-
-gulp.task('coveralls', function() {
-    gulp.src('coverage/**/lcov.info')
-    .pipe(coveralls());
 });
 
 gulp.task('combine', ['clean'], function() {
@@ -103,5 +98,5 @@ gulp.task('watch', function() {
 
 gulp.task('default', ['lint', 'compress', 'test', 'codecoverage']);
 
-gulp.task('travis-test', ['lint', 'compress', 'test', 'coveralls']);
+gulp.task('travis-test', ['lint', 'compress', 'test', 'codecoverage']);
 
