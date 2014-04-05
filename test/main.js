@@ -93,7 +93,8 @@ describe('Creating a simple Messi window', function() {
 
     it('should not show a closebutton when option is disabled', function() {
         var dialog = new $.Messi('my message', {closeButton: false});
-        expect($('.messi-closebtn').get(0)).to.be.undefined;
+        expect($('.messi', dialog).get(0)).to.be.defined;
+        expect($('.messi-closebtn', dialog).get(0)).to.be.undefined;
         dialog.unload();
     });
 
