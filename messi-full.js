@@ -411,7 +411,9 @@
                     width: jQuery(window).width() - 50,
                     height: jQuery(window).height() - 50
                 };
-                var ratio = (this.width > vp.width || this.height > vp.height) ? Math.min(vp.width / this.width, vp.height / this.height) : 1;
+                var ratio = (this.width > vp.width || this.height > vp.height)
+                    ? Math.min(vp.width / this.width, vp.height / this.height)
+                    : 1;
 
                 jQuery(img)
                     .css({

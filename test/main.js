@@ -7,12 +7,24 @@ function closeDialog(dialog, done) {
     }, 500);
 }
 
+function waitForDialogToClose(done) {
+    $messi = $('.messi');
+    if ($messi.get(0) !== undefined) {
+        setTimeout(waitForDialogToClose, 50);
+        done();
+    }
+}
+
 beforeEach(function(done) {
     setTimeout(function() {
         $('container').width(800).height(600);
         //$(document).width(800).height(600);
         done();
     }, 25);
+});
+
+afterEach(function() {
+    //setTimeout(waitForDialogToClose, 50);
 });
 
 describe('Creating a simple Messi window', function() {
@@ -118,17 +130,15 @@ describe('Create a titled Messi window', function() {
         dialog = new $.Messi('my message', {title: 'My title'});
     });
 
-    afterEach(function() {
-        dialog.unload();
-    });
-
-    it('should have a title', function() {
+    it('should have a title', function(done) {
         expect($('.messi-title:visible').text()).to.equal('My title');
+        closeDialog(dialog, done);
     });
 
-    it('should have a visible close button', function() {
+    it('should have a visible close button', function(done) {
         expect($('.messi-closebtn').get(0)).to.defined;
         expect($('.messi-closebtn').css('opacity')).to.equal('1');
+        closeDialog(dialog, done);
     });
 
     it('should close when we click the button', function(done) {
@@ -149,10 +159,6 @@ describe('Create a modal Messi window', function() {
             'This is a message with Messi in modal view. Now you can\'t interact with other elements in the page until close this.',
             {title: 'Modal Window', modal: true}
         );
-    });
-
-    afterEach(function() {
-        dialog.unload();
     });
 
     it('should have a title', function(done) {
@@ -198,10 +204,6 @@ describe('Create a Messi window with a custom buttons', function() {
             {title: 'Buttons', buttons: [{id: 0, label: 'Close', val: 'X'}]}
         );
         done();
-    });
-
-    afterEach(function() {
-        dialog.unload();
     });
 
     it('should show my message', function(done) {
@@ -269,16 +271,14 @@ describe('Message with custom buttons (yes/no) and style classes', function() {
         );
     });
 
-    afterEach(function() {
-        dialog.unload();
-    });
-
-    it('should have a yes button with class', function() {
+    it('should have a yes button with class', function(done) {
         expect($('button.btn-success[value="Yes"]').get(0)).to.be.defined;
+        closeDialog(dialog, done);
     });
 
-    it('should have a no button with class', function() {
+    it('should have a no button with class', function(done) {
         expect($('button.btn-danger[value="No"]').get(0)).to.be.defined;
+        closeDialog(dialog, done);
     });
 });
 
@@ -296,12 +296,9 @@ describe('Window with success title', function() {
         );
     });
 
-    afterEach(function() {
-        dialog.unload();
-    });
-
-    it('should have a titleClass of "success"', function() {
+    it('should have a titleClass of "success"', function(done) {
         expect($('.messi-titlebox.success').attr('class')).to.match(/success/);
+        closeDialog(dialog, done);
     });
 });
 
@@ -319,15 +316,13 @@ describe('Window with error title (animated)', function() {
         );
     });
 
-    afterEach(function() {
-        dialog.unload();
-    });
-
-    it('titleClass should be "error"', function() {
+    it('titleClass should be "error"', function(done) {
         expect($('.messi-titlebox.error').text()).to.be.equal('Title');
+        closeDialog(dialog, done);
     });
 
-    it('titleClass should be animated', function() {
+    it('titleClass should be animated', function(done) {
         expect($('.messi-titlebox.anim').text()).to.be.equal('Title');
+        closeDialog(dialog, done);
     });
 });
