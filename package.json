@@ -5,7 +5,8 @@
   "main": "messi.js",
   "private": true,
   "scripts": {
-    "test": "gulp travis-test"
+    "test": "gulp travis-test",
+    "coveralls": "gulp codecoverage"
   },
   "repository": {
     "type": "git",
