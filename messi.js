@@ -67,10 +67,6 @@
         // Prepare the buttons
         if (_this.options.buttons.length > 0) {
 
-            var btnCallback = function () {
-                _this.options.callback.call(this.value);
-            };
-
             for (var i = 0; i < _this.options.buttons.length; i++) {
 
                 var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
@@ -80,18 +76,21 @@
                 jQuery('.messi-actions', this.messi)
                     .append(btn);
 
-                jQuery(document)
-                    .delegate('.messi-actions button', 'click', function () {
-                        var after = null;
-                        var value = jQuery(this)
-                            .data('value');
+                jQuery(document).delegate(
+                    '.messi-actions button',
+                    'click',
+                    function () {
+                        var value = jQuery(this).data('value');
 
                         if (typeof _this.options.callback === 'function') {
-                            after = btnCallback;
+                            if (_this.options.callback(value) === false) {
+                                return this;
+                            }
                         }
-                        _this.hide(after);
-                    });
 
+                        _this.hide();
+                    }
+                );
 
             }
 
@@ -144,7 +143,7 @@
                 var after = (_this.options.callback !== null) ? function () {
                         _this.options.callback(value);
                     } : null;
-                _this.hide(after);
+                _this.hide();
             }, _this.options.autoclose, this);
         }
 
@@ -235,16 +234,12 @@
 
         },
 
-        hide: function (after) {
+        hide: function () {
 
             if (!this.visible) { return; }
             var _this = this;
 
-            if (typeof after === 'function') {
-                if (after.call(this) === false) {
-                    return this;
-                }
-            }
+            jQuery(document).delegate('.messi-actions button', 'click');
 
             this.messi.animate({
                 opacity: 0
