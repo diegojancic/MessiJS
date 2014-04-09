@@ -58,14 +58,15 @@ describe('Create a Messi.ask() to launch a fast yes/no message', function() {
 
 describe('Using Messi.img()', function() {
     it('will show an image', function() {
-        dialog = Messi.img('https://avatars2.githubusercontent.com/u/70142?s=140');
-        expect(jQuery('.messi', dialog).get(0)).to.be.defined;
-        expect(jQuery('.messi img', dialog).get(0)).to.be.defined;
+        Messi.img('https://avatars2.githubusercontent.com/u/70142?s=140');
+        expect(jQuery('.messi').get(0)).to.be.defined;
+        expect(jQuery('.messi img').get(0)).to.be.defined;
+        $('.messi').unload();
     });
 
     it('will error loading a non-existant image', function() {
-        dialog = Messi.img('https://avatars2.githubusercontent.com/u/70142?s=140');
-        expect(jQuery('.messi', dialog).get(0)).to.be.defined;
-        expect(jQuery('.messi img', dialog).get(0)).to.be.undefined;
+        Messi.img('http://www.example.com/image.gif');
+        expect(jQuery('.messi').get(0)).to.be.defined;
+        expect(jQuery('.messi img').get(0)).to.be.undefined;
     });
 });
