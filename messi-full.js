@@ -122,6 +122,7 @@
                 opacity: _this.options.modalOpacity,
                 width: jQuery(document).width(),
                 height: jQuery(document).height(),
+                position: 'fixed',
                 'z-index': _this.options.zIndex + jQuery('.messi').length
             })
             .appendTo(document.body) : null;
