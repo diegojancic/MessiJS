@@ -58,6 +58,7 @@
     "karma-phantomjs-launcher": "^0.1.2",
     "karma-coverage": "^0.2.1",
     "gulp-util": "^2.2.14",
-    "gulp-concat": "^2.2.0"
+    "gulp-concat": "^2.2.0",
+    "gulp-notify": "^1.2.5"
   }
 }
