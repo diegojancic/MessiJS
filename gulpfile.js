@@ -6,6 +6,7 @@ var exec = require('gulp-exec');
 var jshint = require('gulp-jshint');
 var karma = require('karma').server;
 var minifyCSS = require('gulp-minify-css');
+var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
@@ -88,15 +89,15 @@ gulp.task('codecoverage', function() {
 });
 
 gulp.task('watch', function() {
-    gulp
-        .src(sources)
-        .pipe(watch(function(files) {
-            return files.pipe(jshint())
-                .pipe(gulp.dest('.'));
-        }));
+    gulp.watch(sources, ['default']);
 });
 
-gulp.task('default', ['lint', 'compress', 'test', 'codecoverage']);
+gulp.task('notify', function() {
+    gulp.src('./gulpfile.js')
+        .pipe(notify({ message: 'All done, master!' }));
+});
+
+gulp.task('default', ['lint', 'compress', 'test', 'codecoverage', 'notify']);
 
 gulp.task('travis-test', ['lint', 'compress', 'test', 'codecoverage']);
 
