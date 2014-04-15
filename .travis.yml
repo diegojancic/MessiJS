@@ -1,6 +1,14 @@
 language: node_js
 
 node_js:
-- '0.10'
-#- '0.11'
+  - '0.10'
+  #- '0.11'
 
+env:
+  - JQUERY="jquery-1.7.0"
+  - JQUERY="jquery-1.11.0"
+  - JQUERY="jquery-2.0.0"
+  - JQUERY="jquery"
+
+before_script:
+    - "curl http://code.jquery.com/${JQUERY}.min.js >jquery.min.js"

@@ -41,7 +41,7 @@ gulp.task('test', ['combine'], function() {
             files: [
                 'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
                 'http://chaijs.com/chai.js',
-                'http://code.jquery.com/jquery.min.js',
+                'jquery.min.js',
                 'messi-full.js',
                 'test/**/*.js'
             ],
