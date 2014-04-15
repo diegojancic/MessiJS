@@ -46,7 +46,7 @@ You will find more examples at [http://marcosesperon.es/apps/messi/](http://marc
 Enjoy it!
 
 ## Requirements
-* [jQuery](http://jquery.com/) v. 1.6+
+* [jQuery](http://jquery.com/) v. 1.7+
 
 ## License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
