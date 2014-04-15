@@ -11,4 +11,4 @@ env:
   - JQUERY=jquery
 
 before_script:
-    - "wget http://code.jquery.com/${JQUERY}.min.js >jquery.min.js"
+    - "curl http://code.jquery.com/${JQUERY}.min.js >jquery.min.js"
