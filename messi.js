@@ -71,12 +71,12 @@
 
                 var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
                 var btn = '<button class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button>';
-                btn = jQuery('<div class="btnbox">' + btn + '</div>', {});
-                btn.data('value', _this.options.buttons[i].val);
+                btn = jQuery('<div class="messi-btnbox">' + btn + '</div>', {});
+                btn.val(_this.options.buttons[i].val);
 
                 jQuery(btn).click(
                     function () {
-                        var value = $(this).data('value');
+                        var value = $(this).val();
 
                         if (typeof _this.options.callback === 'function') {
                             if (_this.options.callback(value) === false) {
