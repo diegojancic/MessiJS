@@ -11,6 +11,6 @@ Setting up a development environment
 2. npm install
 3. gulp  _then verify all tests are passing_
 4. Add a test for your Issue or new feature
-5. <code>
+5. `<coding happens>`
 6. Verify your new code passes JSHint validation and your new test(s) are passing.
 7. Send me a Pull Request.
