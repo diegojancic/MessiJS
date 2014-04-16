@@ -125,6 +125,31 @@ describe('Creating a simple Messi window', function() {
 
 });
 
+describe('Create a Messi window with advanced features', function() {
+    it('and a callback', function(done) {
+        dialog = new $.Messi(
+            'This is a message with Messi with custom buttons.',
+            {
+                title: 'Buttons',
+                buttons: [{id: 0, label: 'Close', val: 'X', class: 'cbClose'}],
+                callback: function(value) {
+                    window.value1 = value;
+                    console.log('value: ' + value);
+                }
+            }
+        );
+        expect($('.messi-title:visible').text()).to.equal('Buttons');
+        expect($('button[value="X"]').get(0)).to.be.defined;
+        expect(window.value1).to.not.be.ok;
+        $('.messi .cbClose').click();
+        expect(window.value1).to.equal('X');
+        window.value1 = null;
+        closeDialog(dialog, done);
+    });
+
+
+});
+
 describe('Create a titled Messi window', function() {
     beforeEach(function() {
         dialog = new $.Messi('my message', {title: 'My title'});
