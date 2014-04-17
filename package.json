@@ -59,6 +59,8 @@
     "karma-coverage": "^0.2.1",
     "gulp-util": "^2.2.14",
     "gulp-concat": "^2.2.0",
-    "gulp-notify": "^1.2.5"
+    "gulp-notify": "^1.2.5",
+    "gulp-karma": "0.0.4",
+    "karma-chai": "^0.1.0"
   }
 }
