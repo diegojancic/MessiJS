@@ -61,6 +61,7 @@
     "gulp-concat": "^2.2.0",
     "gulp-notify": "^1.2.5",
     "gulp-karma": "0.0.4",
-    "karma-chai": "^0.1.0"
+    "karma-chai": "^0.1.0",
+    "event-stream": "^3.1.2"
   }
 }
