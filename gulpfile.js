@@ -3,15 +3,26 @@ var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var coveralls = require('gulp-coveralls');
 var exec = require('gulp-exec');
+var eventStream = require('event-stream');
 var jshint = require('gulp-jshint');
 var karma = require('karma').server;
+var gulpkarma = require('gulp-karma');
 var minifyCSS = require('gulp-minify-css');
+var mocha = require('gulp-mocha');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 
 var sources = ['messi.js', 'test/*.js'];
+var testfiles = [
+    'jquery.min.js',
+    //'http://chaijs.com/chai.js',
+    //'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
+    'messi.js',
+    'extensions/**/*.js',
+    'test/**/*.js'
+];
 
 gulp.task('clean', function() {
     gulp.src([ './messi.min.js', './messi.min.js.map', './messi.min.css' ])
@@ -19,25 +30,15 @@ gulp.task('clean', function() {
 });
 
 gulp.task('lint', function() {
-    gulp.src(sources)
+    return gulp.src(sources)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('test', ['combine'], function() {
-    karma.start(
+gulp.task('test', ['combine'], function(done) {
+    return karma.start(
         {
-            browsers: ['PhantomWithConfig'],
-            customLaunchers: {
-                PhantomWithConfig: {
-                    base: 'PhantomJS',
-                    options: {
-                        page: {
-                            viewportSize: { width: 640, height: 480 }
-                        }
-                    }
-                }
-            },
+            browsers: ['PhantomJS'],
             files: [
                 'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
                 'http://chaijs.com/chai.js',
@@ -55,49 +56,63 @@ gulp.task('test', ['combine'], function() {
             singleRun: true
         },
         function(exitCode) {
+            done();
             gutil.log('Karma has exited with ' + exitCode);
             process.exit(exitCode);
         });
 });
 
+gulp.task('test2', ['combine'], function() {
+    return gulp.src(testfiles)
+        .pipe(gulpkarma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            throw err; // Make sure failed tests cause gulp to exit non-zero
+        });
+});
+
 gulp.task('combine', ['clean'], function() {
-    gulp.src(['messi.js', 'extensions/*.js'])
+    return gulp.src(['messi.js', 'extensions/*.js'])
         .pipe(concat('messi-full.js'))
         .pipe(gulp.dest('./'));
 });
 
 gulp.task('compress', ['combine'], function() {
-    gulp.src('messi.js')
-        .pipe(rename('messi.min.js'))
-        .pipe(uglify({outSourceMap: true}))
-        .pipe(gulp.dest('./'));
+    return eventStream.merge(
+        gulp.src('messi.js')
+            .pipe(rename('messi.min.js'))
+            .pipe(uglify({outSourceMap: true}))
+            .pipe(gulp.dest('./')),
 
-    gulp.src('messi-full.js')
-        .pipe(rename('messi-full.min.js'))
-        .pipe(uglify({outSourceMap: true}))
-        .pipe(gulp.dest('./'));
+        gulp.src('messi-full.js')
+            .pipe(rename('messi-full.min.js'))
+            .pipe(uglify({outSourceMap: true}))
+            .pipe(gulp.dest('./')),
 
-    gulp.src('messi.css')
-        .pipe(rename('messi.min.css'))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest('./'));
+        gulp.src('messi.css')
+            .pipe(rename('messi.min.css'))
+            .pipe(minifyCSS())
+            .pipe(gulp.dest('./'))
+    );
 });
 
-gulp.task('codecoverage', function() {
-    gulp.src('test/coverage/**/lcov.info')
+gulp.task('codecoverage', ['test'], function() {
+    return gulp.src('coverage/**/lcov.info')
         .pipe(coveralls());
 });
 
 gulp.task('watch', function() {
-    gulp.watch(sources, ['default']);
+    return gulp.watch(sources, ['default']);
 });
 
-gulp.task('notify', function() {
-    gulp.src('./gulpfile.js')
+gulp.task('notify', ['test'], function() {
+    return gulp.src('./gulpfile.js')
         .pipe(notify({ message: 'All done, master!' }));
 });
 
-gulp.task('default', ['lint', 'compress', 'test', 'codecoverage', 'notify']);
+gulp.task('default', ['lint', 'compress', 'test', 'notify']);
 
 gulp.task('travis-test', ['lint', 'compress', 'test', 'codecoverage']);
 

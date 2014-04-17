@@ -1,5 +1,4 @@
 node_modules/
 coverage/
 .coveralls.yml
-karma.conf.js
 jquery.js
