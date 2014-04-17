@@ -84,7 +84,7 @@ gulp.task('compress', ['combine'], function() {
 });
 
 gulp.task('codecoverage', function() {
-    gulp.src('test/coverage/**/lcov.info')
+    gulp.src('coverage/**/lcov.info')
         .pipe(coveralls());
 });
 
@@ -97,7 +97,7 @@ gulp.task('notify', function() {
         .pipe(notify({ message: 'All done, master!' }));
 });
 
-gulp.task('default', ['lint', 'compress', 'test', 'codecoverage', 'notify']);
+gulp.task('default', ['lint', 'compress', 'test', 'notify']);
 
 gulp.task('travis-test', ['lint', 'compress', 'test', 'codecoverage']);
 
