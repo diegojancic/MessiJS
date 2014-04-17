@@ -48,7 +48,7 @@ gulp.task('test', ['combine'], function(done) {
             ],
             frameworks: ['mocha'],
             preprocessors: {'messi-full.js': ['coverage']},
-            reporters: ['progress', 'coverage'],
+            reporters: ['progress', 'coverage', 'coveralls'],
             coverageReporter: {
               type : 'lcov',
               dir : 'coverage/'
@@ -114,5 +114,5 @@ gulp.task('notify', ['test'], function() {
 
 gulp.task('default', ['lint', 'compress', 'test', 'notify']);
 
-gulp.task('travis-test', ['lint', 'compress', 'test', 'codecoverage']);
+gulp.task('travis-test', ['lint', 'compress', 'test']);
 
