@@ -117,7 +117,8 @@
         }
 
         // Activate the modal screen
-        _this.modal = (_this.options.modal) ? jQuery('<div class="messi-modal"></div>')
+        if (_this.options.modal) {
+            _this.modal = jQuery('<div class="messi-modal"></div>')
             .css({
                 opacity: _this.options.modalOpacity,
                 width: jQuery(document).width(),
@@ -125,7 +126,8 @@
                 position: 'fixed',
                 'z-index': _this.options.zIndex + jQuery('.messi').length
             })
-            .appendTo(document.body) : null;
+            .appendTo(document.body);
+        }
 
         // Show the message
         if (_this.options.show) { _this.show(); }
