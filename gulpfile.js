@@ -40,8 +40,8 @@ gulp.task('test', ['combine'], function(done) {
         {
             browsers: ['PhantomJS'],
             files: [
-                'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
-                'http://chaijs.com/chai.js',
+                'node_modules/mocha/mocha.js',
+                'node_modules/chai/chai.js',
                 'jquery.min.js',
                 'messi-full.js',
                 'test/**/*.js'
