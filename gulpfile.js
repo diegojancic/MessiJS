@@ -14,7 +14,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 
-var sources = ['messi.js', 'test/*.js'];
+var sources = ['src/*.js', 'test/*.js'];
 var testfiles = [
     'jquery.min.js',
     //'http://chaijs.com/chai.js',
@@ -25,8 +25,14 @@ var testfiles = [
 ];
 
 gulp.task('clean', function() {
-    gulp.src([ './messi.min.js', './messi.min.js.map', './messi.min.css' ])
+    gulp.src([ './messi.min.js', './messi.min.js.map', './messi.min.css', 'coverage' ])
         .pipe(clean());
+});
+
+gulp.task('combine', ['clean'], function() {
+    return gulp.src(['src/main.js', 'src/extensions.js'])
+        .pipe(concat('messi.js'))
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('lint', function() {
@@ -43,11 +49,11 @@ gulp.task('test', ['combine'], function(done) {
                 'node_modules/mocha/mocha.js',
                 'node_modules/chai/chai.js',
                 'jquery.min.js',
-                'messi-full.js',
+                'messi.js',
                 'test/**/*.js'
             ],
             frameworks: ['mocha'],
-            preprocessors: {'messi-full.js': ['coverage']},
+            preprocessors: {'messi.js': ['coverage']},
             reporters: ['progress', 'coverage', 'coveralls'],
             coverageReporter: {
               type : 'lcov',
@@ -73,12 +79,6 @@ gulp.task('test2', ['combine'], function() {
         });
 });
 
-gulp.task('combine', ['clean'], function() {
-    return gulp.src(['messi.js', 'extensions/*.js'])
-        .pipe(concat('messi-full.js'))
-        .pipe(gulp.dest('./'));
-});
-
 gulp.task('compress', ['combine'], function() {
     return eventStream.merge(
         gulp.src('messi.js')
@@ -86,8 +86,8 @@ gulp.task('compress', ['combine'], function() {
             .pipe(uglify({outSourceMap: true}))
             .pipe(gulp.dest('./')),
 
-        gulp.src('messi-full.js')
-            .pipe(rename('messi-full.min.js'))
+        gulp.src('messi.js')
+            .pipe(rename('messi.min.js'))
             .pipe(uglify({outSourceMap: true}))
             .pipe(gulp.dest('./')),
 

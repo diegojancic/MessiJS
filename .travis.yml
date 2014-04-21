@@ -8,7 +8,7 @@ env:
   - JQUERY="jquery-1.7.0"
   - JQUERY="jquery-1.11.0"
   - JQUERY="jquery-2.0.0"
-  - JQUERY="jquery"
+  - JQUERY="jquery-2.1.0"
 
 before_script:
     - "curl http://code.jquery.com/${JQUERY}.min.js >jquery.min.js"

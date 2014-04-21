@@ -133,10 +133,9 @@
         if (_this.options.show) { _this.show(); }
 
         // Control the resizing of the display
-        jQuery(window)
-            .bind('resize scroll', function () {
-                _this.resize();
-            });
+        jQuery(window).bind('resize scroll', function () {
+            _this.resize();
+        });
 
         // Configure the automatic closing
         if (_this.options.autoclose !== null) {
@@ -164,13 +163,14 @@
             height: 'auto',                        // content height
             title: null,                           // message title
             titleClass: null,                      // title style: info, warning, success, error
-            minMargin: 15,                         // set how much minimal space there should be (in pixels) when the nudge function moves the popup back into the window
+            margin: 0,                             // enforce a minimal viewport margin the dialog cannot move outside, set to zero to disable
             modal: false,                          // shows message in modal (loads background)
             modalOpacity: 0.2,                     // modal background opacity
             padding: '10px',                       // content padding
+            position: { top: '0px', left: '0px' }, // if center: false, sets X and Y position
             show: true,                            // show message after load
             unload: true,                          // unload message after hide
-            viewport: { top: '0px', left: '0px' }, // if not center message, sets X and Y position
+            viewport: { top: '0px', left: '0px' }, // deprecated, see position
             width: '500px',                        // message width
             zIndex: 99999                          // message z-index
         },
@@ -188,13 +188,13 @@
                 .append(data);
         },
 
-        viewport: function () {
+        center: function () {
+            this.messi.css({
+                top: ((jQuery(window).height() - this.messi.height()) / 2),
+                left: ((jQuery(window).width() - this.messi.width()) / 2)
+            });
 
-            return {
-                top: ((jQuery(window).height() - this.messi.height()) / 2) + jQuery(window).scrollTop() + 'px',
-                left: ((jQuery(window).width() - this.messi.width()) / 2) + jQuery(window).scrollLeft() + 'px'
-            };
-
+            return this;
         },
 
         show: function () {
@@ -213,21 +213,20 @@
                 this.modal.show();
             }
 
-            // Get the center of the screen if the center option is on
-            if (this.options.center) {
-                this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
-            } else {
-                this.nudge();
-            }
-
-            this.messi
-                .css({
+            this.messi.css({
                     top: this.options.viewport.top,
                     left: this.options.viewport.left,
-                    'z-index': this.options.zIndex + jQuery('.messi').length
+                    'zIndex': this.options.zIndex + jQuery('.messi').length
                 })
                 .show()
                 .animate({ opacity: 1 }, 300);
+
+            // Get the center of the screen if the center option is on
+            if (this.options.center) {
+                this.center();
+            } else {
+                this.enforceMargin();
+            }
 
             // Cancel the scroll
             //document.documentElement.style.overflow = "hidden";
@@ -273,12 +272,11 @@
                         height: jQuery(document).height()
                     });
             }
+
             if (this.options.center) {
-                this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
-                this.messi.css({
-                    top: this.options.viewport.top,
-                    left: this.options.viewport.left
-                });
+                this.center();
+            } else if(this.options.margin > 0) {
+                this.enforceMargin();
             }
         },
 
@@ -302,30 +300,44 @@
             this.messi.remove();
         },
 
-        nudge: function () {
-            // this.options.viewport.top, this.options.viewport.left
-            var win = jQuery(window);
-            var x = (this.options.viewport.left).replace('px', '');
-            var y = (this.options.viewport.top).replace('px', '');
+        // When the dialog is outside the viewport, move it back in.
+        // options.viewport is the center point of the dialog
+        enforceMargin: function () {
+            if (!this.options.margin) { return; }
 
-            if (this.isNumber(x) && this.isNumber(y)) {
-                x = parseInt(x, 10);
-                y = parseInt(y, 10);
+            var $window = jQuery(window);
 
-                // When the popup is too far on the right, change the viewport  to the left
-                var xtreme = jQuery(document).scrollLeft() + win.width() - this.messi.width() - this.options.minMargin;
-                if (x > xtreme) {
-                    x -= this.messi.width() + 2 * this.options.minMargin;
-                }
-                x = this.max(x, 0);
+            // Backward compatibility hack - remove in version 2.1
+            var x = this.max(
+                parseInt(this.options.viewport.left, 10),
+                parseInt(this.options.position.left, 10)
+            );
+            var y = this.max(
+                parseInt(this.options.viewport.top, 10),
+                parseInt(this.options.position.top, 10)
+            );
 
-                // When the popup is too far down, move popup up
-                if ((y + this.messi.height()) > (win.height() + jQuery(document).scrollTop())) {
-                    y -= this.messi.height() + this.options.minMargin;
-                }
-                this.options.viewport.left = x.toString() + 'px';
-                this.options.viewport.top = y.toString() + 'px';
+            // When the popup is too far on the right, move left
+            if (x + this.messi.width() > $window.width() - this.options.margin) {
+                x = $window.width() - this.options.margin - this.messi.width();
             }
+
+            // When the popup is too far down, move up
+            if (y + this.messi.height() > $window.height() - this.options.margin) {
+                y = $window.height() - this.options.margin - this.messi.height();
+            }
+
+            // When the popup is too far to the left, move right
+            if (x < this.options.margin) {
+                x = this.options.margin;
+            }
+
+            // When the popup is too far up, move down
+            if (y < this.options.margin) {
+                y = this.options.margin;
+            }
+
+            this.messi.css({ left: x, top: y });
         },
 
         max: function (a, b) {
@@ -347,126 +359,3 @@
 
 })();
 // vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:
-
-
-    // Special Call
-    jQuery.extend(Messi, {
-
-        alert: function (data, callback, options) {
-
-            var buttons = [{
-                id: 'ok',
-                label: 'OK',
-                val: 'OK'
-            }];
-
-            options = jQuery.extend({
-                closeButton: false,
-                buttons: buttons,
-                callback: function () {}
-            }, options || {}, {
-                show: true,
-                unload: true,
-                callback: callback
-            });
-
-            return new Messi(data, options);
-
-        },
-
-        ask: function (data, callback, options) {
-
-            var buttons = [
-                { id: 'yes', label: 'Yes', val: 'Y', 'class': 'btn-success' },
-                { id: 'no', label: 'No', val: 'N', 'class': 'btn-danger' }
-            ];
-
-            options = jQuery.extend({
-                closeButton: false,
-                modal: true,
-                buttons: buttons,
-                callback: function () {}
-            }, options || {}, {
-                show: true,
-                unload: true,
-                callback: callback
-            });
-
-            return new Messi(data, options);
-
-        },
-
-        img: function (src, options) {
-
-            var img = new Image();
-
-            jQuery(img).load(function () {
-
-                var vp = {
-                    width: jQuery(window).width() - 50,
-                    height: jQuery(window).height() - 50
-                };
-                var ratio = (this.width > vp.width || this.height > vp.height)
-                    ? Math.min(vp.width / this.width, vp.height / this.height)
-                    : 1;
-
-                jQuery(img)
-                    .css({
-                        width: this.width * ratio,
-                        height: this.height * ratio
-                    });
-
-                options = jQuery.extend({
-                    show:         true,
-                    unload:       true,
-                    closeButton:  true,
-                    width:        this.width * ratio,
-                    height:       this.height * ratio,
-                    padding:      0
-                }, options || {});
-
-                new Messi(img, options);
-
-            })
-            .error(function () {
-
-                // Be IE friendly
-                if (typeof window.console === 'object') {
-                    console.log('Error loading ' + src);
-                }
-
-            })
-            .attr('src', src);
-
-        },
-
-        load: function (url, options) {
-
-            options = jQuery.extend({
-                show: true,
-                unload: true,
-                params: {}
-            }, options || {});
-
-            var request = {
-                url: url,
-                data: options.params,
-                dataType: 'html',
-                cache: false,
-                error: function (request, status, error) {
-                    // Be IE friendly
-                    if (typeof window.console === 'object') {
-                        console.log(request.responseText);
-                    }
-                },
-                success: function (html) {
-                    new Messi(html, options);
-                }
-            };
-
-            jQuery.ajax(request);
-
-        }
-
-    });
-
