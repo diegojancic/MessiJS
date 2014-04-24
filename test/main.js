@@ -119,8 +119,6 @@ describe('Create a Messi window with advanced features', function() {
         window.value1 = null;
         dialog.unload();
     });
-
-
 });
 
 describe('Create a titled Messi window', function() {
@@ -174,26 +172,23 @@ describe('Create a modal Messi window', function() {
     });
 });
 
-// TODO this was failing on PhantomJS - viewport bug?
-if (navigator.userAgent.match(/PhantomJS/) === null) {
-    describe('Create an absolutely positioned Messi window', function() {
-        it('should be positioned absolutely', function() {
-            console.log(navigator.userAgent.match(/PhantomJS/));
-            var dialog = new $.Messi(
-                'This is a message with Messi in absolute position.',
-                {
-                    center: false,
-                    width: '200px',
-                    viewport: {top: '17px', left: '38px'}
-                }
-            );
+// TODO positioning a window in PhantomJS doesn't work. Chrome is OK.
+describe.skip('Create an absolutely positioned Messi window', function() {
+    it('should be positioned absolutely', function() {
+        var dialog = new $.Messi(
+            'This is a message with Messi in absolute position.',
+            {
+                center:   false,
+                width:    '200px',
+                viewport: {top: '52px', left: '138px'}
+            }
+        );
 
-            var position = jQuery(dialog.messi).position();
-            expect(position).to.eql({top: 17, left: 38});
-            dialog.unload();
-        });
+        var position = dialog.messi.position();
+        expect(position).to.eql({top: 52, left: 138});
+        dialog.unload();
     });
-}
+});
 
 describe('Create a Messi window with a custom buttons', function() {
     var dialog = null;
@@ -332,5 +327,44 @@ describe('Window with error title (animated)', function() {
 
     it('titleClass should be animated', function() {
         expect(jQuery('.messi-titlebox.anim', dialog.messi).text()).to.be.equal('Title');
+    });
+});
+
+// TODO positioning a window in PhantomJS doesn't work. Chrome is OK.
+describe.skip('Window with a margin', function() {
+    it('when center is on', function() {
+        dialog = new $.Messi('This is a message with Messi.', {
+            title: 'Margin Center Test',
+            center: true,
+            margin: 15,
+            viewport: { top: '10px', left: '10px' }
+        });
+
+        expect(dialog.messi.position().top).to.not.equal(10);
+        dialog.unload();
+    });
+
+    it('when margin is off', function() {
+        dialog = new $.Messi('This is a message with Messi.', {
+            title: 'Margin Off Test',
+            center: false,
+            margin: 0,
+            viewport: { top: '10px', left: '10px' }
+        });
+
+        expect(dialog.messi.position()).to.eql({top: 10, left: 10});
+        dialog.unload();
+    });
+
+    it('when margin is on', function() {
+        dialog = new $.Messi('This is a message with Messi.', {
+            title: 'Margin On Test',
+            center: false,
+            margin: 15,
+            viewport: { top: -15, left: -15 }
+        });
+
+        expect(dialog.messi.position()).to.eql({top: 15, left: 15});
+        dialog.unload();
     });
 });
