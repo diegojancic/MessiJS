@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
+var coverage = require('gulp-coverage');
 var concat = require('gulp-concat');
 var coveralls = require('gulp-coveralls');
 var exec = require('gulp-exec');
@@ -11,6 +12,7 @@ var minifyCSS = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
+var runner = require('gulp-mocha-phantomjs');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 
@@ -68,7 +70,7 @@ gulp.task('test', ['combine'], function(done) {
         });
 });
 
-gulp.task('test2', ['combine'], function() {
+gulp.task('test:gulp-karma', ['combine'], function() {
     return gulp.src(testfiles)
         .pipe(gulpkarma({
             configFile: 'karma.conf.js',
@@ -77,6 +79,20 @@ gulp.task('test2', ['combine'], function() {
         .on('error', function(err) {
             throw err; // Make sure failed tests cause gulp to exit non-zero
         });
+});
+
+gulp.task('test:coverage', ['combine'], function() {
+    return gulp.src(['test/**/*.js'], {read: false})
+        .pipe(coverage.instrument({
+            pattern: ['test/**/*.js'],
+            debugDirectory: 'debug'
+        }))
+        .pipe(runner({
+            reporter: 'spec'
+        }))
+        .pipe(coverage.report({
+            outFile: 'coverage.html'
+        }));
 });
 
 gulp.task('compress', ['combine'], function() {
@@ -107,7 +123,7 @@ gulp.task('watch', function() {
     return gulp.watch(sources, ['default']);
 });
 
-gulp.task('notify', ['test'], function() {
+gulp.task('notify', ['test3'], function() {
     return gulp.src('./gulpfile.js')
         .pipe(notify({ message: 'All done, master!' }));
 });
