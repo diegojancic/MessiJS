@@ -5,11 +5,13 @@ module.exports = function(config) {
             'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
             'http://chaijs.com/chai.js',
             'jquery.min.js',
-            'messi-full.js',
-            'test/**/*.js'
+            'src/main.js',
+            'src/extensions.js',
+            'test/**/*.js',
+            'messi.css'
         ],
         frameworks: ['mocha', 'chai'],
-        preprocessors: {'messi-full.js': ['coverage']},
+        preprocessors: {'src/*.js': ['coverage']},
         reporters: ['progress', 'coverage'],
         coverageReporter: {
             type : 'lcov',
