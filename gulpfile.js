@@ -51,11 +51,13 @@ gulp.task('test', ['combine'], function(done) {
                 'node_modules/mocha/mocha.js',
                 'node_modules/chai/chai.js',
                 'jquery.min.js',
-                'messi.js',
-                'test/**/*.js'
+                'src/main.js',
+                'src/extensions.js',
+                'test/**/*.js',
+                'messi.css'
             ],
             frameworks: ['mocha'],
-            preprocessors: {'messi.js': ['coverage']},
+            preprocessors: {'src/*.js': ['coverage']},
             reporters: ['progress', 'coverage', 'coveralls'],
             coverageReporter: {
               type : 'lcov',
@@ -123,7 +125,7 @@ gulp.task('watch', function() {
     return gulp.watch(sources, ['default']);
 });
 
-gulp.task('notify', ['test3'], function() {
+gulp.task('notify', ['test'], function() {
     return gulp.src('./gulpfile.js')
         .pipe(notify({ message: 'All done, master!' }));
 });
