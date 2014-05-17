@@ -10,25 +10,33 @@ If you are interested in helping, send me Pull Requests and I'll
 review them.  Where appropriate, I'll try to add the Pull Requests
 that have been already issued for the original Messi repo.
 
-* :white_check_mark: In the current build, the messi.min.js works but the messi.js is broken.
-* :white_check_mark: A guplfile.js needs to be created to manage testing and minifying.
-* :white_check_mark: Tests—preferably in Mocha—need to be written.
-* :white_check_mark: Messi does not play nice with other Javascript.  It needs to be wrapped in an IIFE so it's no longer in the global scope. See PR27 & PR28. 
-* :white_check_mark: Add css minification.
-
-### Preparing for 2.0 Beta
-* [ ] 90% Code Coverage
-* :white_check_mark: Examine Open Issues: Currently there are 38 Open Issues
-* :white_check_mark: Complete the Issue tests
-* :white_check_mark: Update package.json
-* :white_check_mark: Add Code Style checks for JSHint.
-
 ### Preparing for 2.0 Final
 * [ ] 95% Code Coverage or better
 * [ ] Write the documentation
 * [ ] Write CONTRIBUTING.md
 * :white_check_mark: Add a LICENSE file
 * :white_check_mark: Update package.json
+* :white_check_mark: Add css minification.
+
+### Preparing for 2.0 Beta
+* [ ] 90% Code Coverage
+* [ ] How to distribute (may affect Bower)?
+    - dist files vs. zip files vs release attachments?
+* [ ] Add to Bower (bower.js)
+* [ ] Re-evaluate Global vs jQuery scope. Make consistent, easy to use and backward compatible
+    - Option 1: Since jQuery.Messi(...) doesn't make sense, remove it.
+    - Option 2: Make Messi a true jQuery plugin with new Messi === $('body').Messi(...).
+    - Option 3: Leave the status quo
+* :white_check_mark: Examine Open Issues: Currently there are 38 Open Issues
+* :white_check_mark: Complete the Issue tests
+* :white_check_mark: Update package.json
+* :white_check_mark: Add Code Style checks for JSHint.
+
+### Preliminary
+* :white_check_mark: In the current build, the messi.min.js works but the messi.js is broken.
+* :white_check_mark: A guplfile.js needs to be created to manage testing and minifying.
+* :white_check_mark: Tests—preferably in Mocha—need to be written.
+* :white_check_mark: Messi does not play nice with other Javascript.  It needs to be wrapped in an IIFE so it's no longer in the global scope. See PR27 & PR28. 
 
 ### Pull Requests – Examine and apply all appropriate 
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/26 – Added Box Name _NOTE: There are better ways to do this. E.g. hide()_

@@ -172,7 +172,6 @@ describe('Create a modal Messi window', function() {
     });
 });
 
-// TODO positioning a window in Karma doesn't work.
 describe('Create an absolutely positioned Messi window', function() {
     it('should be positioned absolutely', function() {
         var dialog = new $.Messi(
@@ -185,7 +184,7 @@ describe('Create an absolutely positioned Messi window', function() {
         );
 
         var position = dialog.messi.position();
-        expect(position).to.eql({top: 52, left: 138}); // Normal
+        expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
     });
 });

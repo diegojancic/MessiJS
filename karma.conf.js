@@ -5,10 +5,9 @@ module.exports = function(config) {
             'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
             'http://chaijs.com/chai.js',
             'jquery.min.js',
-            'src/main.js',
-            'src/extensions.js',
-            'test/**/*.js',
-            'messi.css'
+            'src/*.js',
+            'src/*.css',
+            'test/**/*.js'
         ],
         frameworks: ['mocha', 'chai'],
         preprocessors: {'src/*.js': ['coverage']},
