@@ -1,9 +1,9 @@
 /**
  * jQuery Messi Plugin 2.0
- * https://github.com/marcosesperon/jquery-messi
+ * http://MessiJS.github.io/
  *
  * Development continues as MessiJS.
- * http://MessiJS.github.io/
+ * https://github.com/MessiJS/MessiJS
  *
  * Early versions Copyright 2012, Marcos Esperón
  * http://marcosesperon.es
