@@ -3,3 +3,4 @@ coverage/
 .coveralls.yml
 jquery.js
 jquery.min.js
+dist/
