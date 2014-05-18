@@ -1,14 +1,15 @@
 var expect = chai.expect;
+var dialog;
 
 describe('Creating a simple Messi window', function() {
 
     it('should be ready', function() {
-        expect($.Messi).to.be.a('function');
+        expect(Messi).to.be.a('function');
     });
 
     it('should open and close', function(done) {
         //expect(jQuery('.messi:visible').get(0)).to.be.undefined;
-        var dialog = new $.Messi('my message');
+        dialog = new Messi('my message');
         expect(jQuery('.messi:visible', dialog.messi).get(0)).to.be.defined;
         dialog.unload();
         setTimeout(function() {
@@ -18,13 +19,13 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should show "my message"', function() {
-        var dialog = new $.Messi('my message');
+        dialog = new Messi('my message');
         expect(jQuery('.messi-content').text()).to.be.equal('my message');
         dialog.unload();
     });
 
     it('should toggle the dialog', function(done) {
-        var dialog = new $.Messi('my message');
+        dialog = new Messi('my message');
         expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
         dialog.toggle();
         setTimeout(function() {
@@ -39,7 +40,7 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should remain open on show()', function() {
-        var dialog = new $.Messi('my message');
+        dialog = new Messi('my message');
         expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
         expect(dialog.visible).to.be.ok;
         dialog.show();
@@ -49,7 +50,7 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should remain hidden on hide()', function() {
-        var dialog = new $.Messi('my message');
+        dialog = new Messi('my message');
         dialog.hide();
         expect(jQuery('.messi:visible', dialog).get(0)).to.be.undefined;
         dialog.hide();
@@ -58,14 +59,14 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should have a close button', function() {
-        var dialog = new $.Messi('my message');
-        expect(jQuery('.messi-closebtn').get(0)).to.be.defined;
+        dialog = new Messi('my message');
+        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.defined;
         dialog.unload();
     });
 
     it('should close when we click the button', function(done) {
-        var dialog = new $.Messi('my message');
-        jQuery('.messi-closebtn').click();
+        dialog = new Messi('my message');
+        jQuery('.messi-closebtn', dialog.messi).click();
         setTimeout(function() {
             expect(jQuery('.messi:visible', dialog).get(0)).to.be.undefined;
             done();
@@ -73,7 +74,7 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should close automatically when autoclose is enabled', function(done) {
-        var dialog = new $.Messi('my message', {autoclose: 100});
+        dialog = new Messi('my message', {autoclose: 100});
         expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
         setTimeout(function() {
             expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
@@ -85,45 +86,74 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should show a closebutton when option is enabled', function() {
-        var dialog = new $.Messi('my message', {closeButton: true});
-        expect(jQuery('.messi-closebtn').get(0)).to.be.defined;
+        dialog = new Messi('my message', {closeButton: true});
+        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.defined;
         dialog.unload();
     });
 
     it('should not show a closebutton when option is disabled', function() {
-        var dialog = new $.Messi('my message', {closeButton: false});
-        expect(jQuery('.messi', dialog).get(0)).to.be.defined;
-        expect(jQuery('.messi-closebtn', dialog).get(0)).to.be.undefined;
+        dialog = new Messi('my message', {closeButton: false});
+        expect(jQuery(dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.undefined;
         dialog.unload();
     });
 
 });
 
 describe('Create a Messi window with advanced features', function() {
-    it('and a callback', function() {
-        dialog = new $.Messi(
+
+    it('and a callback', function(done) {
+        dialog = new Messi(
             'This is a message with Messi with custom buttons.',
             {
                 title: 'Buttons',
-                buttons: [{id: 0, label: 'Close', val: 'X', class: 'cbClose'}],
+                buttons: [{id: 0, label: 'Close', val: 'X', 'class': 'cbClose'}],
                 callback: function(value) {
-                    window.value1 = value;
+                    jQuery(document).triggerHandler('messi.cb');
+                    return true;
                 }
             }
         );
-        expect(jQuery('.messi-title:visible').text()).to.equal('Buttons');
-        expect(jQuery('button[value="X"]').get(0)).to.be.defined;
-        expect(window.value1).to.not.be.ok;
-        jQuery('.messi .cbClose').click();
-        expect(window.value1).to.equal('X');
-        window.value1 = null;
-        dialog.unload();
+        jQuery(document).bind('messi.cb', function(val) {
+            setTimeout(function() {
+                expect(jQuery(dialog.messi).is(':visible')).to.be.false;
+                jQuery(document).unbind('messi.cb');
+                done();
+            }, 800);
+        });
+        expect(jQuery('.messi-title:visible', dialog.messi).text()).to.equal('Buttons');
+        expect(jQuery('button.cbClose', dialog.messi).get(0)).to.be.defined;
+        jQuery('.cbClose', dialog.messi).click();
+    });
+
+    it('and a failing callback', function(done) {
+        dialog = new Messi(
+            'This is a message with Messi with custom buttons.',
+            {
+                title: 'Buttons',
+                buttons: [{id: 0, label: 'Close', val: 'X', 'class': 'cbClose'}],
+                callback: function(value) {
+                    jQuery(document).triggerHandler('messi.cb');
+                    return false;
+                }
+            }
+        );
+        jQuery(document).bind('messi.cb', function(val) {
+            setTimeout(function() {
+                expect(jQuery(dialog.messi).is(':visible')).to.be.true;
+                dialog.unload();
+                done();
+            }, 350);
+        });
+        expect(jQuery('.messi-title:visible', dialog.messi).text()).to.equal('Buttons');
+        expect(jQuery('button.cbClose', dialog.messi).get(0)).to.be.defined;
+        jQuery('.cbClose', dialog.messi).click();
     });
 });
 
 describe('Create a titled Messi window', function() {
     beforeEach(function() {
-        dialog = new $.Messi('my message', {title: 'My title'});
+        dialog = new Messi('my message', {title: 'My title'});
     });
 
     afterEach(function() {
@@ -140,7 +170,7 @@ describe('Create a titled Messi window', function() {
     });
 
     it('should close when we click the button', function(done) {
-        var dialog = new $.Messi('my message');
+        dialog = new Messi('my message');
         jQuery('.messi-closebtn', dialog.messi).click();
         setTimeout(function() {
             expect(jQuery('.messi:visible', dialog.messi).get(0)).to.be.undefined;
@@ -150,10 +180,10 @@ describe('Create a titled Messi window', function() {
 });
 
 describe('Create a modal Messi window', function() {
-    var dialog = null;
+    dialog = null;
 
     beforeEach(function() {
-        dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi in modal view. Now you can\'t interact with other elements in the page until close this.',
             {title: 'Modal Window', modal: true}
         );
@@ -174,7 +204,7 @@ describe('Create a modal Messi window', function() {
 
 describe('Create an absolutely positioned Messi window', function() {
     it('should be positioned absolutely', function() {
-        var dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi in absolute position.',
             {
                 center:   false,
@@ -183,6 +213,7 @@ describe('Create an absolutely positioned Messi window', function() {
             }
         );
 
+        jQuery(window).trigger('resize');
         var position = dialog.messi.position();
         expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
@@ -190,10 +221,10 @@ describe('Create an absolutely positioned Messi window', function() {
 });
 
 describe('Create a Messi window with a custom buttons', function() {
-    var dialog = null;
+    dialog = null;
 
     beforeEach(function() {
-        dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi with custom buttons.',
             {title: 'Buttons', buttons: [{id: 0, label: 'Close', val: 'X'}]}
         );
@@ -217,10 +248,10 @@ describe('Create a Messi window with a custom buttons', function() {
 });
 
 describe('Message with custom buttons (yes/no/cancel)', function() {
-    var dialog = null;
+    dialog = null;
 
     beforeEach(function() {
-        dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi with custom buttons.',
             {
                 title: 'Buttons',
@@ -251,10 +282,10 @@ describe('Message with custom buttons (yes/no/cancel)', function() {
 });
 
 describe('Message with custom buttons (yes/no) and style classes', function() {
-    var dialog = null;
+    dialog = null;
 
     beforeEach(function() {
-        dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi with custom buttons.',
             {
                 title: 'Buttons',
@@ -280,10 +311,10 @@ describe('Message with custom buttons (yes/no) and style classes', function() {
 });
 
 describe('Window with success title', function() {
-    var dialog = null;
+    dialog = null;
 
     beforeEach(function() {
-        dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi.',
             {
                 title: 'Title',
@@ -303,10 +334,10 @@ describe('Window with success title', function() {
 });
 
 describe('Window with error title (animated)', function() {
-    var dialog = null;
+    dialog = null;
 
     beforeEach(function() {
-        dialog = new $.Messi(
+        dialog = new Messi(
             'This is a message with Messi.',
             {
                 title: 'Title',
@@ -331,7 +362,7 @@ describe('Window with error title (animated)', function() {
 
 describe('Window with a margin', function() {
     it('when center is on', function() {
-        dialog = new $.Messi('This is a message with Messi.', {
+        dialog = new Messi('This is a message with Messi.', {
             title: 'Margin Center Test',
             center: true,
             margin: 15,
@@ -343,26 +374,55 @@ describe('Window with a margin', function() {
     });
 
     it('when margin is off', function() {
-        dialog = new $.Messi('This is a message with Messi.', {
+        dialog = new Messi('This is a message with Messi.', {
             title: 'Margin Off Test',
             center: false,
             margin: 0,
             viewport: { top: '10px', left: '10px' }
         });
 
-        expect(dialog.messi.position()).to.eql({top: 10, left: 10}); // Normal
+        expect(dialog.messi.position()).to.eql({top: 10, left: 10});
         dialog.unload();
     });
 
     it('when margin is on', function() {
-        dialog = new $.Messi('This is a message with Messi.', {
+        dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
             center: false,
             margin: 15,
             viewport: { top: -15, left: -15 }
         });
 
-        expect(dialog.messi.position()).to.eql({top: 15, left: 15}); // Normal
+        expect(dialog.messi.position()).to.eql({top: 15, left: 15});
+        dialog.unload();
+    });
+
+    it('when margin is on and too low', function() {
+        dialog = new Messi('This is a message with Messi.', {
+            title: 'Margin On Test',
+            center: false,
+            margin: 15,
+            viewport: { top: 2900, left: 15 }
+        });
+
+        var newTop = window.innerHeight - 15 - dialog.messi.height();
+
+        expect(dialog.messi.position()).to.eql({top: newTop, left: 15});
+        dialog.unload();
+    });
+
+    it('when margin is on and too far right', function() {
+        dialog = new Messi('This is a message with Messi.', {
+            title: 'Margin On Test',
+            center: false,
+            margin: 15,
+            viewport: { top: 15, left: 2900 },
+            width: '300px'
+        });
+
+        var newLeft = window.innerWidth - 15 - dialog.messi.width();
+
+        expect(dialog.messi.position()).to.eql({top: 15, left: newLeft});
         dialog.unload();
     });
 });

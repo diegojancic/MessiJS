@@ -1,5 +1,4 @@
-# MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS) [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
-
+# MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS)
 An easy to use message plugin for jQuery.
 
 This is a continuation of the [Messi](https://github.com/marcosesperon/Messi) dialog.
@@ -56,3 +55,9 @@ Enjoy it!
 
 ### License
 Released under the [MIT license](http://www.opensource.org/licenses/MIT).
+
+### Coveralls [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
+Today (May 22, 2014 and for the last few days), Coveralls has been
+reporting different values than you get from the HTML coverage info.
+So take the Coveralls coverage information with a grain of salt.
+I'd like to know why this is happening.
