@@ -11,7 +11,7 @@ review them.  Where appropriate, I'll try to add the Pull Requests
 that have been already issued for the original Messi repo.
 
 ### Preparing for 2.0 Final
-* [ ] 95% Code Coverage or better
+* [ ] 95% Code Coverage _[Note!](https://github.com/MessiJS/MessiJS#coveralls)_ or better
 * [ ] Write the documentation
 * [ ] Write CONTRIBUTING.md
 * :white_check_mark: Add a LICENSE file
@@ -19,14 +19,19 @@ that have been already issued for the original Messi repo.
 * :white_check_mark: Add css minification.
 
 ### Preparing for 2.0 Beta
-* [ ] 90% Code Coverage
-* [ ] How to distribute (may affect Bower)?
-    - dist files vs. zip files vs release attachments?
-* [ ] Add to Bower (bower.js)
 * [ ] Re-evaluate Global vs jQuery scope. Make consistent, easy to use and backward compatible
     - Option 1: Since jQuery.Messi(...) doesn't make sense, remove it.
     - Option 2: Make Messi a true jQuery plugin with new Messi === $('body').Messi(...).
     - Option 3: Leave the status quo
+
+* [ ] Greater than 90% Code Coverage_[Note!](https://github.com/MessiJS/MessiJS#coveralls)_
+* [ ] Preliminary documentation
+* :white_check_mark: Distributing and Bower
+    - Folder structure doesn't matter.
+    - Attaching zip file to Github release (will Bower use this?)
+    - [ ] Commit dist directory only on tagged releases!
+        + Create a release branch, then delete it afterward?
+* :white_check_mark: Banners for messi.js and messi.min.js (also css?)
 * :white_check_mark: Examine Open Issues: Currently there are 38 Open Issues
 * :white_check_mark: Complete the Issue tests
 * :white_check_mark: Update package.json
