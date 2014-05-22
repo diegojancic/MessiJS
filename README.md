@@ -11,7 +11,7 @@ See the [Contributors List](https://github.com/MessiJS/MessiJS/graphs/contributo
 to see who's contributed code.
 
 ## Goals
-1. Version 2.x will be fully backward compatible: Drop in replacement for messi.js.
+1. Version 2.0.x will be fully backward compatible: Drop in replacement for messi.js.
 2. Standards based (Code validated by JSHint).
 3. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
 4. Support Internet Explorer 9+ (previous versions did not support IE).
