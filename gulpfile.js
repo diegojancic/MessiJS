@@ -8,7 +8,7 @@ var coveralls = require('gulp-coveralls');
 var eventStream = require('event-stream');
 var header = require('gulp-header');
 var jshint = require('gulp-jshint');
-var karma = require('karma').server;
+var karma = require('gulp-karma');
 var minifyCSS = require('gulp-minify-css');
 var mocha = require('gulp-mocha');
 var notify = require('gulp-notify');
@@ -77,33 +77,20 @@ gulp.task('compress', ['combine'], function() {
     );
 });
 
-gulp.task('test', ['combine'], function(done) {
-    return karma.start(
-        {
-            browsers: ['PhantomJS'],
-            files: [
-                'node_modules/mocha/mocha.js',
-                'node_modules/chai/chai.js',
-                'jquery.min.js',
-                'src/main.js',
-                'src/extensions.js',
-                'test/**/*Spec.js',
-                'src/*.css'
-            ],
-            frameworks: ['mocha'],
-            preprocessors: {'src/*.js': ['coverage']},
-            reporters: ['progress', 'coverage', 'coveralls'],
-            coverageReporter: {
-              type : 'lcov',
-              dir : 'coverage/'
-            },
-            singleRun: true
-        },
-        function(exitCode) {
-            done();
-            gutil.log('Karma has exited with ' + exitCode);
-            process.exit(exitCode);
-        });
+gulp.task('test', ['combine'], function() {
+    return gulp.src([
+        'node_modules/mocha/mocha.js',
+        'node_modules/chai/chai.js',
+        'jquery.min.js',
+        'src/main.js',
+        'src/extensions.js',
+        'test/**/*Spec.js',
+        'src/*.css'
+    ])
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }));
 });
 
 gulp.task('test:coverage', ['combine'], function() {
