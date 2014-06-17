@@ -8,8 +8,11 @@ module.exports = function(config) {
             'node_modules/chai/chai.js',
             'jquery.min.js',
             'src/main.js',
-            'src/extensions.js',
-            'test/**/*Spec.js',
+            //'src/extensions.js',
+            'test/mainSpec.js',
+            //'test/privateFunctionsSpec.js',
+            //'test/extensionsSpec.js',
+            //'test/todoSpec.js',
             'src/*.css'
         ],
         frameworks: ['mocha'],
