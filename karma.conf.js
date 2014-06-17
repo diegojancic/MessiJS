@@ -14,7 +14,7 @@ module.exports = function(config) {
         ],
         frameworks: ['mocha'],
         preprocessors: {'src/*.js': ['coverage']},
-        reporters: ['progress', 'coverage', 'coveralls'],
+        reporters: ['progress', 'coverage'],
         singleRun: true
     });
 

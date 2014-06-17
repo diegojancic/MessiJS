@@ -19,12 +19,12 @@ that have been already issued for the original Messi repo.
 * :white_check_mark: Add css minification.
 
 ### Preparing for 2.0 Beta
-* [ ] Re-evaluate Global vs jQuery scope. Make consistent, easy to use and backward compatible
-    - Option 1: Since jQuery.Messi(...) doesn't make sense, remove it.
-    - Option 2: Make Messi a true jQuery plugin with new Messi === $('body').Messi(...).
+* :white_check_mark: Re-evaluate Global vs jQuery scope. Make consistent, easy to use and backward compatible
+    :white_check_mark: Option 1: Since jQuery.Messi(...) doesn't make sense, remove it.
+    - Option 2: Make Messi a true jQuery plugin with new Messi === $('body').Messi(...). [This may be done for MessiJS 2.1.]
     - Option 3: Leave the status quo
 
-* [ ] Greater than 90% Code Coverage_[Note!](https://github.com/MessiJS/MessiJS#coveralls)_
+* :white_check_mark: Greater than 90% Code Coverage_[Note!](https://github.com/MessiJS/MessiJS#coveralls)_
 * [ ] Preliminary documentation
 * :white_check_mark: Distributing and Bower
     - Folder structure doesn't matter.
@@ -51,7 +51,7 @@ that have been already issued for the original Messi repo.
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/30 – Fix to enable the callbacks
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/31 – Remove extra comma
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/32 – updated messi.js to correct when messi appears off page
-* [x] https://github.com/marcosesperon/Messi/pull/33 – add click to close feature _This will likely be added. Not before 2.0, however._
+* [x] https://github.com/marcosesperon/Messi/pull/33 – add click to close feature _This will likely be added. Not before 2.1, however._
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/35 - Update messi.css (for Firefox 23.0.1) _IGNORED: This fix was causing the buttons to appear incorrectly in Firefox 27.0.1_
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/36 - fix unload and modal
 * :white_check_mark: https://github.com/marcosesperon/Messi/pull/38 - Controlling the resizing and scrolling the screen to adjust the message in the user's field of view.
