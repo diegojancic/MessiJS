@@ -1,4 +1,4 @@
-# MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS)
+# MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS) [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
 An easy to use message plugin for jQuery.
 
 This is a continuation of the [Messi](https://github.com/marcosesperon/Messi) dialog.
@@ -15,6 +15,9 @@ to see who's contributed code.
 3. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
 4. Support Internet Explorer 9+ (previous versions did not support IE).
 
+### Requirements
+* [jQuery](http://jquery.com/) version 1.7 or greater
+
 ## Messi 1.x Documentation
 The previous documentation begins here.  This will be rewritten before the final release of 2.0.0.
 
@@ -23,41 +26,35 @@ Messi is a jQuery plugin to show clean, elegant messages in a simple way. With M
 
 Display text, html content, images and ajax requests with 5KB code.
 
-![Sample Image](http://marcosesperon.es/apps/messi/messi-white.png)
+![Messi Example](images/messi_example.png)
 
 ### Demo
 [http://marcosesperon.es/apps/messi/](http://marcosesperon.es/apps/messi/)
 
-### Setup instructions
-Messi requires jQuery framework to work, so include it first of all in your project. After that, include in the `head` of your page the stylesheet:
+### How to use
+Messi requires jQuery to work, so include it first of all in your project. After that, include in the `head` of your page the stylesheet:
 
 ```html
-<link rel="stylesheet" href="messi.min.css" />
+<head>
+  <link rel="stylesheet" href="messi.min.css" />
+</head>
+<body>
+  <div> Content here...</div>
+  <script src="jquery.min.js"></script>
+  <script src="messi.min.js"></script>
+</body>
 ```
-And before the `</body>` the script:
 
-```html
-<script src="messi.min.js"></script>
-```
-
-Now you can start using Messi in your page, for example:
+Use Messi in your page, like this:
 
 ```js
 new Messi('This is a message with Messi.', {title: 'Title'});
 ```
 
-You will find more examples at [http://marcosesperon.es/apps/messi/](http://marcosesperon.es/apps/messi/)
+Many more examples can be found at [http://marcosesperon.es/apps/messi/](http://marcosesperon.es/apps/messi/)
 
-Enjoy it!
+Please, use, enjoy, and leave me feedback.
 
-### Requirements
-* [jQuery](http://jquery.com/) v. 1.7+
+### Messi 1.x
 
-### License
-Released under the [MIT license](http://www.opensource.org/licenses/MIT).
-
-### Coveralls [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
-Today (May 22, 2014 and for the last few days), Coveralls has been
-reporting different values than you get from the HTML coverage info.
-So take the Coveralls coverage information with a grain of salt.
-I'd like to know why this is happening.
+The original Messi 1.x documentation can be found at [http://marcosesperon.es/apps/messi/](http://marcosesperon.es/apps/messi/)

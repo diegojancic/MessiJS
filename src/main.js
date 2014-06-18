@@ -340,8 +340,5 @@
     // Preserve backward compatibility
     window.Messi = Messi;
 
-    // Put Messi into the jQuery namespace
-    jQuery.Messi = Messi;
-
 })();
 // vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:

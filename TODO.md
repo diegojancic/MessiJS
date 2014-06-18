@@ -13,7 +13,7 @@ that have been already issued for the original Messi repo.
 ### Preparing for 2.0 Final
 * [ ] 95% Code Coverage _[Note!](https://github.com/MessiJS/MessiJS#coveralls)_ or better
 * [ ] Write the documentation
-* [ ] Write CONTRIBUTING.md
+* :white_check_mark: Write CONTRIBUTING.md
 * :white_check_mark: Add a LICENSE file
 * :white_check_mark: Update package.json
 * :white_check_mark: Add css minification.
