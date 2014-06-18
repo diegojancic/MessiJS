@@ -1,38 +1,27 @@
 {
   "name": "MessiJS",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-beta",
   "description": "A easy to use message plugin for jQuery",
   "main": "dist/messi.js",
-  "private": true,
-  "scripts": {
-    "test": "gulp travis-test",
-    "coveralls": "gulp codecoverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/MessiJS/MessiJS.git"
-  },
+  "license": "MIT",
+  "ignore": [
+      "**/.*",
+      "**/*.json",
+      "coverage",
+      "src",
+      "test",
+      "TODO.md",
+      "gulpfile.js",
+      "karma.conf.js",
+      "package.json",
+      "node_modules"
+  ],
   "keywords": [
     "messi",
     "jQuery",
     "message",
     "plugin"
   ],
-  "contributors": [
-    {
-      "name": "Marcos Esperón"
-    },
-    {
-      "name": "Kevin Gustavson",
-      "email": "kdgustavson@gmail.com",
-      "url": "http://kevingustavson.info/"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/MessiJS/MessiJS/issues"
-  },
-  "homepage": "https://MessiJS.github.io/",
   "dependencies": {
     "jquery": ">1.7.0"
   },

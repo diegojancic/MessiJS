@@ -1,17 +1,3 @@
-/**
- * jQuery Messi Plugin 2.0
- * http://MessiJS.github.io/
- *
- * Development continues as MessiJS.
- * https://github.com/MessiJS/MessiJS
- *
- * Early versions Copyright 2012, Marcos Esperón
- * http://marcosesperon.es
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
-// Main class
 (function () {
     'use strict';
 
@@ -318,12 +304,12 @@
             );
 
             // When the popup is too far on the right, move left
-            if (x + this.messi.width() > $window.width() - this.options.margin) {
+            if (x + this.messi.width() + this.options.margin > $window.width()) {
                 x = $window.width() - this.options.margin - this.messi.width();
             }
 
             // When the popup is too far down, move up
-            if (y + this.messi.height() > $window.height() - this.options.margin) {
+            if (y + this.messi.height() + this.options.margin > $window.height()) {
                 y = $window.height() - this.options.margin - this.messi.height();
             }
 
@@ -353,9 +339,6 @@
 
     // Preserve backward compatibility
     window.Messi = Messi;
-
-    // Put Messi into the jQuery namespace
-    jQuery.Messi = Messi;
 
 })();
 // vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:

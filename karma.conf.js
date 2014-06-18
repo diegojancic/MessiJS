@@ -1,21 +1,24 @@
 module.exports = function(config) {
+
     config.set({
         browsers: ['PhantomJS'],
+        coverageReporter: { type : 'lcov', dir : 'coverage/' },
         files: [
-            'http://cdnjs.cloudflare.com/ajax/lib/mocha/1.13.0/mocha.min.js',
-            'http://chaijs.com/chai.js',
+            'node_modules/mocha/mocha.js',
+            'node_modules/chai/chai.js',
             'jquery.min.js',
-            'src/*.js',
-            'src/*.css',
-            'test/**/*.js'
+            'src/main.js',
+            //'src/extensions.js',
+            'test/mainSpec.js',
+            //'test/privateFunctionsSpec.js',
+            //'test/extensionsSpec.js',
+            //'test/todoSpec.js',
+            'src/*.css'
         ],
-        frameworks: ['mocha', 'chai'],
+        frameworks: ['mocha'],
         preprocessors: {'src/*.js': ['coverage']},
         reporters: ['progress', 'coverage'],
-        coverageReporter: {
-            type : 'lcov',
-            dir : 'coverage/'
-        },
         singleRun: true
     });
+
 };
