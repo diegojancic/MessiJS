@@ -1,7 +1,7 @@
 Goals
 =====
 
-Take Messi and move it to the next level.  Also full support for IE9+.
+Take Messi and move it to the next level.  Also support IE9+.
 
 If you are interested in helping, send me Pull Requests and I'll
 review them.  Where appropriate, I'll try to add the Pull Requests
@@ -18,13 +18,9 @@ Preparing for 2.0 Final
 
 Preparing for 2.0 Beta
 ----------------------
-* :white_check_mark: Greater than 90% Code Coverage
 * [ ] Preliminary documentation
-* :white_check_mark: Distributing and Bower
-    - Folder structure doesn't matter.
-    - Attaching zip file to Github release (will Bower use this?)
-    - [ ] Commit dist directory only on tagged releases!
-        + Create a release branch, then delete it afterward?
+* [ ] Figure out distribution, releases, bower, etc.
+* :white_check_mark: Greater than 90% Code Coverage
 * :white_check_mark: Banners for messi.js and messi.min.js (also css?)
 * :white_check_mark: Examine Open Issues: Currently there are 38 Open Issues
 * :white_check_mark: Complete the Issue tests

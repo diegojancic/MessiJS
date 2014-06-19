@@ -37,7 +37,7 @@ to see who's contributed code.
 4. Ideas to improve MessiJS?  Open a [Github Issue](https://github.com/MessiJS/MessiJS/issues) and let me know.
 
 ## Demo
-[MessiJS Demo](example.md)
+[MessiJS Demo](EXAMPLES.md)
 
 ## How to use
 MessiJS requires jQuery to work, so include it first of all in your project. After that, include in the `head` of your page the stylesheet:
