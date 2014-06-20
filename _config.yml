@@ -1,0 +1,9 @@
+name: Your New Jekyll Site
+#markdown: kramdown
+markdown: redcarpet
+pygments: true
+exclude:
+    - node_modules
+    - Gemfile
+    - Gemfile.lock
+    - params.json
