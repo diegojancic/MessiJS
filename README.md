@@ -24,19 +24,19 @@ to see who's contributed code.
 * [jQuery](http://jquery.com/) version 1.7 or greater
 
 ## Roadmap
-### MessiJS 2.0
-1. Version 2.0.x will be fully backward compatible: Drop in replacement for messi.js.
-2. Standards based (Code validated by JSHint).
-3. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
-4. Support Internet Explorer 9+ (previous versions did not support IE).
-
 ### MessiJS 2.1
 1. To allow for growth, Version 2.1 won't be backward compatible with the original Messi or MessiJS 2.0.
 2. I'm considering making MessiJS more jQuery standards compliant (with a compatibility extension).
 3. Many bug fixes and more tests.
 4. Ideas to improve MessiJS?  Open a [Github Issue](https://github.com/MessiJS/MessiJS/issues) and let me know.
 
-## Demo
+#### MessiJS 2.0
+1. Version 2.0.x will be fully backward compatible: Drop in replacement for messi.js.
+2. Standards based (Code validated by JSHint).
+3. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
+4. Support Internet Explorer 9+ (previous versions did not support IE).
+
+# Demo
 [MessiJS Demo](EXAMPLES.md)
 
 ## How to use
