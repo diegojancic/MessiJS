@@ -10,7 +10,7 @@ Javascript execution.
 
 Display text, html content, images and ajax requests with 5KB code.
 
-![MessiJS Example](images/messi_example.png)
+![MessiJS Example](images/messijs.png)
 
 This is a continuation of the [Messi](https://github.com/marcosesperon/Messi) dialog.
 When the original contributor stopped responding to Issues and Pull Requests, I created this fork of the Messi plugin.
