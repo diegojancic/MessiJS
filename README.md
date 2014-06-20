@@ -36,8 +36,9 @@ to see who's contributed code.
 3. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
 4. Support Internet Explorer 9+ (previous versions did not support IE).
 
-# Demo
-[MessiJS Demo](EXAMPLES.md)
+# Options and Demo
+1. [MessiJS Options](http://messijs.github.io/MessiJS/options/)
+2. [MessiJS Demos](http://messijs.github.io/MessiJS/demos/)
 
 ## How to use
 MessiJS requires jQuery to work, so include it first of all in your project. After that, include in the `head` of your page the stylesheet:
