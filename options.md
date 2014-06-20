@@ -1,5 +1,6 @@
 ---
 layout: github
+title: Options
 ---
 # MessiJS Options
 | Option       | Default                   | Description                                                            |

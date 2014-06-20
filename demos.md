@@ -1,5 +1,6 @@
 ---
 layout: github
+title: Demos
 ---
 # MessiJS Demos
 
@@ -24,7 +25,7 @@ var dialog = new Messi('my message', {title: 'My title'});
 
 ```javascript
 var dialog = new Messi(
-    'This is a message with Messi in modal view. Now you can\'t interact with other elements in the page until close this.',
+    "This is a message with Messi in modal view. Now you can't interact with other elements in the page until close this.",
     {title: 'Modal Window', modal: true}
 );
 ```
