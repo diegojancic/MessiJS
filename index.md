@@ -13,9 +13,7 @@ user.
 
 Display text, html content, images and ajax requests with 5KB code.
 
-![Example MessiJS Dialog]({{baseurl}}/images/messijs.png "Example MessiJS Dialog")
-
-Form me on GitHub: [https://github.com/marcosesperon/Messi/](https://github.com/marcosesperon/Messi/)
+![Example MessiJS Dialog]({{site.baseurl}}/images/messijs.png "Example MessiJS Dialog")
 
 Changelog
 ---------
