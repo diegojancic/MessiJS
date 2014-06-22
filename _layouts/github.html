@@ -24,16 +24,9 @@
             </p>
 
             <ul>
-                <li><a href="https://github.com/MessiJS/MessiJS">View On <strong>GitHub</strong></a></li>
-                {% if page.title != "Options" %}
-                <li><a href="{{ site.baseurl }}/options/">MessiJS <strong>Options</strong></a></li>
-                {% endif %}
-                {% if page.title != "Demos" %}
-                <li><a href="{{ site.baseurl }}/demos/">MessiJS <strong>Demos</strong></a></li>
-                {% endif %}
-                {% if page.title != "Home" %}
                 <li><a href="{{site.baseurl}}/">Return <strong>Home</strong></a></li>
-                {% endif %}
+                <li><a href="{{ site.baseurl }}/options/">MessiJS <strong>Options</strong></a></li>
+                <li><a href="{{ site.baseurl }}/demos/">MessiJS <strong>Demos</strong></a></li>
             </ul>
         </header>
         <section>
@@ -47,6 +40,7 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="{{site.baseurl}}/javascripts/scale.fix.js"></script>
     <script src="{{site.baseurl}}/javascripts/messi.js"></script>
+    <script src="{{site.baseurl}}/javascripts/global.js"></script>
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

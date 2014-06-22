@@ -53,15 +53,15 @@
         // Prepare the buttons
         if (_this.options.buttons.length > 0) {
 
+            var btnbox = jQuery('<div>', {'class':'messi-btnbox'});
+            jQuery('.messi-actions', this.messi).append(btnbox);
             for (var i = 0; i < _this.options.buttons.length; i++) {
-
                 var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
-                var btn = '<button class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button>';
-                btn = jQuery('<div class="messi-btnbox">' + btn + '</div>', {});
-                btn.val(_this.options.buttons[i].val);
-
-                jQuery(btn).click(
-                    function () {
+                var btn = jQuery('<button>', {
+                    href: "#",
+                    'class': 'btn ' + cls,
+                    value: _this.options.buttons[i].val,
+                    'click': function () {
                         var value = $(this).val();
 
                         if (typeof _this.options.callback === 'function') {
@@ -72,10 +72,9 @@
 
                         _this.hide();
                     }
-                );
+                }).text(_this.options.buttons[i].label);
 
-                jQuery('.messi-actions', this.messi)
-                    .append(btn);
+                btnbox.append(btn);
 
             }
 
@@ -340,5 +339,128 @@
     // Preserve backward compatibility
     window.Messi = Messi;
 
+})();
+
+(function () {
+    // Special Call
+    jQuery.extend(Messi, {
+
+        alert: function (data, callback, options) {
+
+            var buttons = [{
+                id: 'ok',
+                label: 'OK',
+                val: 'OK'
+            }];
+
+            options = jQuery.extend({
+                closeButton: false,
+                buttons: buttons,
+                callback: function () {}
+            }, options || {}, {
+                show: true,
+                unload: true,
+                callback: callback
+            });
+
+            return new Messi(data, options);
+
+        },
+
+        ask: function (data, callback, options) {
+
+            var buttons = [
+                { id: 'yes', label: 'Yes', val: 'Y', 'class': 'btn-success' },
+                { id: 'no', label: 'No', val: 'N', 'class': 'btn-danger' }
+            ];
+
+            options = jQuery.extend({
+                closeButton: false,
+                modal: true,
+                buttons: buttons,
+                callback: function () {}
+            }, options || {}, {
+                show: true,
+                unload: true,
+                callback: callback
+            });
+
+            return new Messi(data, options);
+
+        },
+
+        img: function (src, options) {
+
+            var img = new Image();
+
+            jQuery(img).load(function () {
+
+                var vp = {
+                    width: jQuery(window).width() - 50,
+                    height: jQuery(window).height() - 50
+                };
+                var ratio = (this.width > vp.width || this.height > vp.height) ?
+                    Math.min(vp.width / this.width, vp.height / this.height) :
+                    1;
+
+                jQuery(img)
+                    .css({
+                        width: this.width * ratio,
+                        height: this.height * ratio
+                    });
+
+                options = jQuery.extend({
+                    show: true,
+                    unload: true,
+                    closeButton: true,
+                    width: this.width * ratio,
+                    height: this.height * ratio,
+                    padding: 0
+                }, options || {});
+
+                new Messi(img, options);
+
+            })
+            .error(function () {
+
+                // Be IE friendly
+                if (typeof window.console === 'object') {
+                    console.log('Error loading ' + src);
+                }
+
+            })
+            .attr('src', src);
+
+        },
+
+        load: function (url, options) {
+
+            options = jQuery.extend({
+                show: true,
+                unload: true,
+                params: {}
+            }, options || {});
+
+            var request = {
+                url: url,
+                data: options.params,
+                dataType: 'html',
+                cache: false,
+                error: function (request, status, error) {
+                    // Be IE friendly
+                    if (typeof window.console === 'object') {
+                        console.log(request.responseText);
+                    }
+                },
+                success: function (html) {
+                    new Messi(html, options);
+                }
+            };
+
+            jQuery.ajax(request);
+
+        }
+
+    });
 })();
 // vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:

@@ -19,9 +19,8 @@ Changelog
 ---------
 2.0 [??-Jun-2014]
 
-* Name changed to MessiJS
-* New Maintainer
-* New build process, testing
+* Name changed to MessiJS (New Maintainer)
+* Gulp build process and Mocha tests
 * Now supporting IE9+
 
 1.3 [13-Mar-2013]
