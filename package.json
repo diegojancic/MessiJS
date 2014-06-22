@@ -1,9 +1,8 @@
 {
   "name": "MessiJS",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-beta",
   "description": "A easy to use message plugin for jQuery",
   "main": "dist/messi.js",
-  "private": true,
   "scripts": {
     "test": "gulp travis-test",
     "coveralls": "gulp codecoverage"
