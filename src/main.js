@@ -24,16 +24,14 @@
 
             if (_this.options.buttons.length === 0 && !_this.options.autoclose) {
 
-                if (_this.options.closeButton) {
-                    close = jQuery('<span class="messi-closebtn"></span>');
-                    close.bind('click', function () {
-                        _this.hide();
-                    });
+                // Close button required
+                close = jQuery('<span class="messi-closebtn"></span>');
+                close.bind('click', function () {
+                    _this.hide();
+                });
 
-                    jQuery('.messi-titlebox', this.messi)
-                        .prepend(close);
-
-                }
+                jQuery('.messi-titlebox', this.messi)
+                    .prepend(close);
 
             }
 
@@ -228,7 +226,7 @@
             this.messi.animate({
                 opacity: 0
             }, 300, function () {
-                if (_this.modal) {
+                if (_this.options.modal) {
                     _this.modal.css({
                         display: 'none'
                     });
@@ -329,10 +327,6 @@
             if (a > b) { return a; }
             else { return b; }
         },
-
-        isNumber: function (n) {
-            return !isNaN(parseFloat(n)) && isFinite(n);
-        }
 
     };
 

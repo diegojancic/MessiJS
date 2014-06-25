@@ -58,6 +58,20 @@ describe('Creating a simple Messi window', function() {
         dialog.unload();
     });
 
+    it('should remain hidden on hide(), with modal', function() {
+        dialog = new Messi('my message', {modal: true});
+        dialog.hide();
+        expect(jQuery('.messi:visible', dialog).get(0)).to.be.undefined;
+        dialog.hide();
+        expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
+        dialog.unload();
+    });
+
+    it('should not be visible if show = false', function() {
+        dialog = new Messi('my message', {show: false});
+        expect(jQuery('.messi:visible', dialog).get(0)).to.be.undefined;
+    });
+
     it('should have a close button', function() {
         dialog = new Messi('my message');
         expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.defined;
@@ -74,8 +88,29 @@ describe('Creating a simple Messi window', function() {
     });
 
     it('should close automatically when autoclose is enabled', function(done) {
-        dialog = new Messi('my message', {autoclose: 100});
+        dialog = new Messi('my message', {autoclose: 100 });
         expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
+
+        setTimeout(function() {
+            expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
+        }, 90);
+        setTimeout(function() {
+            expect(jQuery('.messi:visible', dialog).get(0)).to.be.undefined;
+            done();
+        }, 200);
+    });
+
+    it('should close automatically when autoclose is enabled', function(done) {
+        dialog = new Messi(
+            'my message',
+            {
+                autoclose: 100,
+                callback: function(value) { console.log(value); }
+            }
+        );
+
+        expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
+
         setTimeout(function() {
             expect(jQuery('.messi:visible', dialog).get(0)).to.be.defined;
         }, 90);
@@ -198,7 +233,8 @@ describe('Create a modal Messi window', function() {
     });
 
     it('should open a modal background', function() {
-        expect(jQuery('.messi-modal', dialog.messi).get(0)).to.defined;
+        jQuery(window).trigger('resize');
+        expect(jQuery('.messi-modal', dialog.messi).get(0)).to.be.defined;
     });
 });
 
@@ -362,6 +398,7 @@ describe('Window with error title (animated)', function() {
 
 describe('Window with a margin', function() {
     it('when center is on', function() {
+        jQuery(window).trigger('resize');
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin Center Test',
             center: true,
@@ -393,6 +430,7 @@ describe('Window with a margin', function() {
             viewport: { top: -15, left: -15 }
         });
 
+        jQuery(window).trigger('resize');
         expect(dialog.messi.position()).to.eql({top: 15, left: 15});
         dialog.unload();
     });
