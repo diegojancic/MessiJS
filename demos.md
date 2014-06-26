@@ -116,3 +116,14 @@ Messi.img(
     'https://avatars2.githubusercontent.com/u/70142?s=140'
 );
 ```
+
+This will load the "html" results of an Ajax request into the dialog.
+
+**NOTE:** I'm still working on this demo.
+
+```javascript
+Messi.load('login.php', {
+    params: {user: 'demo', password: '1234'}
+});
+```
+
