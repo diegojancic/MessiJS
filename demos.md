@@ -8,9 +8,13 @@ Here are a few demos to whet your appetite. All of MessiJS's options can
 be found on the [Options](../options/) page.
 
 
+A simple example:
+
 ```javascript
 var dialog = new Messi('my message');
 ```
+
+A simple example with no close button. Bad idea!
 
 ```javascript
 var dialog = new Messi(
@@ -19,13 +23,22 @@ var dialog = new Messi(
 );
 ```
 
+An autoclosing dialog:
+
 ```javascript
-var dialog = new Messi('my message', {autoclose: 1000});
+var dialog = new Messi(
+    'This message will close automatically!',
+    {autoclose: 1000}
+);
 ```
+
+Add a titlebar:
 
 ```javascript
 var dialog = new Messi('my message', {title: 'My title'});
 ```
+
+Make the dialog modal (adds a layer to force you to react to the dialog):
 
 ```javascript
 var dialog = new Messi(
@@ -34,30 +47,54 @@ var dialog = new Messi(
 );
 ```
 
+Add customizable buttons to the bottom:
+
 ```javascript
 var dialog = new Messi(
-    'This is a message with Messi with a close button.',
+    'This is a message with Messi with custom buttons on the bottom.',
     {
         title: 'Buttons',
-        buttons: [{id: 0, label: 'Close', val: 'X', 'class': 'cbClose'}],
-        callback: function(value) {
-            jQuery(document).triggerHandler('messi.cb');
-            return true;
-        }
+        buttons: [
+            {id: 0, label: 'Yes', val: 'Y', class: 'btn-success'},
+            {id: 1, label: 'No', val: 'N', class: 'btn-danger'},
+            {id: 2, label: 'Cancel', val: 'C'}
+        ]
     }
 );
 ```
 
+Customizable buttons with a callback:
+
 ```javascript
-dialog = new Messi(
-    'This is a message with Messi with custom buttons.',
+var dialog = new Messi(
+    'This messi dialog has custom buttons and callback.',
     {
         title: 'Buttons',
         buttons: [
             {id: 0, label: 'Yes', val: 'Y'},
-            {id: 1, label: 'No', val: 'N'},
-            {id: 2, label: 'Cancel', val: 'C'}
-        ]
+            {id: 1, label: 'No', val: 'N'}
+        ],
+        callback: function(val) { alert('Your selection: ' + val); }
+    }
+);
+```
+
+Apply styles to your titlebar:
+
+* success (a lovely shade of green)
+* info (blue)
+* error (red)
+* warning (orange)
+
+Add animation with _anim_.
+
+```javascript
+var dialog = new Messi(
+    'This is a error message.',
+    {
+        title: 'Animated error',
+        titleClass: 'anim error',
+        buttons: [ {id: 0, label: 'Close', val: 'X'} ]
     }
 );
 ```
@@ -78,12 +115,4 @@ Messi.ask(
 Messi.img(
     'https://avatars2.githubusercontent.com/u/70142?s=140'
 );
-```
-
-```javascript
-Messi.load('http://google.com/', {});
-```
-
-```javascript
-Messi.load('http://messijs.github.io/', {});
 ```
