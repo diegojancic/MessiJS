@@ -100,9 +100,16 @@ var dialog = new Messi(
 ```
 
 # Extensions
+
+**MessiJS are semi-official add-ons. Essentially they are convenience functions.**
+
+Show a MessiJS style alert.
+
 ```javascript
 Messi.alert('This is an alert with Messi.');
 ```
+
+How to ask a question.
 
 ```javascript
 Messi.ask(
@@ -110,6 +117,8 @@ Messi.ask(
     function(value) { alert(value); }
 );
 ```
+
+Load a minimal image.
 
 ```javascript
 Messi.img(
@@ -119,11 +128,10 @@ Messi.img(
 
 This will load the "html" results of an Ajax request into the dialog.
 
-**NOTE:** I'm still working on this demo.
-
 ```javascript
-Messi.load('login.php', {
-    params: {user: 'demo', password: '1234'}
+Messi.load('fragment.html', {
+    params: {query: 'demo'},
+    title: 'Messi.load(url, options)'
 });
 ```
 
