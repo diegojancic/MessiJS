@@ -338,6 +338,10 @@
             this.messi.css({ left: x, top: y });
         },
 
+        jqueryize: function() {
+            return this.messi;
+        },
+
         max: function (a, b) {
             if (a > b) { return a; }
             else { return b; }

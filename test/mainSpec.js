@@ -10,10 +10,10 @@ describe('Creating a simple Messi window', function() {
     it('should open and close', function(done) {
         //expect(jQuery('.messi:visible').get(0)).to.be.undefined;
         dialog = new Messi('my message');
-        expect(jQuery('.messi:visible', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('.messi:visible', dialog.jqueryize()).get(0)).to.be.defined;
         dialog.unload();
         setTimeout(function() {
-            expect(jQuery('.messi:visible', dialog.messi).get(0)).to.be.undefined;
+            expect(jQuery('.messi:visible', dialog.jqueryize()).get(0)).to.be.undefined;
             done();
         }, 100);
     });
@@ -74,13 +74,13 @@ describe('Creating a simple Messi window', function() {
 
     it('should have a close button', function() {
         dialog = new Messi('my message');
-        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('.messi-closebtn', dialog.jqueryize()).get(0)).to.be.defined;
         dialog.unload();
     });
 
     it('should close when we click the button', function(done) {
         dialog = new Messi('my message');
-        jQuery('.messi-closebtn', dialog.messi).click();
+        jQuery('.messi-closebtn', dialog.jqueryize()).click();
         setTimeout(function() {
             expect(jQuery('.messi:visible', dialog).get(0)).to.be.undefined;
             done();
@@ -122,14 +122,14 @@ describe('Creating a simple Messi window', function() {
 
     it('should show a closebutton when option is enabled', function() {
         dialog = new Messi('my message', {closeButton: true});
-        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('.messi-closebtn', dialog.jqueryize()).get(0)).to.be.defined;
         dialog.unload();
     });
 
     it('should not show a closebutton when option is disabled', function() {
         dialog = new Messi('my message', {closeButton: false});
-        expect(jQuery(dialog.messi).get(0)).to.be.defined;
-        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.undefined;
+        expect(jQuery(dialog.jqueryize()).get(0)).to.be.defined;
+        expect(jQuery('.messi-closebtn', dialog.jqueryize()).get(0)).to.be.undefined;
         dialog.unload();
     });
 
@@ -151,14 +151,14 @@ describe('Create a Messi window with advanced features', function() {
         );
         jQuery(document).bind('messi.cb', function(val) {
             setTimeout(function() {
-                expect(jQuery(dialog.messi).is(':visible')).to.be.false;
+                expect(jQuery(dialog.jqueryize()).is(':visible')).to.be.false;
                 jQuery(document).unbind('messi.cb');
                 done();
             }, 800);
         });
-        expect(jQuery('.messi-title:visible', dialog.messi).text()).to.equal('Buttons');
-        expect(jQuery('button.cbClose', dialog.messi).get(0)).to.be.defined;
-        jQuery('.cbClose', dialog.messi).click();
+        expect(jQuery('.messi-title:visible', dialog.jqueryize()).text()).to.equal('Buttons');
+        expect(jQuery('button.cbClose', dialog.jqueryize()).get(0)).to.be.defined;
+        jQuery('.cbClose', dialog.jqueryize()).click();
     });
 
     it('and a failing callback', function(done) {
@@ -175,14 +175,14 @@ describe('Create a Messi window with advanced features', function() {
         );
         jQuery(document).bind('messi.cb', function(val) {
             setTimeout(function() {
-                expect(jQuery(dialog.messi).is(':visible')).to.be.true;
+                expect(jQuery(dialog.jqueryize()).is(':visible')).to.be.true;
                 dialog.unload();
                 done();
             }, 350);
         });
-        expect(jQuery('.messi-title:visible', dialog.messi).text()).to.equal('Buttons');
-        expect(jQuery('button.cbClose', dialog.messi).get(0)).to.be.defined;
-        jQuery('.cbClose', dialog.messi).click();
+        expect(jQuery('.messi-title:visible', dialog.jqueryize()).text()).to.equal('Buttons');
+        expect(jQuery('button.cbClose', dialog.jqueryize()).get(0)).to.be.defined;
+        jQuery('.cbClose', dialog.jqueryize()).click();
     });
 });
 
@@ -196,19 +196,19 @@ describe('Create a titled Messi window', function() {
     });
 
     it('should have a title', function() {
-        expect(jQuery('.messi-title:visible', dialog.messi).text()).to.equal('My title');
+        expect(jQuery('.messi-title:visible', dialog.jqueryize()).text()).to.equal('My title');
     });
 
     it('should have a visible close button', function() {
-        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.defined;
-        expect(jQuery('.messi-closebtn', dialog.messi).css('opacity')).to.equal('1');
+        expect(jQuery('.messi-closebtn', dialog.jqueryize()).get(0)).to.defined;
+        expect(jQuery('.messi-closebtn', dialog.jqueryize()).css('opacity')).to.equal('1');
     });
 
     it('should close when we click the button', function(done) {
         dialog = new Messi('my message');
-        jQuery('.messi-closebtn', dialog.messi).click();
+        jQuery('.messi-closebtn', dialog.jqueryize()).click();
         setTimeout(function() {
-            expect(jQuery('.messi:visible', dialog.messi).get(0)).to.be.undefined;
+            expect(jQuery('.messi:visible', dialog.jqueryize()).get(0)).to.be.undefined;
             done();
         }, 100);
     });
@@ -229,12 +229,12 @@ describe('Create a modal Messi window', function() {
     });
 
     it('should have a title', function() {
-        expect(jQuery('.messi-title:visible', dialog.messi).text()).to.equal('Modal Window');
+        expect(jQuery('.messi-title:visible', dialog.jqueryize()).text()).to.equal('Modal Window');
     });
 
     it('should open a modal background', function() {
         jQuery(window).trigger('resize');
-        expect(jQuery('.messi-modal', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('.messi-modal', dialog.jqueryize()).get(0)).to.be.defined;
     });
 });
 
@@ -250,7 +250,7 @@ describe('Create an absolutely positioned Messi window', function() {
         );
 
         jQuery(window).trigger('resize');
-        var position = dialog.messi.position();
+        var position = dialog.jqueryize().position();
         expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
     });
@@ -266,7 +266,7 @@ describe('Create an absolutely positioned Messi window', function() {
         );
 
         jQuery(window).trigger('resize');
-        var position = dialog.messi.position();
+        var position = dialog.jqueryize().position();
         expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
     });
@@ -288,15 +288,15 @@ describe('Create a Messi window with a custom buttons', function() {
     });
 
     it('should show my message', function() {
-        expect(jQuery('.messi-content', dialog.messi).text()).to.be.equal('This is a message with Messi with custom buttons.');
+        expect(jQuery('.messi-content', dialog.jqueryize()).text()).to.be.equal('This is a message with Messi with custom buttons.');
     });
 
     it('should not have an inline close button', function() {
-        expect(jQuery('.messi-closebtn', dialog.messi).get(0)).to.be.undefined;
+        expect(jQuery('.messi-closebtn', dialog.jqueryize()).get(0)).to.be.undefined;
     });
 
     it('should have a custom "Close" action button', function() {
-        expect(jQuery('.messi-actions button', dialog.messi).text()).to.equal('Close');
+        expect(jQuery('.messi-actions button', dialog.jqueryize()).text()).to.equal('Close');
     });
 });
 
@@ -322,15 +322,15 @@ describe('Message with custom buttons (yes/no/cancel)', function() {
     });
 
     it('should have a yes button', function() {
-        expect(jQuery('button[value="Yes"]', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('button[value="Yes"]', dialog.jqueryize()).get(0)).to.be.defined;
     });
 
     it('should have a no button', function() {
-        expect(jQuery('button[value="No"]', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('button[value="No"]', dialog.jqueryize()).get(0)).to.be.defined;
     });
 
     it('should have a cancel button', function() {
-        expect(jQuery('button[value="Cancel"]', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('button[value="Cancel"]', dialog.jqueryize()).get(0)).to.be.defined;
     });
 });
 
@@ -355,11 +355,11 @@ describe('Message with custom buttons (yes/no) and style classes', function() {
     });
 
     it('should have a yes button with class', function() {
-        expect(jQuery('button.btn-success[value="Yes"]', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('button.btn-success[value="Yes"]', dialog.jqueryize()).get(0)).to.be.defined;
     });
 
     it('should have a no button with class', function() {
-        expect(jQuery('button.btn-danger[value="No"]', dialog.messi).get(0)).to.be.defined;
+        expect(jQuery('button.btn-danger[value="No"]', dialog.jqueryize()).get(0)).to.be.defined;
     });
 });
 
@@ -382,7 +382,7 @@ describe('Window with success title', function() {
     });
 
     it('should have a titleClass of "success"', function() {
-        expect(jQuery('.messi-titlebox.success', dialog.messi).attr('class')).to.match(/success/);
+        expect(jQuery('.messi-titlebox.success', dialog.jqueryize()).attr('class')).to.match(/success/);
     });
 });
 
@@ -405,11 +405,11 @@ describe('Window with error title (animated)', function() {
     });
 
     it('titleClass should be "error"', function() {
-        expect(jQuery('.messi-titlebox.error', dialog.messi).text()).to.be.equal('Title');
+        expect(jQuery('.messi-titlebox.error', dialog.jqueryize()).text()).to.be.equal('Title');
     });
 
     it('titleClass should be animated', function() {
-        expect(jQuery('.messi-titlebox.anim', dialog.messi).text()).to.be.equal('Title');
+        expect(jQuery('.messi-titlebox.anim', dialog.jqueryize()).text()).to.be.equal('Title');
     });
 });
 
@@ -423,7 +423,7 @@ describe('Window with a margin', function() {
             position: { top: '10px', left: '10px' }
         });
 
-        expect(dialog.messi.position().top).to.not.equal(10);
+        expect(dialog.jqueryize().position().top).to.not.equal(10);
         dialog.unload();
     });
 
@@ -435,7 +435,7 @@ describe('Window with a margin', function() {
             position: { top: '10px', left: '10px' }
         });
 
-        expect(dialog.messi.position()).to.eql({top: 10, left: 10});
+        expect(dialog.jqueryize().position()).to.eql({top: 10, left: 10});
         dialog.unload();
     });
 
@@ -448,7 +448,7 @@ describe('Window with a margin', function() {
         });
 
         jQuery(window).trigger('resize');
-        expect(dialog.messi.position()).to.eql({top: 15, left: 15});
+        expect(dialog.jqueryize().position()).to.eql({top: 15, left: 15});
         dialog.unload();
     });
 
@@ -460,9 +460,9 @@ describe('Window with a margin', function() {
             position: { top: 2900, left: 15 }
         });
 
-        var newTop = window.innerHeight - 15 - dialog.messi.height();
+        var newTop = window.innerHeight - 15 - dialog.jqueryize().height();
 
-        expect(dialog.messi.position()).to.eql({top: newTop, left: 15});
+        expect(dialog.jqueryize().position()).to.eql({top: newTop, left: 15});
         dialog.unload();
     });
 
@@ -475,9 +475,9 @@ describe('Window with a margin', function() {
             width: '300px'
         });
 
-        var newLeft = window.innerWidth - 15 - dialog.messi.width();
+        var newLeft = window.innerWidth - 15 - dialog.jqueryize().width();
 
-        expect(dialog.messi.position()).to.eql({top: 15, left: newLeft});
+        expect(dialog.jqueryize().position()).to.eql({top: 15, left: newLeft});
         dialog.unload();
     });
 });
