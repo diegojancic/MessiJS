@@ -245,6 +245,22 @@ describe('Create an absolutely positioned Messi window', function() {
             {
                 center:   false,
                 width:    '200px',
+                position: {top: '52px', left: '138px'}
+            }
+        );
+
+        jQuery(window).trigger('resize');
+        var position = dialog.messi.position();
+        expect(position).to.eql({top: 52, left: 138});
+        dialog.unload();
+    });
+
+    it('should be positioned absolutely with viewport', function() {
+        dialog = new Messi(
+            'This is a message with Messi in absolute position.',
+            {
+                center:   false,
+                width:    '200px',
                 viewport: {top: '52px', left: '138px'}
             }
         );
@@ -254,6 +270,7 @@ describe('Create an absolutely positioned Messi window', function() {
         expect(position).to.eql({top: 52, left: 138});
         dialog.unload();
     });
+
 });
 
 describe('Create a Messi window with a custom buttons', function() {
@@ -403,7 +420,7 @@ describe('Window with a margin', function() {
             title: 'Margin Center Test',
             center: true,
             margin: 15,
-            viewport: { top: '10px', left: '10px' }
+            position: { top: '10px', left: '10px' }
         });
 
         expect(dialog.messi.position().top).to.not.equal(10);
@@ -415,7 +432,7 @@ describe('Window with a margin', function() {
             title: 'Margin Off Test',
             center: false,
             margin: 0,
-            viewport: { top: '10px', left: '10px' }
+            position: { top: '10px', left: '10px' }
         });
 
         expect(dialog.messi.position()).to.eql({top: 10, left: 10});
@@ -427,7 +444,7 @@ describe('Window with a margin', function() {
             title: 'Margin On Test',
             center: false,
             margin: 15,
-            viewport: { top: -15, left: -15 }
+            position: { top: -15, left: -15 }
         });
 
         jQuery(window).trigger('resize');
@@ -440,7 +457,7 @@ describe('Window with a margin', function() {
             title: 'Margin On Test',
             center: false,
             margin: 15,
-            viewport: { top: 2900, left: 15 }
+            position: { top: 2900, left: 15 }
         });
 
         var newTop = window.innerHeight - 15 - dialog.messi.height();
@@ -454,7 +471,7 @@ describe('Window with a margin', function() {
             title: 'Margin On Test',
             center: false,
             margin: 15,
-            viewport: { top: 15, left: 2900 },
+            position: { top: 15, left: 2900 },
             width: '300px'
         });
 

@@ -196,9 +196,24 @@
                 this.modal.show();
             }
 
-            this.messi.css({
+            // positioning
+            if (this.options.viewport !== Messi.prototype.options.viewport) {
+                this.messi.css({
                     top: this.options.viewport.top,
-                    left: this.options.viewport.left,
+                    left: this.options.viewport.left
+                });
+            }
+
+            if (this.options.position !== Messi.prototype.options.position) {
+                this.messi.css({
+                    top: this.options.position.top,
+                    left: this.options.position.left
+                });
+            }
+
+
+            this.messi
+                .css({
                     'zIndex': this.options.zIndex + jQuery('.messi').length
                 })
                 .show()
