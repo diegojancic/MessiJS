@@ -1,6 +1,6 @@
 # MessiJS [![Build Status](https://travis-ci.org/MessiJS/MessiJS.png?branch=master)](https://travis-ci.org/MessiJS/MessiJS) [![Coverage Status](https://coveralls.io/repos/MessiJS/MessiJS/badge.png)](https://coveralls.io/r/MessiJS/MessiJS)
 
-**An easy to use message plugin for jQuery.**
+** A simple, elegant message plugin for jQuery.**
 
 MessiJS is a plugin for jQuery that shows messages in a clean,
 elegant and simple way. With MessiJS, you no longer need to use the
