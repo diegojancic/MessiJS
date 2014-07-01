@@ -151,9 +151,6 @@
 
 .messi-actions .btnbox {
   text-align: center;
-  -webkit-box-flex: 1;
-     -moz-box-flex: 1;
-          box-flex: 1;
 
   display: inline-block; /* IE compatibility */
   margin: 0 10px;
