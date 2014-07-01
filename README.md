@@ -25,15 +25,17 @@ to see who's contributed code.
 
 ## Roadmap
 ### MessiJS 2.0
-1. Version 2.0.x will be fully backward compatible: Drop in replacement for messi.js.
-2. Standards based (Code validated by JSHint).
-3. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
-4. Support Internet Explorer 9+ (previous versions did not support IE).
+1. Name change and new maintainer.
+2. Version 2.x will be mostly backward compatible with 1.x. It's a drop-in replacement for 1.x.
+3. Standards based (code validated by JSHint).
+4. Well Tested.  Using Travis CI, with Mocha+Chai and against supported versions of jQuery.
+5. Adheres to [Semantic Versioning](http://semver.org).
+6. Supports Internet Explorer 9+ (previous versions did not officially support IE).
 
-### MessiJS 2.1
-1. To allow for growth, Version 2.1 won't be backward compatible with the original Messi or MessiJS 2.0.
-2. I'm considering making MessiJS more jQuery standards compliant (with a compatibility extension).
-3. Many bug fixes and more tests.
+### MessiJS 3.0
+1. Version 3.0 won't be backward compatible with Messi 1.x or MessiJS 2.0, but will share much of the same code.
+2. The core of 3.x will either be a full jQuery compliant plugin or I'll remove all jQuery dependent code (making MessiJS a stand-alone dialog).  Please let me know if you have a preference on this.
+3. Like 2.x, well tested and bug fixed.
 4. Ideas to improve MessiJS?  Open a [Github Issue](https://github.com/MessiJS/MessiJS/issues) and let me know.
 
 ## Demo
