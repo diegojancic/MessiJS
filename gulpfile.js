@@ -32,7 +32,7 @@ var banner = [
     ''].join('\n');
 
 gulp.task('clean', function() {
-    gulp.src([ 'dist', 'coverage' ])
+    gulp.src([ 'dist/*', 'coverage' ])
         .pipe(clean());
 });
 
@@ -42,7 +42,7 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-gulp.task('create-dist', function() {
+gulp.task('create-dist', ['clean'], function() {
     gutil.File({ path: 'dist/' });
     return gulp.src(['README.md'])
         .pipe(gulp.dest('dist'));
