@@ -59,9 +59,9 @@
         // Prepare the buttons
         if (_this.options.buttons.length > 0) {
 
-            var btnbox = jQuery('<div>', {'class':'messi-btnbox'});
-            jQuery('.messi-actions', this.messi).append(btnbox);
             for (var i = 0; i < _this.options.buttons.length; i++) {
+                var btnbox = jQuery('<div>', {'class':'messi-btnbox'})
+                    .css('width', parseInt(100/_this.options.buttons.length, 10) + '%');
                 var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
                 var btn = jQuery('<button>', {
                     href: '#',
@@ -81,6 +81,7 @@
                 }).text(_this.options.buttons[i].label);
 
                 btnbox.append(btn);
+                jQuery('.messi-actions', this.messi).append(btnbox);
 
             }
 

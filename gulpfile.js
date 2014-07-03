@@ -66,7 +66,8 @@ gulp.task('compress', ['combine'], function() {
     return eventStream.merge(
         gulp.src('dist/messi.js')
             .pipe(rename('messi.min.js'))
-            .pipe(uglify({outSourceMap: true}))
+            .pipe(uglify({outSourceMap: false}))
+            .pipe(header(banner, { pkg: pkg }))
             .pipe(gulp.dest('dist')),
 
         gulp.src('dist/messi.css')
