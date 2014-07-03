@@ -2,9 +2,9 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="../messi.css" type="text/css" media="screen" charset="utf-8">
-    <script src="http://code.jquery.com/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../messi.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/messi.css" type="text/css" media="screen">
+    <script src="http://code.jquery.com/jquery-1.11.0.js" type="text/javascript"></script>
+    <script src="../src/main.js" type="text/javascript"></script>
 
     <title>MessiJS Examples Pages</title>
 </head>
@@ -21,53 +21,53 @@
     <ul>
       <li>
         <a id="simple">Simple message</a>
-        <pre class="code" data-initialized="true" data-gclp-id="0" style="display: block;">var dialog = new $.Messi('This is a message with Messi.');</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="0" style="display: block;">var dialog = new Messi('This is a message with Messi.');</pre>
       </li>
       <li>
         <a id="title">Message with title.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="1" style="display: block;">var dialog = new $.Messi('This is a message with Messi.', {title: 'Title'});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="1" style="display: block;">var dialog = new Messi('This is a message with Messi.', {title: 'Title'});</pre>
       </li>
       <li>
         <a id="modal">Message in modal view.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="2" style="display: block;">var dialog = new $.Messi('This is a message with Messi in modal view. Now you can\'t interact with other elements in the page until close this.', {title: 'Modal Window', modal: true});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="2" style="display: block;">var dialog = new Messi('This is a message with Messi in modal view. Now you can\'t interact with other elements in the page until close this.', {title: 'Modal Window', modal: true});</pre>
       </li>
       <li>
         <a id="absolute">Message in absolute position.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="3" style="display: block;">var dialog = new $.Messi('This is a message with Messi in absolute position.', {center: false, viewport: {top: '760px', left: '0px'}});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="3" style="display: block;">var dialog = new Messi('This is a message with Messi in absolute position.', {center: false, viewport: {top: '760px', left: '0px'}});</pre>
       </li>
     </ul>
     <p>Buttons:</p>
     <ul>
       <li>
         <a id="close-button">Message with custom button.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="4" style="display: block;">var dialog = new $.Messi('This is a message with Messi with custom buttons.', {title: 'Buttons', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="4" style="display: block;">var dialog = new Messi('This is a message with Messi with custom buttons.', {title: 'Buttons', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
       </li>
       <li>
         <a id="yes-no-buttons">Message with custom buttons (yes/no) and callback function.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="5" style="display: block;">var dialog = new $.Messi('This is a message with Messi with custom buttons.', {title: 'Buttons', buttons: [{id: 0, label: 'Yes', val: 'Y'}, {id: 1, label: 'No', val: 'N'}], callback: function(val) { alert('Your selection: ' + val); }});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="5" style="display: block;">var dialog = new Messi('This is a message with Messi with custom buttons.', {title: 'Buttons', buttons: [{id: 0, label: 'Yes', val: 'Y'}, {id: 1, label: 'No', val: 'N'}], callback: function(val) { alert('Your selection: ' + val); }});</pre>
       </li>
       <li>
         <a id="yes-no-cancel-buttons">Message with custom buttons (yes/no/cancel) with style classes.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="6" style="display: block;">var dialog = new $.Messi('This is a message with Messi with custom buttons.', {title: 'Buttons', buttons: [{id: 0, label: 'Yes', val: 'Y', class: 'btn-success'}, {id: 1, label: 'No', val: 'N', class: 'btn-danger'}, {id: 2, label: 'Cancel', val: 'C'}]});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="6" style="display: block;">var dialog = new Messi('This is a message with Messi with custom buttons.', {title: 'Buttons', buttons: [{id: 0, label: 'Yes', val: 'Y', class: 'btn-success'}, {id: 1, label: 'No', val: 'N', class: 'btn-danger'}, {id: 2, label: 'Cancel', val: 'C'}]});</pre>
       </li>
     </ul>
     <p>Applying styles to title:</p>
     <ul>
       <li>
         <a id="success-title">Success title.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="7" style="display: block;">var dialog = new $.Messi('This is a message with Messi.', {title: 'Title', titleClass: 'success', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="7" style="display: block;">var dialog = new Messi('This is a message with Messi.', {title: 'Title', titleClass: 'success', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
       </li>
       <li>
         <a id="info-title">Info title.</a>
-        <pre class="code" data-initialized="true" data-gclp-id="8" style="display: block;">var dialog = new $.Messi('This is a message with Messi.', {title: 'Title', titleClass: 'info', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="8" style="display: block;">var dialog = new Messi('This is a message with Messi.', {title: 'Title', titleClass: 'info', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
       </li>
       <li>
         <a id="error-title">Error title (animated).</a>
-        <pre class="code" data-initialized="true" data-gclp-id="9" style="display: block;">var dialog = new $.Messi('This is a message with Messi.', {title: 'Title', titleClass: 'anim error', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="9" style="display: block;">var dialog = new Messi('This is a message with Messi.', {title: 'Title', titleClass: 'anim error', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
       </li>
       <li>
         <a id="warning-title">Warning title (animated).</a>
-        <pre class="code" data-initialized="true" data-gclp-id="10" style="display: block;">var dialog = new $.Messi('This is a message with Messi.', {title: 'Title', titleClass: 'anim warning', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
+        <pre class="code" data-initialized="true" data-gclp-id="10" style="display: block;">var dialog = new Messi('This is a message with Messi.', {title: 'Title', titleClass: 'anim warning', buttons: [{id: 0, label: 'Close', val: 'X'}]});</pre>
       </li>
     </ul>
     <p>Other options:</p>

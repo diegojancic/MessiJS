@@ -135,29 +135,20 @@
 }
 
 .messi-actions {
-  width: 100%;
-  /* Box not IE Compatible?
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  */
-  padding-top: 8px;
-  margin: 0 10px;
   border-top: 1px solid #eee;
-  -webkit-box-orient: horizontal;
-     -moz-box-orient: horizontal;
-          box-orient: horizontal;
+  padding-top: 8px;
+  text-align: justify;
+  width: 100%;
 }
 
-.messi-actions .btnbox {
-  text-align: center;
-
+.messi-actions .messi-btnbox {
   display: inline-block; /* IE compatibility */
-  margin: 0 10px;
+  text-align: center;
 }
 
 .messi-actions .btnbox .btn {
   min-width: 75px;
+  text-align: center;
 }
 
 .messi-titlebox.anim {
