@@ -1,3 +1,11 @@
+/**!
+ * MessiJS - A easy to use message plugin for jQuery
+ * @version 2.0.0-beta
+ * @link https://MessiJS.github.io/
+ * @license MIT
+ * @copyright Copyright 2012-13 Marcos Esperón
+ * @copyright Copyright 2014 Kevin Gustavson
+ */
 (function () {
     'use strict';
 
@@ -24,16 +32,14 @@
 
             if (_this.options.buttons.length === 0 && !_this.options.autoclose) {
 
-                if (_this.options.closeButton) {
-                    close = jQuery('<span class="messi-closebtn"></span>');
-                    close.bind('click', function () {
-                        _this.hide();
-                    });
+                // Close button required
+                close = jQuery('<span class="messi-closebtn"></span>');
+                close.bind('click', function () {
+                    _this.hide();
+                });
 
-                    jQuery('.messi-titlebox', this.messi)
-                        .prepend(close);
-
-                }
+                jQuery('.messi-titlebox', this.messi)
+                    .prepend(close);
 
             }
 
@@ -53,12 +59,12 @@
         // Prepare the buttons
         if (_this.options.buttons.length > 0) {
 
-            var btnbox = jQuery('<div>', {'class':'messi-btnbox'});
-            jQuery('.messi-actions', this.messi).append(btnbox);
             for (var i = 0; i < _this.options.buttons.length; i++) {
+                var btnbox = jQuery('<div>', {'class':'messi-btnbox'})
+                    .css('width', parseInt(100/_this.options.buttons.length, 10) + '%');
                 var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
                 var btn = jQuery('<button>', {
-                    href: "#",
+                    href: '#',
                     'class': 'btn ' + cls,
                     value: _this.options.buttons[i].val,
                     'click': function () {
@@ -75,6 +81,7 @@
                 }).text(_this.options.buttons[i].label);
 
                 btnbox.append(btn);
+                jQuery('.messi-actions', this.messi).append(btnbox);
 
             }
 
@@ -198,9 +205,24 @@
                 this.modal.show();
             }
 
-            this.messi.css({
+            // positioning
+            if (this.options.viewport !== Messi.prototype.options.viewport) {
+                this.messi.css({
                     top: this.options.viewport.top,
-                    left: this.options.viewport.left,
+                    left: this.options.viewport.left
+                });
+            }
+
+            if (this.options.position !== Messi.prototype.options.position) {
+                this.messi.css({
+                    top: this.options.position.top,
+                    left: this.options.position.left
+                });
+            }
+
+
+            this.messi
+                .css({
                     'zIndex': this.options.zIndex + jQuery('.messi').length
                 })
                 .show()
@@ -228,7 +250,7 @@
             this.messi.animate({
                 opacity: 0
             }, 300, function () {
-                if (_this.modal) {
+                if (_this.options.modal) {
                     _this.modal.css({
                         display: 'none'
                     });
@@ -325,14 +347,14 @@
             this.messi.css({ left: x, top: y });
         },
 
+        jqueryize: function() {
+            return this.messi;
+        },
+
         max: function (a, b) {
             if (a > b) { return a; }
             else { return b; }
         },
-
-        isNumber: function (n) {
-            return !isNaN(parseFloat(n)) && isFinite(n);
-        }
 
     };
 
@@ -340,8 +362,9 @@
     window.Messi = Messi;
 
 })();
+// vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:
 
-(function () {
+
     // Special Call
     jQuery.extend(Messi, {
 
@@ -410,12 +433,12 @@
                     });
 
                 options = jQuery.extend({
-                    show: true,
-                    unload: true,
-                    closeButton: true,
-                    width: this.width * ratio,
-                    height: this.height * ratio,
-                    padding: 0
+                    show:         true,
+                    unload:       true,
+                    closeButton:  true,
+                    width:        this.width * ratio,
+                    height:       this.height * ratio,
+                    padding:      0
                 }, options || {});
 
                 new Messi(img, options);
@@ -462,5 +485,4 @@
         }
 
     });
-})();
-// vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:
+

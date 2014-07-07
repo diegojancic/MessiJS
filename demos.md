@@ -86,7 +86,7 @@ Apply styles to your titlebar:
 * error (red)
 * warning (orange)
 
-Add animation with _anim_.
+Add animation with _anim_.  _This is not supported for IE versions prior to IE10._
 
 ```javascript
 var dialog = new Messi(
