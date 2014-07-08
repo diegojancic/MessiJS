@@ -5,7 +5,8 @@
   "main": "dist/messi.js",
   "scripts": {
     "test": "gulp travis-test",
-    "coveralls": "gulp codecoverage"
+    "coveralls": "gulp codecoverage",
+    "watch": "node_modules/karma/bin/karma start --no-single-run --auto-watch"
   },
   "repository": {
     "type": "git",
