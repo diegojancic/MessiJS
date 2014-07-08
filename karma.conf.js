@@ -16,8 +16,15 @@ module.exports = function(config) {
             'src/*.css'
         ],
         frameworks: ['mocha'],
+        plugins: [
+            'karma-coverage',
+            'karma-phantomjs-launcher',
+            'karma-mocha',
+            'karma-mocha-reporter',
+            'karma-osx-reporter'
+        ],
         preprocessors: {'src/*.js': ['coverage']},
-        reporters: ['progress', 'coverage'],
+        reporters: ['mocha', 'osx', 'coverage'],
         singleRun: true
     });
 
