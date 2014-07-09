@@ -1,6 +1,6 @@
 /**!
  * MessiJS - A easy to use message plugin for jQuery
- * @version 2.0.0-beta
+ * @version 2.0.0
  * @link https://MessiJS.github.io/
  * @license MIT
  * @copyright Copyright 2012-13 Marcos Esperón
@@ -175,6 +175,7 @@
           box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4);
   -webkit-animation: animate-bg 5s linear infinite;
      -moz-animation: animate-bg 5s linear infinite;
+          animation: animate-bg 5s linear infinite;
 }
 
 .messi-titlebox.anim.info {
@@ -193,22 +194,22 @@
   background-color: #61b832;
 }
 
-@-webkit-keyframes animate-bg {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -80px 0;
-  }
+@-moz-keyframes animate-bg
+{
+  from { background-position: 0 0; }
+  to { background-position: -80px 0; }
 }
 
-@-moz-keyframes animate-bg {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -80px 0;
-  }
+@-webkit-keyframes animate-bg
+{
+  from { background-position: 0 0; }
+  to { background-position: -80px 0; }
+}
+
+@keyframes animate-bg
+{
+  from { background-position: 0 0; }
+  to { background-position: -80px 0; }
 }
 
 /* CSS Buttons from Twitter Bootstrap: http://twitter.github.com/bootstrap/ */
