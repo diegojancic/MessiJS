@@ -1,6 +1,6 @@
 /**!
  * MessiJS - A easy to use message plugin for jQuery
- * @version 2.0.0-beta
+ * @version 2.0.0
  * @link https://MessiJS.github.io/
  * @license MIT
  * @copyright Copyright 2012-13 Marcos Esperón
