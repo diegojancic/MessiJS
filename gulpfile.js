@@ -5,13 +5,13 @@ var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var coveralls = require('gulp-coveralls');
 var eventStream = require('event-stream');
-var header = require('gulp-header');
 var jshint = require('gulp-jshint');
 var karma = require('gulp-karma');
 var minifyCSS = require('gulp-minify-css');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var wrapper = require('gulp-wrapper');
 var zip = require('gulp-zip');
 var gutil = require('gulp-util');
 
@@ -19,10 +19,10 @@ var sources = ['src/*.js', 'test/*Spec.js'];
 
 var banner = [
     '/**!',
-    ' * <%= pkg.name %> - <%= pkg.description %>',
-    ' * @version <%= pkg.version %>',
-    ' * @link <%= pkg.homepage %>',
-    ' * @license <%= pkg.license %>',
+    ' * ' + pkg.name + ' - ' + pkg.description,
+    ' * @version ' + pkg.version,
+    ' * @link ' + pkg.homepage,
+    ' * @license ' + pkg.license,
     ' * @copyright Copyright 2012-13 Marcos Esperón',
     ' * @copyright Copyright 2014 Kevin Gustavson',
     ' */',
@@ -45,32 +45,38 @@ gulp.task('create-dist', ['clean'], function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('combine:css', ['create-dist'], function() {
-    return gulp.src(['src/*.css'])
-        .pipe(concat('messi.css'))
-        .pipe(header(banner, { pkg: pkg }))
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('combine', ['clean', 'combine:css'], function() {
-    return gulp.src(['src/main.js', 'src/extensions.js'])
-        .pipe(concat('messi.js'))
-        .pipe(header(banner, { pkg: pkg }))
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('compress', ['combine'], function() {
+gulp.task('combine', ['create-dist'], function() {
     return eventStream.merge(
-        gulp.src('dist/messi.js')
-            .pipe(rename('messi.min.js'))
-            .pipe(uglify({outSourceMap: false}))
-            .pipe(header(banner, { pkg: pkg }))
+        gulp.src(['src/*.css'])
+            .pipe(concat('messi.css'))
+            .pipe(gulp.dest('dist')),
+        gulp.src(['src/main.js', 'src/extensions.js'])
+            .pipe(concat('messi.js'))
+            .pipe(gulp.dest('dist'))
+    );
+});
+
+gulp.task('compress', ['create-dist'], function() {
+    return eventStream.merge(
+        gulp.src(['src/*.js'])
+            .pipe(concat('messi.min.js'))
+            .pipe(uglify({outSourceMap: true}))
             .pipe(gulp.dest('dist')),
 
-        gulp.src('dist/messi.css')
-            .pipe(rename('messi.min.css'))
+        gulp.src(['src/*.css'])
+            .pipe(concat('messi.min.css'))
             .pipe(minifyCSS())
-            .pipe(header(banner, { pkg: pkg }))
+            .pipe(gulp.dest('dist'))
+    );
+});
+
+gulp.task('add-banner', ['combine', 'compress'], function() {
+    return eventStream.merge(
+        gulp.src(['dist/messi.js', 'dist/messi*.css'])
+            .pipe(wrapper({header: banner}))
+            .pipe(gulp.dest('dist')),
+        gulp.src('dist/messi.min.js')
+            .pipe(wrapper({header: banner, footer: '\n//# sourceMappingURL=messi.min.js.map'}))
             .pipe(gulp.dest('dist'))
     );
 });
@@ -99,7 +105,7 @@ gulp.task('coveralls', ['test'], function() {
         .pipe(coveralls());
 });
 
-gulp.task('zip', ['compress'], function() {
+gulp.task('zip', ['add-banner'], function() {
     return gulp.src('dist/*')
         .pipe(zip('MessiJS.zip'))
         .pipe(gulp.dest('dist'));
