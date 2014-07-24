@@ -5,13 +5,14 @@ var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var coveralls = require('gulp-coveralls');
 var eventStream = require('event-stream');
+var insert = require('gulp-insert');
 var jshint = require('gulp-jshint');
 var karma = require('gulp-karma');
 var minifyCSS = require('gulp-minify-css');
 var notify = require('gulp-notify');
 var rename = require('gulp-rename');
+var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
-var wrapper = require('gulp-wrapper');
 var zip = require('gulp-zip');
 var gutil = require('gulp-util');
 
@@ -59,8 +60,10 @@ gulp.task('combine', ['create-dist'], function() {
 gulp.task('compress', ['create-dist'], function() {
     return eventStream.merge(
         gulp.src(['src/*.js'])
-            .pipe(concat('messi.min.js'))
-            .pipe(uglify({outSourceMap: true}))
+            .pipe(sourcemaps.init())
+                .pipe(concat('messi.min.js'))
+                .pipe(uglify())
+            .pipe(sourcemaps.write('dist'))
             .pipe(gulp.dest('dist')),
 
         gulp.src(['src/*.css'])
@@ -73,10 +76,10 @@ gulp.task('compress', ['create-dist'], function() {
 gulp.task('add-banner', ['combine', 'compress'], function() {
     return eventStream.merge(
         gulp.src(['dist/messi.js', 'dist/messi*.css'])
-            .pipe(wrapper({header: banner}))
+            .pipe(insert.prepend(banner))
             .pipe(gulp.dest('dist')),
         gulp.src('dist/messi.min.js')
-            .pipe(wrapper({header: banner, footer: '\n//# sourceMappingURL=messi.min.js.map'}))
+            .pipe(insert.wrap(banner, '\n//# sourceMappingURL=messi.min.js.map'))
             .pipe(gulp.dest('dist'))
     );
 });
