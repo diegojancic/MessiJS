@@ -50,7 +50,7 @@ gulp.task('combine', ['create-dist'], function() {
         gulp.src(['src/*.css'])
             .pipe(concat('messi.css'))
             .pipe(gulp.dest('dist')),
-        gulp.src(['src/main.js', 'src/extensions.js'])
+        gulp.src(['src/*.js'])
             .pipe(concat('messi.js'))
             .pipe(gulp.dest('dist'))
     );
@@ -86,9 +86,9 @@ gulp.task('test', ['combine'], function() {
         'node_modules/mocha/mocha.js',
         'node_modules/chai/chai.js',
         'jquery.min.js',
-        'src/main.js',
+        'src/_main.js',
         //'src/extensions.js',
-        'test/mainSpec.js',
+        'test/_mainSpec.js',
         //'test/privateFunctionsSpec.js',
         //'test/extensionsSpec.js',
         //'test/todoSpec.js',
