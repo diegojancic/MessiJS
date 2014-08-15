@@ -132,3 +132,4 @@ gulp.task('default', ['lint', 'zip', 'test']);
 
 gulp.task('travis-test', ['lint', 'coveralls']);
 
+module.exports = gulp;
