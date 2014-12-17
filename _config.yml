@@ -3,7 +3,7 @@ name: Your New Jekyll Site
 markdown: redcarpet
 baseurl: "/MessiJS"
 permalink: pretty
-pygments: true
+highlighter: pygments
 exclude:
     - node_modules
     - Gemfile
