@@ -139,24 +139,25 @@
     Messi.prototype = {
 
         options: {
-            autoclose: null,                       // autoclose message after 'x' miliseconds, i.e: 5000
-            buttons: [],                           // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
-            callback: null,                        // callback function after close message
-            center: true,                          // center message on screen
-            closeButton: true,                     // show close button in header title (or content if buttons array is empty).
-            height: 'auto',                        // content height
-            title: null,                           // message title
-            titleClass: null,                      // title style: info, warning, success, error
-            margin: 0,                             // enforce a minimal viewport margin the dialog cannot move outside, set to zero to disable
-            modal: false,                          // shows message in modal (loads background)
-            modalOpacity: 0.2,                     // modal background opacity
-            padding: '10px',                       // content padding
-            position: { top: '0px', left: '0px' }, // if center: false, sets X and Y position
-            show: true,                            // show message after load
-            unload: true,                          // unload message after hide
-            viewport: { top: '0px', left: '0px' }, // deprecated, see position
-            width: '500px',                        // message width
-            zIndex: 99999                          // message z-index
+            animate: { show: 'bounceIn', hide: 'bounceOut' },   // default animation (disable by setting animate: false)
+            autoclose: null,                                    // autoclose message after 'x' miliseconds, i.e: 5000
+            buttons: [],                                        // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
+            callback: null,                                     // callback function after close message
+            center: true,                                       // center message on screen
+            closeButton: true,                                  // show close button in header title (or content if buttons array is empty).
+            height: 'auto',                                     // content height
+            title: null,                                        // message title
+            titleClass: null,                                   // title style: info, warning, success, error
+            margin: 0,                                          // enforce a minimal viewport margin the dialog cannot move outside, set to zero to disable
+            modal: false,                                       // shows message in modal (loads background)
+            modalOpacity: 0.2,                                  // modal background opacity
+            padding: '10px',                                    // content padding
+            position: { top: '0px', left: '0px' },              // if center: false, sets X and Y position
+            show: true,                                         // show message after load
+            unload: true,                                       // unload message after hide
+            viewport: { top: '0px', left: '0px' },              // deprecated, see position
+            width: '500px',                                     // message width
+            zIndex: 99999                                       // first dialog z-index
         },
         template: '<div class="messi"><div class="messi-box"><div class="messi-wrapper"><div class="messi-titlebox"><span class="messi-title"></span></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
         content: '<div></div>',
@@ -212,13 +213,16 @@
                 });
             }
 
+            this.messi.css({
+                'zIndex': this.options.zIndex + jQuery('.messi').length
+            });
 
-            this.messi
-                .css({
-                    'zIndex': this.options.zIndex + jQuery('.messi').length
-                })
-                .show()
-                .animate({ opacity: 1 }, 300);
+            // animation
+            if (this.options.animate) {
+                this.messi.addClass('animate '+this.options.animate.show);
+            }
+
+            this.messi.show();
 
             // Get the center of the screen if the center option is on
             if (this.options.center) {
@@ -239,25 +243,36 @@
             if (!this.visible) { return; }
             var _this = this;
 
-            this.messi.animate({
-                opacity: 0
-            }, 300, function () {
-                if (_this.options.modal) {
-                    _this.modal.css({
-                        display: 'none'
-                    });
-                }
-                _this.messi.css({
-                    display: 'none'
+            if (this.options.animate) {
+                this.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                    _this.visible = false;
+                    if (_this.options.unload) {
+                        _this.unload();
+                    }
                 });
 
-                // Reactivate the scroll
-                //document.documentElement.style.overflow = "visible";
-                _this.visible = false;
-                if (_this.options.unload) {
-                    _this.unload();
-                }
-            });
+                this.messi.addClass('animate '+this.options.animate.hide);
+            } else {
+                this.messi.animate({
+                    opacity: 0
+                }, 300, function () {
+                    if (_this.options.modal) {
+                        _this.modal.css({
+                            display: 'none'
+                        });
+                    }
+                    _this.messi.css({
+                        display: 'none'
+                    });
+
+                    // Reactivate the scroll
+                    //document.documentElement.style.overflow = "visible";
+                    _this.visible = false;
+                    if (_this.options.unload) {
+                        _this.unload();
+                    }
+                });
+            }
 
             return this;
 
