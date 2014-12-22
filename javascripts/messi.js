@@ -1,6 +1,6 @@
 /**!
  * MessiJS - A easy to use message plugin for jQuery
- * @version 2.0.0-beta
+ * @version 2.0.1-beta
  * @link https://MessiJS.github.io/
  * @license MIT
  * @copyright Copyright 2012-13 Marcos Esperón
@@ -147,24 +147,25 @@
     Messi.prototype = {
 
         options: {
-            autoclose: null,                       // autoclose message after 'x' miliseconds, i.e: 5000
-            buttons: [],                           // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
-            callback: null,                        // callback function after close message
-            center: true,                          // center message on screen
-            closeButton: true,                     // show close button in header title (or content if buttons array is empty).
-            height: 'auto',                        // content height
-            title: null,                           // message title
-            titleClass: null,                      // title style: info, warning, success, error
-            margin: 0,                             // enforce a minimal viewport margin the dialog cannot move outside, set to zero to disable
-            modal: false,                          // shows message in modal (loads background)
-            modalOpacity: 0.2,                     // modal background opacity
-            padding: '10px',                       // content padding
-            position: { top: '0px', left: '0px' }, // if center: false, sets X and Y position
-            show: true,                            // show message after load
-            unload: true,                          // unload message after hide
-            viewport: { top: '0px', left: '0px' }, // deprecated, see position
-            width: '500px',                        // message width
-            zIndex: 99999                          // message z-index
+            animate: { show: 'bounceIn', hide: 'bounceOut' },   // default animation (disable by setting animate: false)
+            autoclose: null,                                    // autoclose message after 'x' miliseconds, i.e: 5000
+            buttons: [],                                        // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
+            callback: null,                                     // callback function after close message
+            center: true,                                       // center message on screen
+            closeButton: true,                                  // show close button in header title (or content if buttons array is empty).
+            height: 'auto',                                     // content height
+            title: null,                                        // message title
+            titleClass: null,                                   // title style: info, warning, success, error
+            margin: 0,                                          // enforce a minimal viewport margin the dialog cannot move outside, set to zero to disable
+            modal: false,                                       // shows message in modal (loads background)
+            modalOpacity: 0.2,                                  // modal background opacity
+            padding: '10px',                                    // content padding
+            position: { top: '0px', left: '0px' },              // if center: false, sets X and Y position
+            show: true,                                         // show message after load
+            unload: true,                                       // unload message after hide
+            viewport: { top: '0px', left: '0px' },              // deprecated, see position
+            width: '500px',                                     // message width
+            zIndex: 99999                                       // first dialog z-index
         },
         template: '<div class="messi"><div class="messi-box"><div class="messi-wrapper"><div class="messi-titlebox"><span class="messi-title"></span></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
         content: '<div></div>',
@@ -220,13 +221,16 @@
                 });
             }
 
+            this.messi.css({
+                'zIndex': this.options.zIndex + jQuery('.messi').length
+            });
 
-            this.messi
-                .css({
-                    'zIndex': this.options.zIndex + jQuery('.messi').length
-                })
-                .show()
-                .animate({ opacity: 1 }, 300);
+            // animation
+            if (this.options.animate) {
+                this.messi.addClass('animate '+this.options.animate.show);
+            }
+
+            this.messi.show();
 
             // Get the center of the screen if the center option is on
             if (this.options.center) {
@@ -247,25 +251,36 @@
             if (!this.visible) { return; }
             var _this = this;
 
-            this.messi.animate({
-                opacity: 0
-            }, 300, function () {
-                if (_this.options.modal) {
-                    _this.modal.css({
-                        display: 'none'
-                    });
-                }
-                _this.messi.css({
-                    display: 'none'
+            if (this.options.animate) {
+                this.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                    _this.visible = false;
+                    if (_this.options.unload) {
+                        _this.unload();
+                    }
                 });
 
-                // Reactivate the scroll
-                //document.documentElement.style.overflow = "visible";
-                _this.visible = false;
-                if (_this.options.unload) {
-                    _this.unload();
-                }
-            });
+                this.messi.addClass('animate '+this.options.animate.hide);
+            } else {
+                this.messi.animate({
+                    opacity: 0
+                }, 300, function () {
+                    if (_this.options.modal) {
+                        _this.modal.css({
+                            display: 'none'
+                        });
+                    }
+                    _this.messi.css({
+                        display: 'none'
+                    });
+
+                    // Reactivate the scroll
+                    //document.documentElement.style.overflow = "visible";
+                    _this.visible = false;
+                    if (_this.options.unload) {
+                        _this.unload();
+                    }
+                });
+            }
 
             return this;
 
@@ -364,125 +379,115 @@
 })();
 // vim: expandtab shiftwidth=4 tabstop=4 softtabstop=4:
 
+jQuery.extend(Messi, {
 
-    // Special Call
-    jQuery.extend(Messi, {
+    alert: function (data, callback, options) {
 
-        alert: function (data, callback, options) {
+        var buttons = [{
+            id: 'ok',
+            label: 'OK',
+            val: 'OK'
+        }];
 
-            var buttons = [{
-                id: 'ok',
-                label: 'OK',
-                val: 'OK'
-            }];
+        options = jQuery.extend(
+            { closeButton: false, buttons: buttons, callback: function () {} },
+            options,
+            { show: true, unload: true, callback: callback }
+        );
 
-            options = jQuery.extend({
-                closeButton: false,
-                buttons: buttons,
-                callback: function () {}
-            }, options || {}, {
-                show: true,
-                unload: true,
-                callback: callback
-            });
+        return new Messi(data, options);
 
-            return new Messi(data, options);
+    },
 
-        },
+    ask: function (data, callback, options) {
 
-        ask: function (data, callback, options) {
+        var buttons = [
+            { id: 'yes', label: 'Yes', val: 'Y', 'class': 'btn-success' },
+            { id: 'no', label: 'No', val: 'N', 'class': 'btn-danger' }
+        ];
 
-            var buttons = [
-                { id: 'yes', label: 'Yes', val: 'Y', 'class': 'btn-success' },
-                { id: 'no', label: 'No', val: 'N', 'class': 'btn-danger' }
-            ];
+        options = jQuery.extend(
+            { closeButton: false, modal: true, buttons: buttons, callback: function () {} },
+            options,
+            { show: true, unload: true, callback: callback }
+        );
 
-            options = jQuery.extend({
-                closeButton: false,
-                modal: true,
-                buttons: buttons,
-                callback: function () {}
-            }, options || {}, {
-                show: true,
-                unload: true,
-                callback: callback
-            });
+        return new Messi(data, options);
 
-            return new Messi(data, options);
+    },
 
-        },
+    img: function (src, options) {
 
-        img: function (src, options) {
+        var img = new Image();
 
-            var img = new Image();
+        jQuery(img).load(function () {
 
-            jQuery(img).load(function () {
+            var vp = {
+                width: jQuery(window).width() - 50,
+                height: jQuery(window).height() - 50
+            };
+            var ratio = (this.width > vp.width || this.height > vp.height) ?
+                Math.min(vp.width / this.width, vp.height / this.height) :
+                1;
 
-                var vp = {
-                    width: jQuery(window).width() - 50,
-                    height: jQuery(window).height() - 50
-                };
-                var ratio = (this.width > vp.width || this.height > vp.height) ?
-                    Math.min(vp.width / this.width, vp.height / this.height) :
-                    1;
+            jQuery(img)
+                .css({
+                    width: this.width * ratio,
+                    height: this.height * ratio
+                });
 
-                jQuery(img)
-                    .css({
-                        width: this.width * ratio,
-                        height: this.height * ratio
-                    });
-
-                options = jQuery.extend({
+            options = jQuery.extend(
+                {
                     show:         true,
                     unload:       true,
                     closeButton:  true,
                     width:        this.width * ratio,
                     height:       this.height * ratio,
                     padding:      0
-                }, options || {});
+                },
+                options
+            );
 
-                new Messi(img, options);
+            new Messi(img, options);
 
-            })
-            .error(function () {
+        })
+        .error(function () {
 
+            // Be IE friendly
+            if (typeof window.console === 'object') {
+                console.log('Error loading ' + src);
+            }
+
+        })
+        .attr('src', src);
+
+    },
+
+    load: function (url, options) {
+
+        options = jQuery.extend(
+            { show: true, unload: true, params: {} },
+            options
+        );
+
+        var request = {
+            url: url,
+            data: options.params,
+            dataType: 'html',
+            cache: false,
+            error: function (request, status, error) {
                 // Be IE friendly
                 if (typeof window.console === 'object') {
-                    console.log('Error loading ' + src);
+                    console.log(request.responseText);
                 }
+            },
+            success: function (html) {
+                new Messi(html, options);
+            }
+        };
 
-            })
-            .attr('src', src);
+        jQuery.ajax(request);
 
-        },
+    }
 
-        load: function (url, options) {
-
-            options = jQuery.extend({
-                show: true,
-                unload: true,
-                params: {}
-            }, options || {});
-
-            var request = {
-                url: url,
-                data: options.params,
-                dataType: 'html',
-                cache: false,
-                error: function (request, status, error) {
-                    // Be IE friendly
-                    if (typeof window.console === 'object') {
-                        console.log(request.responseText);
-                    }
-                },
-                success: function (html) {
-                    new Messi(html, options);
-                }
-            };
-
-            jQuery.ajax(request);
-
-        }
-
-    });
-
+});
