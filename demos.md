@@ -79,6 +79,19 @@ var dialog = new Messi(
 );
 ```
 
+Add [Animate.css](http://daneden.github.io/animate.css/) styles to the whole dialog. Defaults are: `bounceIn` and `bounceOut`.
+
+```javascript
+var dialog = new Messi(
+    'This is a bounceIn message.',
+    {
+        title: 'Enter stage right.',
+        animate: { open: 'bounceInLeft', close: 'bounceOutRight' },
+        buttons: [ {id: 0, label: 'Close', val: 'X'} ]
+    }
+);
+```
+
 Apply styles to your titlebar:
 
 * success (a lovely shade of green)
@@ -94,19 +107,6 @@ var dialog = new Messi(
     {
         title: 'Animated error',
         titleClass: 'anim error',
-        buttons: [ {id: 0, label: 'Close', val: 'X'} ]
-    }
-);
-```
-
-Add [Animate.css](http://daneden.github.io/animate.css/) to the whole dialog.
-
-```javascript
-var dialog = new Messi(
-    'This is a bounceIn message.',
-    {
-        title: 'Enter stage right.',
-        animate: { open: 'bounceInLeft', close: 'bounceOutRight' },
         buttons: [ {id: 0, label: 'Close', val: 'X'} ]
     }
 );
