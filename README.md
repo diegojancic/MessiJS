@@ -17,6 +17,8 @@ When the original contributor stopped responding to Issues and Pull Requests, I 
 
 All earlier edits are Copyright 2012-2013, Marcos Esperón: http://marcosesperon.es
 
+Version 2.0.1 and newer includes the goodness of [animate.css](https://github.com/daneden/animate.css).
+
 See the [Contributors List](https://github.com/MessiJS/MessiJS/graphs/contributors)
 to see who's contributed code.
 
@@ -24,10 +26,10 @@ to see who's contributed code.
 * [jQuery](http://jquery.com/) version 1.7 or greater
 
 ## Roadmap
-### MessiJS 3.0
-1. Version 3.0 won't be backward compatible with Messi 1.x or MessiJS 2.0, but will share much of the same code.
-2. The core of 3.x will either be a full jQuery compliant plugin or I'll remove all jQuery dependent code (making MessiJS a stand-alone dialog).  Please let me know if you have a preference on this.
-3. Like 2.x, well tested and bug fixed.
+### MessiJS 2.1
+1. Version 2.1 will maintain backward compatibility with Version 2.0.
+2. Version 2.1 will no longer be dependent on jQuery.
+3. Like 2.0, well tested and bug fixed.
 4. Ideas to improve MessiJS?  Open a [Github Issue](https://github.com/MessiJS/MessiJS/issues) and let me know.
 
 ### MessiJS 2.0

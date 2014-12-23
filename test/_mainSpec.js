@@ -243,6 +243,7 @@ describe('Create an absolutely positioned Messi window', function() {
         dialog = new Messi(
             'This is a message with Messi in absolute position.',
             {
+                animate:  false,
                 center:   false,
                 width:    '200px',
                 position: {top: '52px', left: '138px'}
@@ -259,6 +260,7 @@ describe('Create an absolutely positioned Messi window', function() {
         dialog = new Messi(
             'This is a message with Messi in absolute position.',
             {
+                animate:  false,
                 center:   false,
                 width:    '200px',
                 viewport: {top: '52px', left: '138px'}
@@ -430,6 +432,7 @@ describe('Window with a margin', function() {
     it('when margin is off', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin Off Test',
+            animate:  false,
             center: false,
             margin: 0,
             position: { top: '10px', left: '10px' }
@@ -442,6 +445,7 @@ describe('Window with a margin', function() {
     it('when margin is on', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
+            animate: false,
             center: false,
             margin: 15,
             position: { top: -15, left: -15 }
@@ -455,6 +459,7 @@ describe('Window with a margin', function() {
     it('when margin is on and too low', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
+            animate: false,
             center: false,
             margin: 15,
             position: { top: 2900, left: 15 }
@@ -469,6 +474,7 @@ describe('Window with a margin', function() {
     it('when margin is on and too far right', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
+            animate: false,
             center: false,
             margin: 15,
             position: { top: 15, left: 2900 },

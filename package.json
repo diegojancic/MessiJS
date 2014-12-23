@@ -1,6 +1,6 @@
 {
   "name": "MessiJS",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A easy to use message plugin for jQuery",
   "main": "dist/messi.min.js",
   "scripts": {
@@ -12,9 +12,16 @@
     "type": "git",
     "url": "git://github.com/MessiJS/MessiJS.git"
   },
-  "keywords": [ "messi", "jQuery", "message", "plugin" ],
+  "keywords": [
+    "messi",
+    "jQuery",
+    "message",
+    "plugin"
+  ],
   "contributors": [
-    { "name": "Marcos Esperón" },
+    {
+      "name": "Marcos Esperón"
+    },
     {
       "name": "Kevin Gustavson",
       "email": "kdgustavson@gmail.com",
@@ -36,12 +43,13 @@
     "gulp-clean": "^0.2.4",
     "gulp-concat": "^2.2.0",
     "gulp-coveralls": "^0.1.2",
-    "gulp-header": "^1.0.2",
+    "gulp-insert": "^0.4.0",
     "gulp-jshint": "^1.5.0",
     "gulp-karma": "0.0.4",
     "gulp-minify-css": "^0.3.0",
     "gulp-notify": "^1.2.5",
     "gulp-rename": "^1.2.0",
+    "gulp-sourcemaps": "^1.1.0",
     "gulp-uglify": "^0.2.1",
     "gulp-util": "^2.2.14",
     "gulp-watch": "^0.5.2",
