@@ -445,21 +445,21 @@ describe('Window with a margin', function() {
     it('when margin is on', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
-            animate: false,
             center: false,
             margin: 15,
             position: { top: -15, left: -15 }
         });
 
         jQuery(window).trigger('resize');
-        expect(dialog.jqueryize().position()).to.eql({top: 15, left: 15});
-        dialog.unload();
+        dialog.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            expect(dialog.jqueryize().position()).to.eql({top: 15, left: 15});
+            dialog.unload();
+        });
     });
 
     it('when margin is on and too low', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
-            animate: false,
             center: false,
             margin: 15,
             position: { top: 2900, left: 15 }
@@ -467,14 +467,15 @@ describe('Window with a margin', function() {
 
         var newTop = window.innerHeight - 15 - dialog.jqueryize().height();
 
-        expect(dialog.jqueryize().position()).to.eql({top: newTop, left: 15});
-        dialog.unload();
+        dialog.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            expect(dialog.jqueryize().position()).to.eql({top: newTop, left: 15});
+            dialog.unload();
+        });
     });
 
     it('when margin is on and too far right', function() {
         dialog = new Messi('This is a message with Messi.', {
             title: 'Margin On Test',
-            animate: false,
             center: false,
             margin: 15,
             position: { top: 15, left: 2900 },
@@ -483,7 +484,9 @@ describe('Window with a margin', function() {
 
         var newLeft = window.innerWidth - 15 - dialog.jqueryize().width();
 
-        expect(dialog.jqueryize().position()).to.eql({top: 15, left: newLeft});
-        dialog.unload();
+        dialog.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            expect(dialog.jqueryize().position()).to.eql({top: 15, left: newLeft});
+            dialog.unload();
+        });
     });
 });

@@ -215,7 +215,7 @@
 
             // animation
             if (this.options.animate) {
-                this.messi.addClass('animate '+this.options.animate.open);
+                this.messi.addClass('animated '+this.options.animate.open);
             }
 
             this.messi.show();
@@ -247,7 +247,7 @@
                     }
                 });
 
-                this.messi.addClass('animate '+this.options.animate.close);
+                this.messi.removeClass(this.options.animate.open).addClass(this.options.animate.close);
             } else {
                 this.messi.animate({
                     opacity: 0
