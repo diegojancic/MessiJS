@@ -7,6 +7,11 @@
         var _this = this;
         _this.options = jQuery.extend({}, Messi.prototype.options, options || {});
 
+        // Resolve the viewport vs prototype option (prototype overrides viewport)
+        if (this.options.position === Messi.prototype.options.position) {
+            _this.options.position = _this.options.viewport;
+        }
+
         // Prepare the item
         _this.messi = jQuery(_this.template);
         _this.setContent(data);
@@ -199,19 +204,10 @@
             }
 
             // positioning
-            if (this.options.viewport !== Messi.prototype.options.viewport) {
-                this.messi.css({
-                    top: this.options.viewport.top,
-                    left: this.options.viewport.left
-                });
-            }
-
-            if (this.options.position !== Messi.prototype.options.position) {
-                this.messi.css({
-                    top: this.options.position.top,
-                    left: this.options.position.left
-                });
-            }
+            this.messi.css({
+                top: this.options.position.top,
+                left: this.options.position.left
+            });
 
             this.messi.css({
                 'zIndex': this.options.zIndex + jQuery('.messi').length

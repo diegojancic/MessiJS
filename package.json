@@ -1,6 +1,6 @@
 {
   "name": "MessiJS",
-  "version": "2.0.1-pre",
+  "version": "2.0.1",
   "description": "A easy to use message plugin for jQuery",
   "main": "dist/messi.min.js",
   "scripts": {
