@@ -712,8 +712,6 @@ Copyright (c) 2014 Daniel Eden
 .bounceInLeft {
   -webkit-animation-name: bounceInLeft;
           animation-name: bounceInLeft;
-  -webkit-animation-duration: .75s;
-          animation-duration: .75s;
 }
 
 @-webkit-keyframes bounceInRight {
@@ -787,8 +785,6 @@ Copyright (c) 2014 Daniel Eden
 .bounceInRight {
   -webkit-animation-name: bounceInRight;
           animation-name: bounceInRight;
-  -webkit-animation-duration: .75s;
-          animation-duration: .75s;
 }
 
 @-webkit-keyframes bounceInUp {
@@ -1016,8 +1012,6 @@ Copyright (c) 2014 Daniel Eden
 .bounceOutRight {
   -webkit-animation-name: bounceOutRight;
           animation-name: bounceOutRight;
-  -webkit-animation-duration: .75s;
-          animation-duration: .75s;
 }
 
 @-webkit-keyframes bounceOutUp {

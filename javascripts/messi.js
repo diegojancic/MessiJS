@@ -223,7 +223,7 @@
 
             // animation
             if (this.options.animate) {
-                this.messi.addClass('animate '+this.options.animate.open);
+                this.messi.addClass('animated '+this.options.animate.open);
             }
 
             this.messi.show();
@@ -248,14 +248,14 @@
             var _this = this;
 
             if (this.options.animate) {
+                this.messi.removeClass(this.options.animate.open).addClass(this.options.animate.close);
+
                 this.messi.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
                     _this.visible = false;
                     if (_this.options.unload) {
                         _this.unload();
                     }
                 });
-
-                this.messi.addClass('animate '+this.options.animate.close);
             } else {
                 this.messi.animate({
                     opacity: 0
