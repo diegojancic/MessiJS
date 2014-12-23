@@ -152,7 +152,7 @@
     Messi.prototype = {
 
         options: {
-            animate: { show: 'bounceIn', hide: 'bounceOut' },   // default animation (disable by setting animate: false)
+            animate: { open: 'bounceIn', close: 'bounceOut' },  // default animation (disable by setting animate: false)
             autoclose: null,                                    // autoclose message after 'x' miliseconds, i.e: 5000
             buttons: [],                                        // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
             callback: null,                                     // callback function after close message
@@ -223,7 +223,7 @@
 
             // animation
             if (this.options.animate) {
-                this.messi.addClass('animate '+this.options.animate.show);
+                this.messi.addClass('animate '+this.options.animate.open);
             }
 
             this.messi.show();
@@ -255,7 +255,7 @@
                     }
                 });
 
-                this.messi.addClass('animate '+this.options.animate.hide);
+                this.messi.addClass('animate '+this.options.animate.close);
             } else {
                 this.messi.animate({
                     opacity: 0
