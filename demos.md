@@ -106,7 +106,7 @@ var dialog = new Messi(
     'This is a bounceIn message.',
     {
         title: 'Enter stage right.',
-        animate: { open: 'bounceInRight', close: 'bounceOutLeft' },
+        animate: { open: 'bounceInLeft', close: 'bounceOutRight' },
         buttons: [ {id: 0, label: 'Close', val: 'X'} ]
     }
 );
