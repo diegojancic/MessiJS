@@ -1,6 +1,6 @@
 /**!
  * MessiJS - A easy to use message plugin for jQuery
- * @version 2.0.1-beta
+ * @version 2.0.1
  * @link https://MessiJS.github.io/
  * @license MIT
  * @copyright Copyright 2012-13 Marcos Esperón
@@ -14,6 +14,11 @@
         var close;
         var _this = this;
         _this.options = jQuery.extend({}, Messi.prototype.options, options || {});
+
+        // Resolve the viewport vs prototype option (prototype overrides viewport)
+        if (this.options.position === Messi.prototype.options.position) {
+            _this.options.position = _this.options.viewport;
+        }
 
         // Prepare the item
         _this.messi = jQuery(_this.template);
@@ -147,7 +152,7 @@
     Messi.prototype = {
 
         options: {
-            animate: { show: 'bounceIn', hide: 'bounceOut' },   // default animation (disable by setting animate: false)
+            animate: { open: 'bounceIn', close: 'bounceOut' },  // default animation (disable by setting animate: false)
             autoclose: null,                                    // autoclose message after 'x' miliseconds, i.e: 5000
             buttons: [],                                        // array of buttons, i.e: [{id: 'ok', label: 'OK', val: 'OK'}]
             callback: null,                                     // callback function after close message
@@ -207,19 +212,10 @@
             }
 
             // positioning
-            if (this.options.viewport !== Messi.prototype.options.viewport) {
-                this.messi.css({
-                    top: this.options.viewport.top,
-                    left: this.options.viewport.left
-                });
-            }
-
-            if (this.options.position !== Messi.prototype.options.position) {
-                this.messi.css({
-                    top: this.options.position.top,
-                    left: this.options.position.left
-                });
-            }
+            this.messi.css({
+                top: this.options.position.top,
+                left: this.options.position.left
+            });
 
             this.messi.css({
                 'zIndex': this.options.zIndex + jQuery('.messi').length
@@ -227,7 +223,7 @@
 
             // animation
             if (this.options.animate) {
-                this.messi.addClass('animate '+this.options.animate.show);
+                this.messi.addClass('animate '+this.options.animate.open);
             }
 
             this.messi.show();
@@ -259,7 +255,7 @@
                     }
                 });
 
-                this.messi.addClass('animate '+this.options.animate.hide);
+                this.messi.addClass('animate '+this.options.animate.close);
             } else {
                 this.messi.animate({
                     opacity: 0
