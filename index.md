@@ -17,7 +17,7 @@ Display text, html content, images and ajax requests with 5KB code.
 
 Changelog
 ---------
-2.0.1 [23-Dec-2014]
+2.0.1 [22-Dec-2014]
 
 * Added support for [Animate.css](http://daneden.github.io/animate.css). See [Options](http://messijs.github.io/MessiJS/options/) for more details.
 * Cleaned up position|viewport option handling.

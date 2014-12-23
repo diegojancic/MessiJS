@@ -5,7 +5,7 @@ title: Options
 # MessiJS Options
 Option            | Default                                 | Description
 ----------------- | --------------------------------------- | ----------------------------------------------------------------------
-animate[²](#201)  | {&nbsp;show:&nbsp;'bounceIn',<br>&nbsp;&nbsp;hide:&nbsp;'bounceOut'&nbsp;} | default animation<br>(disable by setting animate: false)<br>See [Animate.css](http://daneden.github.io/animate.css) for valid options.
+animate[²](#201)  | {&nbsp;open:&nbsp;'bounceIn',<br>&nbsp;&nbsp;close:&nbsp;'bounceOut'&nbsp;} | default animation<br>(disable by setting animate: false)<br>See [Animate.css](http://daneden.github.io/animate.css) for valid options.
 autoclose         | null                                    | autoclose after 'x' milliseconds
 buttons           | [ ]                                     | array of buttons<br>e.g. [{id: 'yes', label: 'Yes', val: 'Yes'}]
 callback          | null                                    | callback function after close message
