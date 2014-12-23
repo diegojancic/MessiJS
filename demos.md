@@ -115,7 +115,7 @@ var dialog = new Messi(
 
 # Extensions
 
-**MessiJS are semi-official add-ons. Essentially they are convenience functions.**
+**MessiJS extensions are semi-official add-ons.** They are convenience functions (everything they do can be done with the main MessiJS library).
 
 Show a MessiJS style alert.
 
