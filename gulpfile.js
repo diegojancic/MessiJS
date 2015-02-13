@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var coveralls = require('gulp-coveralls');
+var eslint = require('gulp-eslint');
 var eventStream = require('event-stream');
 var insert = require('gulp-insert');
 var jshint = require('gulp-jshint');
@@ -34,10 +35,21 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
-gulp.task('lint', function() {
+gulp.task('jshint', function() {
     return gulp.src(sources)
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
+});
+
+gulp.task('eslint', function () {
+    // Note: To have the process exit with an error code (1) on
+    //  lint error, return the stream and pipe to failOnError last.
+    return gulp.src(sources)
+        .pipe(eslint({
+            rulesPaths: ['.eslintrc']
+        }))
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
 });
 
 gulp.task('create-dist', ['clean'], function() {
@@ -128,8 +140,8 @@ gulp.task('notify:zip', ['zip'], function() {
         .pipe(notify({ message: 'Zip file has been created.' }));
 });
 
-gulp.task('default', ['lint', 'zip', 'test']);
+gulp.task('default', ['jshint', 'zip', 'test']);
 
-gulp.task('travis-test', ['lint', 'coveralls']);
+gulp.task('travis-test', ['jshint', 'coveralls']);
 
 module.exports = gulp;

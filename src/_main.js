@@ -57,9 +57,9 @@
         if (_this.options.buttons.length > 0) {
 
             for (var i = 0; i < _this.options.buttons.length; i++) {
-                var btnbox = jQuery('<div>', {'class':'messi-btnbox'})
-                    .css('width', parseInt(100/_this.options.buttons.length, 10) + '%');
-                var cls = (_this.options.buttons[i]['class']) ? _this.options.buttons[i]['class'] : '';
+                var btnbox = jQuery('<div>', {'class': 'messi-btnbox'})
+                    .css('width', parseInt(100 / _this.options.buttons.length, 10) + '%');
+                var cls = (_this.options.buttons[i].class) ? _this.options.buttons[i].class : '';
                 var btn = jQuery('<button>', {
                     href: '#',
                     'class': 'btn ' + cls,
@@ -215,7 +215,7 @@
 
             // animation
             if (this.options.animate) {
-                this.messi.addClass('animated '+this.options.animate.open);
+                this.messi.addClass('animated ' + this.options.animate.open);
             }
 
             this.messi.show();
@@ -357,7 +357,7 @@
         max: function (a, b) {
             if (a > b) { return a; }
             else { return b; }
-        },
+        }
 
     };
 

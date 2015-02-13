@@ -1,0 +1,18 @@
+{
+    "env": {
+        "browser": 1
+    },
+    "globals": {
+        "jQuery": 1,
+        "$": 1,
+        "Messi": 1,
+        "chai": 1,
+        "describe": 1,
+        "expect": 1,
+        "it": 1
+    },
+    "rules": {
+        "no-underscore-dangle": 0,
+        "quotes": [2, "single"]
+    }
+}
