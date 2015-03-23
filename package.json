@@ -1,8 +1,9 @@
 {
-  "name": "MessiJS",
-  "version": "2.0.1",
+  "name": "messijs",
+  "version": "2.0.2-dev",
   "description": "A easy to use message plugin for jQuery",
-  "main": "dist/messi.min.js",
+  "main": "./dist/messi.js",
+  "style": "./dist/messi.css",
   "scripts": {
     "test": "gulp travis-test",
     "coveralls": "gulp codecoverage",
@@ -14,9 +15,9 @@
   },
   "keywords": [
     "messi",
-    "jQuery",
-    "message",
-    "plugin"
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "dialog"
   ],
   "contributors": [
     {

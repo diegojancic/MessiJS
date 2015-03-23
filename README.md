@@ -22,6 +22,8 @@ Version 2.0.1 and newer includes the goodness of [animate.css](https://github.co
 See the [Contributors List](https://github.com/MessiJS/MessiJS/graphs/contributors)
 to see who's contributed code.
 
+MessiJS is available via [Bower](http://bower.io/search/?q=messijs) or [NPM](https://www.npmjs.com/package/messijs). If you prefer manual installation, see the instructions below.
+
 ## Requirements
 * [jQuery](http://jquery.com/) version 1.7 or greater
 
