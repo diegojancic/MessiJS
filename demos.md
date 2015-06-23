@@ -42,7 +42,7 @@ Make the dialog modal (adds a layer to force you to react to the dialog):
 
 ```javascript
 var dialog = new Messi(
-    "This is a message with Messi in modal view. Now you can't interact with other elements in the page until close this.",
+    "This is a message with Messi in modal view. Now you can't interact with other elements on the page until close this dialog.",
     {title: 'Modal Window', modal: true}
 );
 ```
