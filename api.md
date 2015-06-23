@@ -51,10 +51,3 @@ Removes the dialog from the DOM.
 ```javascript
 dialog.unload();
 ```
-
-Wrap the dialog in jQuery (experimental).
-
-```javascript
-windows.$dialog = dialog.jqueryize();
-$dialog.css({ top: 20px; left: 20px; })
-```
