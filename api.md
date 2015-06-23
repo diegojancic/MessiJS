@@ -34,7 +34,7 @@ Hide, but don't remove, the dialog.
 dialog.hide();
 ```
 
-Show the dialog.
+Show a previously hidden dialog.
 
 ```javascript
 dialog.show();
