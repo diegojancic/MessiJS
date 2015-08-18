@@ -59,9 +59,9 @@
             for (var i = 0; i < _this.options.buttons.length; i++) {
                 var btnbox = jQuery('<div>', {'class':'messi-btnbox'});
 				
-				if (_this.options.buttonsAlign == 'center') {
+				if (_this.options.buttonsAlign === 'center') {
                     btnbox.css('width', parseInt(100/_this.options.buttons.length, 10) + '%');
-				} else if (_this.options.buttonsAlign == 'left') {
+				} else if (_this.options.buttonsAlign === 'left') {
 					btnbox.css('padding-left', '10px');
 				} else {
 					btnbox.css({'padding-right': '10px', 'float': 'right'});
@@ -176,19 +176,19 @@
         template: '<div class="messi"><div class="messi-box" role="dialog" aria-hidden="true" aria-labelledby="messiTitle"><div class="messi-wrapper"><div class="messi-titlebox"><h1 class="messi-title" id="messiTitle"></h1></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
         content: '<div></div>',
         visible: false,
-		focusableElementsString: "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]",
+		focusableElementsString: 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]',
 
 		trapTabKey: function(obj,evt) {
 
 		  // if tab or shift-tab pressed
-		  if ( evt.which == 9 ) {
+		  if ( evt.which === 9 ) {
 
 			// get list of all children elements in given object
 			var o = obj.find('*');
 
 			// get list of focusable items
 			var focusableItems;
-			focusableItems = o.filter(this.focusableElementsString).filter(':visible')
+			focusableItems = o.filter(this.focusableElementsString).filter(':visible');
 
 			// get currently focused item
 			var focusedItem;
@@ -196,7 +196,7 @@
 
 			// get the number of focusable items
 			var numberOfFocusableItems;
-			numberOfFocusableItems = focusableItems.length
+			numberOfFocusableItems = focusableItems.length;
 
 			// get the index of the currently focused item
 			var focusedItemIndex;
@@ -205,7 +205,7 @@
 			if (evt.shiftKey) {
 			  //back tab
 			  // if focused on first item and user preses back-tab, go to the last focusable item
-			  if(focusedItemIndex==0){
+			  if(focusedItemIndex===0){
 				focusableItems.get(numberOfFocusableItems-1).focus();
 				evt.preventDefault();
 			  }
@@ -213,7 +213,7 @@
 			} else {
 			  //forward tab
 			  // if focused on the last item and user preses tab, go to the first focusable item
-			  if(focusedItemIndex==numberOfFocusableItems-1){
+			  if(focusedItemIndex===numberOfFocusableItems-1){
 				focusableItems.get(0).focus();
 				evt.preventDefault();
 			  }
@@ -276,8 +276,8 @@
             }
 			
 			if (this.options.ariaPageContent) {
-				jQuery(this.options.ariaPageContent).attr("aria-hidden", "true");
-				jQuery(this.messi).attr("aria-hidden", "false");
+				jQuery(this.options.ariaPageContent).attr('aria-hidden', 'true');
+				jQuery(this.messi).attr('aria-hidden', 'false');
 			}
 
             this.messi.show();
@@ -317,8 +317,8 @@
 			this.focusedElementBeforeModal.focus();
 			
 			if (this.options.ariaPageContent) {
-				jQuery(this.options.ariaPageContent).attr("aria-hidden", "false");
-				jQuery(this.messi).attr("aria-hidden", "true");
+				jQuery(this.options.ariaPageContent).attr('aria-hidden', 'false');
+				jQuery(this.messi).attr('aria-hidden', 'true');
 			}
 
             if (this.options.animate) {
