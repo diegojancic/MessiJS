@@ -173,7 +173,7 @@
             width: '500px',                                     // message width
             zIndex: 99999                                       // first dialog z-index
         },
-        template: '<div class="messi"><div class="messi-box" role="dialog" aria-hidden="true"><div class="messi-wrapper"><div class="messi-titlebox"><h1 class="messi-title"></h1></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
+        template: '<div class="messi"><div class="messi-box" role="dialog" aria-hidden="true" aria-labelledby="messiTitle"><div class="messi-wrapper"><div class="messi-titlebox"><h1 class="messi-title" id="messiTitle"></h1></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
         content: '<div></div>',
         visible: false,
 		focusableElementsString: "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]",
